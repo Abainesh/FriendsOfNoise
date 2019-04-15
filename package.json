@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/Abainesh/FriendsOfNoise/issues"
   },
-  "homepage": "https://github.com/Abainesh/FriendsOfNoise#readme"
+  "homepage": "https://github.com/Abainesh/FriendsOfNoise#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
 }

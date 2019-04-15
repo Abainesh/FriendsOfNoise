@@ -1,0 +1,26 @@
+{
+  "name": "friendsofnoise",
+  "version": "1.0.0",
+  "description": "Friends of Noise Organization now has a web app for members!",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Abainesh/FriendsOfNoise.git"
+  },
+  "keywords": [
+    "friendsofnoise",
+    "all",
+    "ages",
+    "music",
+    "memberships"
+  ],
+  "author": "Friends of Friends of Noise",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Abainesh/FriendsOfNoise/issues"
+  },
+  "homepage": "https://github.com/Abainesh/FriendsOfNoise#readme"
+}

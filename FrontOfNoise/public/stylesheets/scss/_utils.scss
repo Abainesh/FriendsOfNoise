@@ -4,30 +4,36 @@
 @import url('https://fonts.googleapis.com/css?family=Abel|Cute+Font');
 
 /*            colors               */
-$noiseSalmon: #ED484A;
-$noiseYellow: #FBE633;
-$quietYellow: #FFFF8F;
-$wheelBlue:   #144880;
-$wheelGreen:  #098642;
-$wheelWhite:  #F1F1F3;
-$wheelBlack:  #231F20;
+$noise-salmon: #ED484A;
+$noise-yellow: #FBE633;
+$quiet-yellow: #FFFF8F;
+$wheel-blue:   #144880;
+$wheel-green:  #098642;
+$wheel-white:  #F1F1F3;
+$wheel-black:  #231F20;
 
 /*       font types                 */
 $cute:  'Cute Font', cursive;
 $abel:  'Abel', sans-serif;
-$font-family-text:    $cute;
-$font-family-display: $abel;
 
 /*       font sizes                 */
-@include font-size-small
-@include font-size-regular
-@include font-size-large
-@include font-size-x-large
-@include font-size-xx-large
-@include font-size-xxx-large
-@include font-size-xxxx-large
+@include font-size-small;
+@include font-size-regular;
+@include font-size-large;
+@include font-size-x-large;
+@include font-size-xx-large;
+@include font-size-xxx-large;
+@include font-size-xxxx-large;
 
 /*                    font weights  */
-$font-weight-light:   300
-$font-weight-regular: 400
-$font-weight-bold:    600
+$font-weight-light:   300;
+$font-weight-regular: 400;
+$font-weight-bold:    600;
+
+/*              resolutions         */
+$mobile-small:	240;
+$mobile-large:	320;
+$tablet-small:	480;
+$tablet-large:	768;
+$screen-small:  1024;
+$screen-large:  1280;

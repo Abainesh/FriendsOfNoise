@@ -4,7 +4,8 @@
   "description": "Friends of Noise Organization now has a web app for members!",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: PLEASE MAKE A TEST!!!!! :)\" && exit 1",
+    "sass:compile": "node-sass --include-path sass input.scss style.css"
   },
   "repository": {
     "type": "git",
@@ -24,6 +25,9 @@
   },
   "homepage": "https://github.com/Abainesh/FriendsOfNoise#readme",
   "dependencies": {
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "mongoose": "^5.5.2",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0"
   }
 }

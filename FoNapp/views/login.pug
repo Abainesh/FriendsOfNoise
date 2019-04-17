@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  h1 Login
+  form(method='POST', action='login')
+    #form-labels
+      label Username:
+      input.form-control(name='username',type='text')
+    #form-labels
+      label Password:
+      input.form-control(name='password',type='password')
+    br
+    input.btn.btn-primary(type='submit', value='Welcome back, friend!')

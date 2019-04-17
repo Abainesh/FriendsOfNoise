@@ -1,9 +1,33 @@
-// utility sass
+// utility sass variables
 
+// import fonts
+@import url('https://fonts.googleapis.com/css?family=Abel|Cute+Font');
+
+/*            colors               */
 $noiseSalmon: #ED484A;
 $noiseYellow: #FBE633;
 $quietYellow: #FFFF8F;
-$wheelBlue: #144880;
-$wheelGreen: #098642;
-$wheelWhite: #F1F1F3;
-$wheelBlack: #231F20;
+$wheelBlue:   #144880;
+$wheelGreen:  #098642;
+$wheelWhite:  #F1F1F3;
+$wheelBlack:  #231F20;
+
+/*       font types                 */
+$cute:  'Cute Font', cursive;
+$abel:  'Abel', sans-serif;
+$font-family-text:    $cute;
+$font-family-display: $abel;
+
+/*       font sizes                 */
+@include font-size-small
+@include font-size-regular
+@include font-size-large
+@include font-size-x-large
+@include font-size-xx-large
+@include font-size-xxx-large
+@include font-size-xxxx-large
+
+/*                    font weights  */
+$font-weight-light:   300
+$font-weight-regular: 400
+$font-weight-bold:    600

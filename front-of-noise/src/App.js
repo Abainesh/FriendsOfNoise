@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Helmet} from 'react-helmet';
+// import {Helmet} from 'react-helmet';
 import './App.css';
 
 class App extends Component {
@@ -9,10 +9,7 @@ class App extends Component {
           <div className="container">
             <h1 className="title">Friends of Noise</h1>
             <nav className="navbar">
-              <ButtonToolbar>
-                <Button variant="primary">Log in</Button>
-                <Button variant="primary">Sign up</Button>
-              </ButtonToolbar>;
+
             </nav>
             <p className="subtitle">
               All ages <strong>always</strong>!

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 // import {Helmet} from 'react-helmet';
+import 'bulma';
 import './App.css';
 import FormContainer from './containers/FormContainer';
 
@@ -27,6 +28,5 @@ class App extends Component {
     );
   }
 }
-
 
 export default App;

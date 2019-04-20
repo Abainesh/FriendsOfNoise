@@ -20,7 +20,7 @@ class App extends Component {
             </p>
           </div>
           <div className="col-md-6">
-            <h3> Hello Form </h3>
+            <br />
             <FormContainer />
           </div>
         </section>

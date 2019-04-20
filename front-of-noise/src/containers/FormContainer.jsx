@@ -28,7 +28,8 @@ class FormContainer extends Component {
     }
     this.handleTextArea = this.handleTextArea.bind(this);
     this.handleAge = this.handleAge.bind(this);
-    this.handleFullName = this.handleFullName.bind(this);
+    this.handleFirstName = this.handleFirstName.bind(this);
+    this.handleLastName = this.handleLastName.bind(this);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleClearForm = this.handleClearForm.bind(this);
     this.handleCheckBox = this.handleCheckBox.bind(this);
@@ -37,13 +38,21 @@ class FormContainer extends Component {
 
   /* This lifecycle hook gets executed when the component mounts */
 
-  handleFullName(e) {
+  handleFirstName(e) {
    let value = e.target.value;
    this.setState( prevState => ({ newUser :
-        {...prevState.newUser, name: value
+        {...prevState.newUser, fname: value
         }
       }), () => console.log(this.state.newUser))
   }
+
+  handleLastName(e) {
+     let value = e.target.value;
+     this.setState( prevState => ({ newUser :
+          {...prevState.newUser, lname: value
+          }
+        }), () => console.log(this.state.newUser))
+    }
 
   handleAge(e) {
        let value = e.target.value;

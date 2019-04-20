@@ -4,6 +4,9 @@
 @import "../node_modules/bulmaswatch/united/overrides";
 
 body {
+  margin: 0;
+  padding: 0;
+  font-family: $family-sans-serif;
   background-color: $primary;
 }
 

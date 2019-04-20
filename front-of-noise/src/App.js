@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 // import {Helmet} from 'react-helmet';
 import './App.css';
+import FormContainer from './containers/FormContainer';
 
 class App extends Component {
   render() {
@@ -18,9 +19,14 @@ class App extends Component {
               Ask about how to be sponsored for a membership.
             </p>
           </div>
+          <div className="col-md-6">
+            <h3> Hello Form </h3>
+            <FormContainer />
+          </div>
         </section>
     );
   }
 }
+
 
 export default App;

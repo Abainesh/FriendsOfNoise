@@ -49,13 +49,31 @@ class Header extends Component {
           <div className="navbar-start">
           <NavLink
             className="navbar-item"
+            to="/"
+            activeClassName="is-active"
+            >
+            <span className="icon has-text-primary" style={{ marginRight: 5 }}> <i class="fas fa-heart"></i>
+            </span>
+            Home
+            </NavLink>
+          <NavLink
+            className="navbar-item"
             to="/signup"
             activeClassName="is-active"
             >
-            <span className="icon has-text-primary" style={{ marginRight: 5 }}> <i class="fas fa-code"></i>
+            <span className="icon has-text-primary" style={{ marginRight: 5 }}> <i class="fas fa-heart"></i>
             </span>
             Sign up
             </NavLink>
+            <NavLink
+              className="navbar-item"
+              to="/signin"
+              activeClassName="is-active"
+              >
+              <span className="icon has-text-primary" style={{ marginRight: 5 }}> <i class="fas fa-crow"></i>
+              </span>
+              Sign in
+              </NavLink>
             <div className="navbar-item has-dropdown is-hoverable">
               <a className="navbar-link"  href="#overview">
                 Overview

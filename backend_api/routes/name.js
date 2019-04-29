@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
+
 // GET request - given userID, provide first name & last name
 router.get('/', function(req, res, next) {
 	var fs = require('fs');
@@ -10,4 +11,6 @@ router.get('/', function(req, res, next) {
 	
 		
 	res.response
-}
+});
+
+module.exports = router;

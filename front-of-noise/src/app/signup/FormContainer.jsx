@@ -17,7 +17,7 @@ class FormContainer extends Component {
         lname: '',
         age: '',
         gender: '',
-        skills: [],
+        genrePrefs: [],
         about: ''
 
       },
@@ -83,18 +83,17 @@ class FormContainer extends Component {
 
 
   handleCheckBox(e) {
-
     const newSelection = e.target.value;
     let newSelectionArray;
 
     if(this.state.newUser.skills.indexOf(newSelection) > -1) {
-      newSelectionArray = this.state.newUser.skills.filter(s => s !== newSelection)
+      newSelectionArray = this.state.newUser.genrePrefs.filter(s => s !== newSelection)
     } else {
-      newSelectionArray = [...this.state.newUser.skills, newSelection];
+      newSelectionArray = [...this.state.newUser.genrePrefs, newSelection];
     }
 
       this.setState( prevState => ({ newUser:
-        {...prevState.newUser, skills: newSelectionArray }
+        {...prevState.newUser, genrePrefs: newSelectionArray }
       })
       )
 }
@@ -126,7 +125,7 @@ class FormContainer extends Component {
           lname: '',
           age: '',
           gender: '',
-          genres: [],
+          genrePrefs: [],
           about: ''
         },
       })

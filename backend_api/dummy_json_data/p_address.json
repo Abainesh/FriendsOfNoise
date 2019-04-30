@@ -1,0 +1,19 @@
+{
+  "1": {
+    "address1" : "123 Sesame St",
+    "address2": "Apt 9",
+    "city": "Muppet Town",
+    "state": "NY",
+    "zip": "10023",
+    "zip_ext": "7004"
+  },
+
+  "2": {
+    "address1": "1900 N Urban Way",
+    "address2": "",
+    "city": "Tukwilla",
+    "state": "WA",
+    "zip": "98543",
+    "zip_ext":  ""
+  }
+}

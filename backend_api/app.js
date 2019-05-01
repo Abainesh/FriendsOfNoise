@@ -4,7 +4,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 // member information routes
-//var physicalAddressRouter = require('./routes/physical_address');
+var physicalAddressRouter = require('./routes/physical_address');
 var emailAddressRouter = require('./routes/email_address');
 var nameRouter = require('./routes/name');
 //var membershipEndDateRouter = require('./routes/membership_end_date');

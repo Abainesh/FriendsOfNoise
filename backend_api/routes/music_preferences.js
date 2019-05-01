@@ -1,10 +1,12 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET home page. */
+var filename = '../dummy_json_data/music_pref.json';
+var music_preferences = require(filename);
 router.get('/', function(req, res, next) {
-  res.send("Nobody here, except us chickens.");
+  res.send(music_preferences[1]);
+  
+
+
 });
-
 module.exports = router;
-

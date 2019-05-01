@@ -19,7 +19,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 // member information routes
-//app.use('/physical_address', physicalAddressRouter);
+app.use('/physical_address', physicalAddressRouter);
 app.use('/email_address', emailAddressRouter);
 app.use('/name', nameRouter);
 //app.use('/member_end_date', membershipEndDateRouter);

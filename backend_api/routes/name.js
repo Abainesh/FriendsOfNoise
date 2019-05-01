@@ -2,12 +2,8 @@ var express = require('express');
 var router = express.Router();
 
 // connect to the data source
-var fs = require('fs');
 var filename = '../dummy_json_data/name.json';
 var names = require(filename);
-fs.close(0, () => {
-	console.log("closed json file after read");
-});
 
 
 // GET request - given userID, provide first name & last name
@@ -43,7 +39,7 @@ router.post('/', function(req, res, next) {
 	var fn = req.body.first_name;
 	var ln = req.body.last_name;
 	
-	// validate inputs
+	// validate userId input, convert to integer
 	if(userId === undefined || typeof userId === undefined) {
 		res.status(500).send("No userId specified");
 	} else if (isNaN(userId)) {
@@ -51,15 +47,17 @@ router.post('/', function(req, res, next) {
 	} else {
 		userIdint = parseInt(userId);
 	}
-	if(fn === undefined || typeof fn == undefined) {
-		res.status(500).send("No first_name specified");
-	} 
+	// validate name input using helper function, trim whitespace
 	if (isEmptyOrAllWhitespace(fn)) {
 		res.status(500).send("Empty or all whitespace first_name");
-	} 
+	} else {
+		fn.trim();
+	}
 	if (isEmptyOrAllWhitespace(ln)) {
 		res.status(500).send("Empty or all whitespace last_name");
-	} 
+	} else {
+		ln.trim();
+	}
 	if (!names[userIdint]) {
 		res.status(500).send("User does not exist in database");
 	} else {
@@ -69,13 +67,15 @@ router.post('/', function(req, res, next) {
 		names[userIdint].first_name = fn;
 		names[userIdint].last_name = ln;
 		var json_format = JSON.stringify(names);
-		fs.writeFile(filename, json_format, 'utf8', (err) => {
-			res.status(500).send("fs error: " + err);
+		fs = require('fs');
+		filename = './dummy_json_data/name.json';
+		fs.writeFile(filename, json_format, 'utf8', function(err, data) {
+			if (err) {
+				res.status(500).send("fs write error: " + err);
+			} else {
+				res.status(200).send("record updated: " + data);
+			}
 		});
-		fs.close(0, () => {
-			console.log("closed json file after write.");
-		});
-		res.status(200).send("Record updated");
 	}
 });
 

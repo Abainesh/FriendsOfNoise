@@ -5,6 +5,10 @@ var router = express.Router();
 var fs = require('fs');
 var filename = '../dummy_json_data/name.json';
 var names = require(filename);
+fs.close(0, () => {
+	console.log("closed json file after read");
+});
+
 
 // GET request - given userID, provide first name & last name
 router.get('/', function(req, res, next) {
@@ -49,11 +53,14 @@ router.post('/', function(req, res, next) {
 	}
 	if(fn === undefined || typeof fn == undefined) {
 		res.status(500).send("No first_name specified");
-	} else if (isEmptyOrAllWhitespace(fn)) {
+	} 
+	if (isEmptyOrAllWhitespace(fn)) {
 		res.status(500).send("Empty or all whitespace first_name");
-	} else if (isEmptyOrAllWhitespace(ln)) {
+	} 
+	if (isEmptyOrAllWhitespace(ln)) {
 		res.status(500).send("Empty or all whitespace last_name");
-	} else if (!names[userIdint]) {
+	} 
+	if (!names[userIdint]) {
 		res.status(500).send("User does not exist in database");
 	} else {
 		// At this point the following should be true: userId exists
@@ -65,13 +72,27 @@ router.post('/', function(req, res, next) {
 		fs.writeFile(filename, json_format, 'utf8', (err) => {
 			res.status(500).send("fs error: " + err);
 		});
+		fs.close(0, () => {
+			console.log("closed json file after write.");
+		});
+		res.status(200).send("Record updated");
 	}
 });
 
 // helper function to catch empty strings and all whitespace strings
 // source: StackOverflow questionId 10232366
 function isEmptyOrAllWhitespace(str) {
-	return str === null || str.match(/^\s*$/) !== null;
+	var re = /^\s*$/;
+	
+	if (str === undefined || typeof str === undefined) {
+		return true;
+    } else if(str === null) {
+		return true;
+	} else if (re.test(str)) {
+		return true;
+	} else {
+		return false;
+	}
 }
 
 

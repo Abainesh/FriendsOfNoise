@@ -1,3 +1,6 @@
+/*  Author: Quincy Powell
+	Date: 2019-04-30  */
+
 var express = require('express');
 var router = express.Router();
 
@@ -69,11 +72,11 @@ router.post('/', function(req, res, next) {
 		var json_format = JSON.stringify(names);
 		fs = require('fs');
 		filename = './dummy_json_data/name.json';
-		fs.writeFile(filename, json_format, 'utf8', function(err, data) {
+		fs.writeFile(filename, json_format, 'utf8', function(err) {
 			if (err) {
 				res.status(500).send("fs write error: " + err);
 			} else {
-				res.status(200).send("record updated: " + data);
+				res.status(200).send("record updated");
 			}
 		});
 	}

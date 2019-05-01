@@ -36,7 +36,7 @@ class Header extends Component {
             }}
             src="../images/logo.png"
             width="50px"
-            alt=""
+            alt="Home of Noise"
             />
           </NavLink>
           <button className="button navbar-burger" onClick={this.toggleNav}>

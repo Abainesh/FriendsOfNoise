@@ -37,6 +37,8 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.1.4",
     "node-sass": "^4.11.0"
   }
 }

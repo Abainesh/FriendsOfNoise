@@ -22,7 +22,7 @@ router.get('/', function(req, res, next) {
 		userIdint = parseInt(req.query.userId, 10);
 	}
 	
-	// Find if userId exists in the JSON
+	// Find if userId exists in the JSON, send result data if it does.
 	if(!names[userIdint]) {
 		res.status(500).send("user does not exist");
 	} else {	
@@ -62,14 +62,18 @@ router.post('/', function(req, res, next) {
 		names[userIdint].first_name = fn;
 		names[userIdint].last_name = ln;
 		var json_format = JSON.stringify(names);
-		fs.writeFile(filename, json, 'utf8', callback);
+		fs.writeFile(filename, json_format, 'utf8', (err) => {
+			res.status(500).send("fs error: " + err);
+		});
 	}
 });
 
 // helper function to catch empty strings and all whitespace strings
-// taken from StackOverflow questionId 10232366
+// source: StackOverflow questionId 10232366
 function isEmptyOrAllWhitespace(str) {
 	return str === null || str.match(/^\s*$/) !== null;
 }
+
+
 
 module.exports = router;

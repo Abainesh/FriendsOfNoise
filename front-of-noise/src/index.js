@@ -5,10 +5,17 @@ import './index.scss';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router } from 'react-router-dom';
 
+
+//Firebase imports
+import Firebase, {FirebaseContext} from './app/components/Firebase';
+
+
+
 ReactDOM.render((
   <Router>
     <App />
   </Router>
 ), document.getElementById('root'));
+
 
 serviceWorker.unregister();

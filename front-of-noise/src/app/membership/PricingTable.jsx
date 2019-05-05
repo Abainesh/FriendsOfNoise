@@ -38,7 +38,7 @@ render() {
     <div class="plan-header">Good Friend</div>
     <div class="plan-items">
       <div class="plan-item">You!</div>
-      <div class="plan-item">2 Lucky others</div>
+      <div class="plan-item">+2 Lucky others</div>
       <div class="plan-item">-</div>
       <div class="plan-item">-</div>
     </div>
@@ -52,7 +52,7 @@ render() {
     <div class="plan-header">Best Friend</div>
     <div class="plan-items">
       <div class="plan-item">You!</div>
-      <div class="plan-item">5 Lucky others</div>
+      <div class="plan-item">+5 Lucky others</div>
       <div class="plan-item">Your membership free!</div>
       <div class="plan-item">-</div>
     </div>

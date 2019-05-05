@@ -18,8 +18,9 @@ class FormContainer extends Component {
         age: '',
         gender: '',
         genrePrefs: [],
-        about: ''
-
+        about: '',
+        email: '',
+        password: ''
       },
 
       genderOptions: ['Male', 'Female', 'Nonbinary'],
@@ -34,6 +35,8 @@ class FormContainer extends Component {
     this.handleClearForm = this.handleClearForm.bind(this);
     this.handleCheckBox = this.handleCheckBox.bind(this);
     this.handleInput = this.handleInput.bind(this);
+    this.handleEmail = this.handleEmail.bind(this);
+    this.handlePassword = this.handlePassword.bind(this);
   }
 
   /* This lifecycle hook gets executed when the component mounts */
@@ -96,7 +99,23 @@ class FormContainer extends Component {
         {...prevState.newUser, genrePrefs: newSelectionArray }
       })
       )
-}
+    }
+
+    handleEmail(e) {
+       let value = e.target.value;
+       this.setState( prevState => ({ newUser :
+            {...prevState.newUser, email: value
+            }
+          }), () => console.log(this.state.newUser))
+      }
+
+      handlePassword(e) {
+         let value = e.target.value;
+         this.setState( prevState => ({ newUser :
+              {...prevState.newUser, password: value
+              }
+            }), () => console.log(this.state.newUser))
+        }
 
   handleFormSubmit(e) {
     e.preventDefault();
@@ -170,6 +189,23 @@ class FormContainer extends Component {
                   placeholder = {'Select gender'}
                   handleChange = {this.handleInput}
                   /> {/* Gender */}
+
+                  Email:
+                  <Input inputType={'email'}
+                         title= {'email'}
+                         name= {'email'}
+                         // value={this.state.User.email}
+                         placeholder = {'Chanandler@email.co.tk'}
+                         handleChange = {this.handleInput} />
+
+                  Password:
+                  <Input inputType={'password'}
+                        title= {'password'}
+                        name= {'password'}
+                        // value={this.state.User.password}
+                        placeholder = {'53cR3t!'}
+                        handleChange = {this.handleInput} />
+
           Genre preferences: Rock, Pop, Hip-Hop, Electronic
           <CheckBox  title={'Genres'}
                   name={'genres'}

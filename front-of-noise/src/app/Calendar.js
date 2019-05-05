@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Cal from './calendar/cal';
+
 const Calendar = () => (
   <section className="section">
     <div className="container">
@@ -13,9 +15,10 @@ const Calendar = () => (
       <p className="membertagline">
         Ask about how to be sponsored for a membership.
       </p>
-    </div>
     <div className="col-md-6">
       <br />
+      <Cal />
+    </div>
     </div>
   </section>
 );

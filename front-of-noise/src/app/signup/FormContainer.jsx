@@ -132,19 +132,20 @@ class FormContainer extends Component {
   }
 
   render() {
-      
-   
+
+
     return (
 
         <form className="container-fluid" onSubmit={this.handleFormSubmit}>
 
+        First name:
         <Input inputType={'text'}
                title= {'First Name'}
                name= {'fname'}
                value={this.state.newUser.fname}
                placeholder = {'Chanandler'}
                handleChange = {this.handleInput} />
-
+        Last name:
        <Input inputType={'text'}
               title= {'Last Name'}
               name= {'lname'}
@@ -153,7 +154,7 @@ class FormContainer extends Component {
               handleChange = {this.handleInput} />
 
               {/* Name of the user */}
-
+          Age:
           <Input inputType={'number'}
                 name={'age'}
                  title= {'Age'}
@@ -166,22 +167,25 @@ class FormContainer extends Component {
                   name={'gender'}
                   options = {this.state.genderOptions}
                   value = {this.state.newUser.gender}
-                  placeholder = {'Select Gender'}
+                  placeholder = {'Select gender'}
                   handleChange = {this.handleInput}
                   /> {/* Gender */}
+          Genre preferences: Rock, Pop, Hip-Hop, Electronic
           <CheckBox  title={'Genres'}
                   name={'genres'}
                   options={this.state.genreOptions}
                   selectedOptions = { this.state.newUser.genres}
                   handleChange={this.handleCheckBox}
                    /> {/* Genre Favorites */}
+          Anything else?
           <TextArea
             title={'About you.'}
             rows={10}
             value={this.state.newUser.about}
             name={'currentPetInfo'}
             handleChange={this.handleTextArea}
-            placeholder={'Let us get to know you, pal!'} />{/* About you */}
+            placeholder={'Let us get to know you, pal!'}
+            /> {/* About you */}
 
           <Button
               action = {this.handleFormSubmit}

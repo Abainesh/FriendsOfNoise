@@ -13857,6 +13857,11 @@ input[type=range].slider.is-danger .has-output-tooltip + output, input[type=rang
   to {
     transform: rotate(360deg); } }
 
+hr {
+  display: inline-block;
+  vertical-align: middle;
+  width: 100px; }
+
 /* Calendar */
 .icon {
   font-family: 'Material Icons', serif;

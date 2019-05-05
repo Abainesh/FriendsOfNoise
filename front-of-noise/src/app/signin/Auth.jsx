@@ -1,6 +1,10 @@
 import React, {Component} from 'react';
 
 /* Import Components */
+import Tile from 'react-bulma-components/lib/components/tile';
+import Heading from 'react-bulma-components/lib/components/heading';
+import Section from 'react-bulma-components/lib/components/section';
+import Box from 'react-bulma-components/lib/components/box';
 
 class Auth extends Component {
 
@@ -17,7 +21,11 @@ class Auth extends Component {
   render() {
     return(
       <section className="section">
-
+        <Tile renderAs="article" kind="parent" notification color="primary">
+        <div className="has-text-centered" style={{ padding: '10px 8px' }}>
+        <Heading>Log in!</Heading>
+        <Heading subtitle>or <a href="/signup">register</a>~</Heading>
+        </div>
         <div className="has-text-centered">
           <LoginButton icon="google" name="Google" onClick={this.loginWithProvider} />
           <LoginButton icon="twitter" name="Twitter" onClick={this.loginWithProvider} />
@@ -31,6 +39,7 @@ class Auth extends Component {
         <LoginForm handleSubmit={this.loginWithEmailAndPassword} />
 
         <SignInSuccess active={this.state.authenticated} handleClose={this.handleClose} />
+        </Tile>
 
       </section>
     )
@@ -61,24 +70,37 @@ class LoginForm extends Component {
 
   render() {
     return (
-      <div className="container has-text-centered box" style={{ maxWidth: '300px' }}>
+      <div className="container has-text-centered box" style={{ maxWidth: '350px' }}>
         <form
           onSubmit={e => {
             e.preventDefault();
             this.handleSubmit();
           }}>
           <div className="field">
+          <p class="control has-icons-left has-icons-right">
             <label className="label" htmlFor="email">Email</label>
             <div className="control">
               <input className="input" name="email" type="email" placeholder="email" required onChange={this.handleChange} />
+              <span class="icon is-small is-left">
+              <i class="fas fa-envelope"></i>
+            </span>
+            <span class="icon is-small is-right">
+              <i class="fas fa-check"></i>
+            </span>
             </div>
+            </p>
           </div>
 
           <div className="field">
+           <p class="control has-icons-left">
             <label className="label" htmlFor="password">Password</label>
             <div className="control">
               <input className="input" name="password" type="password" placeholder="password" required onChange={this.handleChange}/>
-            </div>
+              <span class="icon is-small is-left">
+                <i class="fas fa-lock"></i>
+              </span>
+              </div>
+            </p>
           </div>
 
           <div className="field">

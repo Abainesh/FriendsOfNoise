@@ -12,7 +12,7 @@ class FormContainer extends Component {
     super(props);
 
     this.state = {
-      newUser: {
+      logUser: {
         fname: '',
         lname: '',
         age: '',
@@ -22,18 +22,9 @@ class FormContainer extends Component {
 
       },
 
-      genderOptions: ['Male', 'Female', 'Nonbinary'],
-      genreOptions: ['Rock', 'Pop', 'Hip Hop', 'Electronic']
 
     }
-    this.handleTextArea = this.handleTextArea.bind(this);
-    this.handleAge = this.handleAge.bind(this);
-    this.handleFirstName = this.handleFirstName.bind(this);
-    this.handleLastName = this.handleLastName.bind(this);
-    this.handleFormSubmit = this.handleFormSubmit.bind(this);
-    this.handleClearForm = this.handleClearForm.bind(this);
-    this.handleCheckBox = this.handleCheckBox.bind(this);
-    this.handleInput = this.handleInput.bind(this);
+
   }
 
   /* This lifecycle hook gets executed when the component mounts */
@@ -120,13 +111,9 @@ class FormContainer extends Component {
 
       e.preventDefault();
       this.setState({
-        newUser: {
-          fname: '',
-          lname: '',
-          age: '',
-          gender: '',
-          genrePrefs: [],
-          about: ''
+        User: {
+          email: '',
+          password: ''
         },
       })
   }
@@ -136,50 +123,23 @@ class FormContainer extends Component {
 
         <form className="container-fluid" onSubmit={this.handleFormSubmit}>
 
-        <Input inputType={'text'}
-               title= {'First Name'}
-               name= {'fname'}
-               value={this.state.newUser.fname}
-               placeholder = {'Chanandler'}
+        Email:
+        <Input inputType={'email'}
+               title= {'email'}
+               name= {'email'}
+               // value={this.state.User.email}
+               placeholder = {'Chanandler@email.co.tk'}
                handleChange = {this.handleInput} />
 
-       <Input inputType={'text'}
-              title= {'Last Name'}
-              name= {'lname'}
-              value={this.state.newUser.lname}
-              placeholder = {'Bong'}
+        Password: 
+       <Input inputType={'password'}
+              title= {'password'}
+              name= {'password'}
+              // value={this.state.User.password}
+              placeholder = {'53cR3t!'}
               handleChange = {this.handleInput} />
 
-              {/* Name of the user */}
-
-          <Input inputType={'number'}
-                name={'age'}
-                 title= {'Age'}
-                 value={this.state.newUser.age}
-                placeholder = {'Enter your age'}
-                 handleChange={this.handleAge} /> {/* Age */}
-
-
-          <Select title={'Gender'}
-                  name={'gender'}
-                  options = {this.state.genderOptions}
-                  value = {this.state.newUser.gender}
-                  placeholder = {'Select Gender'}
-                  handleChange = {this.handleInput}
-                  /> {/* Gender */}
-          <CheckBox  title={'Genres'}
-                  name={'genres'}
-                  options={this.state.genreOptions}
-                  selectedOptions = { this.state.newUser.genres}
-                  handleChange={this.handleCheckBox}
-                   /> {/* Genre Favorites */}
-          <TextArea
-            title={'About you.'}
-            rows={10}
-            value={this.state.newUser.about}
-            name={'currentPetInfo'}
-            handleChange={this.handleTextArea}
-            placeholder={'Let us get to know you, pal!'} />{/* About you */}
+              {/* user credentials */}
 
           <Button
               action = {this.handleFormSubmit}

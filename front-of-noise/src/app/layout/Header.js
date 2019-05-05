@@ -88,8 +88,8 @@ class Header extends Component {
                 Overview
               </a>
               <div className="navbar-dropdown">
-                <a className="navbar-item" href="#Upcoming">
-                  Upcoming shows
+                <a className="navbar-item" href="/about">
+                  About us
                 </a>
                 <hr className="navbar-divider" />
                 <a className="navbar-item" href="#memberships">

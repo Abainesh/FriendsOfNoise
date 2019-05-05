@@ -74,12 +74,21 @@ class Header extends Component {
               </span>
               Sign in
               </NavLink>
+              <NavLink
+                className="navbar-item"
+                to="/calendar"
+                activeClassName="is-active"
+                >
+                <span className="icon has-text-primary" style={{ marginRight: 5 }}> <i class="fas fa-crow"></i>
+                </span>
+                Calendar
+                </NavLink>
             <div className="navbar-item has-dropdown is-hoverable">
               <a className="navbar-link"  href="#overview">
                 Overview
               </a>
               <div className="navbar-dropdown">
-                <a className="navbar-item" href="#Upcoming">
+                <a className="navbar-item" href="">
                   Upcoming shows
                 </a>
                 <hr className="navbar-divider" />

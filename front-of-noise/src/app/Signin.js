@@ -1,5 +1,5 @@
 import React from 'react';
-import FormContainer from './signin/FormContainer';
+import Auth from './signin/Auth';
 
 const Signin = () => (
   <section className="section">
@@ -16,7 +16,7 @@ const Signin = () => (
       </p>
     <div className="col-md-6">
       <br />
-      <FormContainer />
+      <Auth />
     </div>
     </div>
   </section>

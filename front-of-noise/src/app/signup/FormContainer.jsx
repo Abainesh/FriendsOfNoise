@@ -1,11 +1,19 @@
 import React, {Component} from 'react';
 
 /* Import Components */
-import CheckBox from '../components/CheckBox';
-import Input from '../components/Input';
-import TextArea from '../components/TextArea';
-import Select from '../components/Select';
-import Button from '../components/Button';
+import {
+  Field,
+  Control,
+  Label,
+  Input,
+  Textarea,
+  Select,
+  Checkbox,
+  Radio,
+  Help,
+} from 'react-bulma-components/lib/components/form';
+import Button from 'react-bulma-components/lib/components/button';
+import Icon from 'react-bulma-components/lib/components/icon';
 
 class FormContainer extends Component {
   constructor(props) {
@@ -20,7 +28,8 @@ class FormContainer extends Component {
         genrePrefs: [],
         about: '',
         email: '',
-        password: ''
+        password: '',
+        termsAccepted: false
       },
 
       genderOptions: ['Male', 'Female', 'Nonbinary'],
@@ -157,13 +166,18 @@ class FormContainer extends Component {
 
         <form className="container-fluid" onSubmit={this.handleFormSubmit}>
 
-        First name:
+        <Field>
+        <Label>First name: </Label>
+        <Control>
         <Input inputType={'text'}
                title= {'First Name'}
                name= {'fname'}
                value={this.state.newUser.fname}
                placeholder = {'Chanandler'}
                handleChange = {this.handleInput} />
+        </Control>
+        </Field>
+
         Last name:
        <Input inputType={'text'}
               title= {'Last Name'}
@@ -207,14 +221,14 @@ class FormContainer extends Component {
                         handleChange = {this.handleInput} />
 
           Genre preferences: Rock, Pop, Hip-Hop, Electronic
-          <CheckBox  title={'Genres'}
+          <Checkbox  title={'Genres'}
                   name={'genres'}
                   options={this.state.genreOptions}
                   selectedOptions = { this.state.newUser.genres}
                   handleChange={this.handleCheckBox}
                    /> {/* Genre Favorites */}
           Anything else?
-          <TextArea
+          <Textarea
             title={'About you.'}
             rows={10}
             value={this.state.newUser.about}

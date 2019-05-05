@@ -95,7 +95,7 @@ class Header extends Component {
                 >
                 <span className="icon has-text-primary" style={{ marginRight: 5 }}> <i class="fas fa-crow"></i>
                 </span>
-                About us
+                About Us
                 </NavLink>
                 <hr className="navbar-divider" />
                 <NavLink
@@ -125,4 +125,4 @@ class Header extends Component {
   }
 }
 
-export default Header
+export default Header;

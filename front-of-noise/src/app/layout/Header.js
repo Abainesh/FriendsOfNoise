@@ -88,7 +88,6 @@ class Header extends Component {
                 Overview
               </a>
               <div className="navbar-dropdown">
-<<<<<<< HEAD
               <NavLink
                 className="navbar-item"
                 to="/about"
@@ -98,11 +97,6 @@ class Header extends Component {
                 </span>
                 About us
                 </NavLink>
-=======
-                <a className="navbar-item" href="/about">
-                  About us
-                </a>
->>>>>>> 8a3f483791b76ee1d6a7e277030bd6070c884445
                 <hr className="navbar-divider" />
                 <NavLink
                   className="navbar-item"

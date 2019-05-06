@@ -4,7 +4,8 @@
   "description": "Friends of Noise Organization now has a web app for members!",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: PLEASE MAKE A TEST!!!!! :)\" && exit 1",
+    "sass:compile": "node-sass public/stylesheets/scss/main.scss public/stylesheets/css/style.css -w"
   },
   "repository": {
     "type": "git",

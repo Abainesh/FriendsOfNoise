@@ -1,0 +1,360 @@
+{
+  "Authentication": [
+    {
+      "id": 1,
+      "PersonID": 1,
+      "Email": "person1@test.com",
+      "Password": "abc123"
+    },
+    {
+      "id": 2,
+      "PersonID": 2,
+      "Email": "person2@test.com",
+      "Password": "abc123"
+    },
+    {
+      "id": 3,
+      "PersonID": 3,
+      "Email": "person3@test.com",
+      "Password": "abc123"
+    }
+  ],
+
+  "Person": [
+    {
+      "id": 1,
+      "FirstName": "Wayne",
+      "LastName": "Gretzky",
+      "Address1": "123 avenue",
+      "Address2": "Apt 1",
+      "City": "Seattle",
+      "State": "WA",
+      "Zip": 98101,
+      "ZipExt": 1234,
+      "Email": "person1@test.com",
+      "Phone": "123-4567",
+      "isMember": 1,
+      "isAdmin": 0,
+      "isArtist": 0
+    }
+    {
+      "id": 2,
+      "FirstName": "Babe",
+      "LastName": "Ruth",
+      "Address1": "123 avenue",
+      "Address2": "Apt 2",
+      "City": "Seattle",
+      "State": "WA",
+      "Zip": 98101,
+      "ZipExt": 1234,
+      "Email": "person2@test.com",
+      "Phone": "321-4567",
+      "isMember": 1,
+      "isAdmin": 0,
+      "isArtist": 0
+    }
+    {
+      "id": 3,
+      "FirstName": "Muhammad",
+      "LastName": "Ali",
+      "Address1": "123 avenue",
+      "Address2": "Apt 3",
+      "City": "Seattle",
+      "State": "WA",
+      "Zip": 98101,
+      "ZipExt": 1234,
+      "Email": "person3@test.com",
+      "Phone": "213-4567",
+      "isMember": 1,
+      "isAdmin": 0,
+      "isArtist": 0
+    }
+  ],
+
+  "Member": [
+    {
+      "id": 1,
+      "PersonID": 101,
+      "JoinDate": 4-19-2019,
+      "CommPref": "email",
+      "MusicInterest": "rock",
+      "PaidThroughDate":10-19-2019
+    },
+    {
+      "id": 2,
+      "PersonID": 102,
+      "JoinDate": 4-19-2019,
+      "CommPref": "email",
+      "MusicInterest": "jazz",
+      "PaidThroughDate":10-19-2019
+    },
+    {
+      "id": 3,
+      "PersonID": 103,
+      "JoinDate": 4-19-2019,
+      "CommPref": "email",
+      "MusicInterest": "salsa",
+      "PaidThroughDate":10-19-2019
+    }
+  ],
+
+  "Administrator": [
+    {
+      "id": 1,
+      "AdminID": 1,
+      "PersonID": 1,
+      "ReadPerson": -1,
+      "WritePerson": -1,
+      "ReadMember": -1,
+      "WriteMember": -1,
+      "ReadArtist": -1,
+      "WriteArtist": -1,
+      "ReadAdmin": -1,
+      "WriteAdmin": -1,
+      "ReadVenue": -1,
+      "WriteVenue": -1,
+      "ReadShows": -1,
+      "WriteShows": -1,
+      "ReadTickets": -1,
+      "WriteTickets": -1
+    },
+    {
+      "id": 2,
+      "AdminID": 2,
+      "PersonID": 2,
+      "ReadPerson": -1,
+      "WritePerson": -1,
+      "ReadMember": -1,
+      "WriteMember": -1,
+      "ReadArtist": -1,
+      "WriteArtist": -1,
+      "ReadAdmin": -1,
+      "WriteAdmin": -1,
+      "ReadVenue": -1,
+      "WriteVenue": -1,
+      "ReadShows": -1,
+      "WriteShows": -1,
+      "ReadTickets": -1,
+      "WriteTickets": -1
+    },
+    {
+      "id": 3,
+      "AdminID": 1,
+      "PersonID": 3,
+      "ReadPerson": -1,
+      "WritePerson": -1,
+      "ReadMember": -1,
+      "WriteMember": -1,
+      "ReadArtist": -1,
+      "WriteArtist": -1,
+      "ReadAdmin": -1,
+      "WriteAdmin": -1,
+      "ReadVenue": -1,
+      "WriteVenue": -1,
+      "ReadShows": -1,
+      "WriteShows": -1,
+      "ReadTickets": -1,
+      "WriteTickets": -1
+    }
+  ],
+
+  "Artist": [
+    {
+      "id": 1,
+      "ArtistID": 1,
+      "PersonID": 4
+    }
+  ],
+
+  "Arist-Group-Members": [
+    {
+      "id": 1,
+      "ArtistID": 1,
+      "GroupID": 1
+    }
+    {
+      "id": 2,
+      "ArtistID": 2,
+      "GroupID": 2
+    }
+    {
+      "id": 3,
+      "ArtistID": 3,
+      "GroupID": 3
+    }
+  ],
+
+  "PerformingGroup": [
+    {
+      "id": 1,
+      "GroupID": 1,
+      "Name": "Mouse Rat"
+    }
+    {
+      "id": 2,
+      "GroupID": 2,
+      "Name": "Scarecrow Boat"
+    }
+    {
+      "id": 3,
+      "GroupID": 3,
+      "Name": "Radwagon"
+    }
+  ],
+
+  "SoloPerformance": [
+    {
+      "id": 1,
+      "ShowID": 1,
+      "GroupID": 1
+    }
+    {
+      "id": 2,
+      "ShowID": 2,
+      "GroupID": 2
+    }
+    {
+      "id": 3,
+      "ShowID": 3,
+      "ArtistID": 3
+    }
+  ],
+
+  "GroupPerformance": [
+    {
+      "id": 1,
+      "ShowID": 4,
+      "GroupID": 1
+    }
+    {
+      "id": 2,
+      "ShowID": 5,
+      "GroupID": 2
+    }
+    {
+      "id": 1,
+      "ShowID": 4,
+      "GroupID": 5
+    }
+  ],
+
+  "Show": [
+    {
+      "id": 1,
+      "ShowID": 1,
+      "ShowDate": 4-20-2019,
+      "VenueID": 1,
+      "TicketsSold": 50
+    }
+    {
+      "id": 2,
+      "ShowID": 2,
+      "ShowDate": 5-20-2019,
+      "VenueID": 2,
+      "TicketsSold": 50
+    }
+    {
+      "id": 3,
+      "ShowID": 3,
+      "ShowDate": 6-20-2019,
+      "VenueID": 3,
+      "TicketsSold": 50
+    }
+  ],
+
+  "venue": [
+    {
+      "id": 1,
+      "VenueID": 1,
+      "VenueName": "Venue 1",
+      "Max Capacity": 200,
+      "Lat": "45.5155° N",
+      "Lon": "-122.6793° W",
+      "Address1": "123 Street",
+      "Address2": "N/A",
+      "City": "Portland",
+      "State": "OR",
+      "Zip": 97035,
+      "ZipExt": 1234
+    }
+    {
+      "id": 2,
+      "VenueID": 2,
+      "VenueName": "Venue 2",
+      "Max Capacity": 150,
+      "Lat": "46.5155° N",
+      "Lon": "-123.6793° W",
+      "Address1": "321 Street",
+      "Address2": "N/A",
+      "City": "Portland",
+      "State": "OR",
+      "Zip": 97035,
+      "ZipExt": 1234
+    }
+    {
+      "id": 3,
+      "VenueID": 3,
+      "VenueName": "Venue 3",
+      "Max Capacity": 250,
+      "Lat": "47.5155° N",
+      "Lon": "-124.6793° W",
+      "Address1": "213 Street",
+      "Address2": "N/A",
+      "City": "Portland",
+      "State": "OR",
+      "Zip": 97035,
+      "ZipExt": 1234
+    }
+  ],
+
+  "VenueContact": [
+    {
+      "id": 1,
+      "VenContactID": 1,
+      "VenueID": 1,
+      "Description": "Venue Manager",
+      "FirstName": "Larry",
+      "LastName": "Bird",
+      "Email": "123@email.com"
+    }
+    {
+      "id": 2,
+      "VenContactID": 2,
+      "VenueID": 2,
+      "Description": "Venue Manager",
+      "FirstName": "Serena",
+      "LastName": "Williams",
+      "Email": "321@email.com"
+    }
+    {
+      "id": 3,
+      "VenContactID": 3,
+      "VenueID": 3,
+      "Description": "Venue Manager",
+      "FirstName": "Jackie",
+      "LastName": "Joyner-Kersee",
+      "Email": "213@email.com"
+    }
+  ],
+
+  "VenueContactPhone": [
+    {
+      "Phone": 987-6543,
+      "PhoneType": "Cell",
+      "VenContactID": 1,
+      "PhoneExt": 1
+    }
+    {
+      "Phone": 789-6543,
+      "PhoneType": "Office",
+      "VenContactID": 2,
+      "PhoneExt": 1
+    }
+    {
+      "Phone": 879-6543,
+      "PhoneType": "Cell",
+      "VenContactID": 3,
+      "PhoneExt": "N/A"
+    }
+  ]
+}

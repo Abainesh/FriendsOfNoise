@@ -48,7 +48,7 @@ class Auth extends Component {
 
 const LoginButton = ({ icon, name, onClick }) => (
   <div className="field">
-    <p className="control button is-small is-info" style={{ width: '275px' }} onClick={onClick}>
+    <p className="control button is-small is-warning" style={{ width: '275px' }} onClick={onClick}>
       <span className="icon">
         <i className={`fab fa-${icon}`} aria-hidden="true"></i>
       </span>

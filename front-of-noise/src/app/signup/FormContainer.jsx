@@ -14,6 +14,20 @@ import {
 } from 'react-bulma-components/lib/components/form';
 import Button from 'react-bulma-components/lib/components/button';
 import Icon from 'react-bulma-components/lib/components/icon';
+import Tile from 'react-bulma-components/lib/components/tile';
+import Heading from 'react-bulma-components/lib/components/heading';
+
+
+const SignupButton = ({ icon, name, onClick }) => (
+  <div className="field">
+    <p className="control button is-small is-warning" style={{ width: '275px' }} onClick={onClick}>
+      <span className="icon">
+        <i className={`fab fa-${icon}`} aria-hidden="true"></i>
+      </span>
+      <span>{`Sign Up With ${name}`}</span>
+    </p>
+  </div>
+);
 
 class FormContainer extends Component {
   constructor(props) {
@@ -160,12 +174,22 @@ class FormContainer extends Component {
   }
 
   render() {
-
-
     return (
+      <section className="section">
+        <Tile renderAs="article" notification color="primary">
+        <div style={{ margin: '10px 8px 10px' }}>
+        <Heading>Sign up!</Heading>
+        <Heading subtitle>or <a href="/signin">sign in</a>~</Heading>
+          <SignupButton icon="google" name="Google" onClick={this.loginWithProvider} />
+          <SignupButton icon="twitter" name="Twitter" onClick={this.loginWithProvider} />
+          <SignupButton icon="facebook" name="Facebook" onClick={this.loginWithProvider} />
 
-        <form className="container-fluid" onSubmit={this.handleFormSubmit}>
-
+          <span style={{ verticalAlign: 'middle', padding: '0 10px' }}><hr /> OR <hr /></span>
+          <form
+            onSubmit={e => {
+              e.preventDefault();
+              this.handleSubmit();
+            }}>
         <Field>
         <Label>First name: </Label>
         <Control>
@@ -250,8 +274,10 @@ class FormContainer extends Component {
             title = {'Clear'}
             style={buttonStyle}
           /> {/* Clear the form */}
-
         </form>
+        </div>
+        </Tile>
+        </section>
 
     );
   }
@@ -259,6 +285,6 @@ class FormContainer extends Component {
 
 const buttonStyle = {
   margin : '10px 10px 10px 10px'
-}
+};
 
 export default FormContainer;

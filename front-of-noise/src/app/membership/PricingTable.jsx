@@ -57,7 +57,7 @@ render() {
       <div class="plan-item">-</div>
     </div>
     <div class="plan-footer">
-      <div class="plan-price"><span class="plan-price-amount"><span class="plan-price-currency">$</span>40</span>/month</div>
+      <div class="plan-price"><span class="plan-price-amount"><span class="plan-price-currency">$</span>50</span>/month</div>
       <button class="button is-fullwidth">Choose</button>
     </div>
   </div>

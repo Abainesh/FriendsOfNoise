@@ -21,12 +21,12 @@ class Auth extends Component {
   render() {
     return(
       <section className="section">
-        <Tile renderAs="article" kind="parent" notification color="primary">
-        <div className="has-text-centered" style={{ padding: '10px 8px' }}>
+        <Tile renderAs="article" notification color="primary">
+        <div style={{ margin: '10px 8px 10px' }}>
         <Heading>Log in!</Heading>
         <Heading subtitle>or <a href="/signup">register</a>~</Heading>
         </div>
-        <div className="has-text-centered">
+        <div className="has-text-centered" style={{ margin: '10px auto' }}>
           <LoginButton icon="google" name="Google" onClick={this.loginWithProvider} />
           <LoginButton icon="twitter" name="Twitter" onClick={this.loginWithProvider} />
           <LoginButton icon="facebook" name="Facebook" onClick={this.loginWithProvider} />
@@ -48,7 +48,7 @@ class Auth extends Component {
 
 const LoginButton = ({ icon, name, onClick }) => (
   <div className="field">
-    <p className="control button is-medium is-danger" style={{ width: '300px' }} onClick={onClick}>
+    <p className="control button is-small is-info" style={{ width: '275px' }} onClick={onClick}>
       <span className="icon">
         <i className={`fab fa-${icon}`} aria-hidden="true"></i>
       </span>
@@ -105,7 +105,7 @@ class LoginForm extends Component {
 
           <div className="field">
             <div className="control buttons is-centered">
-              <input className="button is-medium is-danger is-fullwidth" type="submit" value="Sign In" />
+              <input className="button is-medium is-warning is-fullwidth" type="submit" value="Sign In" />
             </div>
           </div>
         </form>

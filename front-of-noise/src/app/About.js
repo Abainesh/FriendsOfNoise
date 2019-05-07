@@ -13,6 +13,7 @@ const About = () => (
       <p className="membertagline">
         Ask about how to be sponsored for a membership.
       </p>
+    
     </div>
     <div className="col-md-6">
       <br />

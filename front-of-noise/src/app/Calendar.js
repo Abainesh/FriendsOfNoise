@@ -1,5 +1,6 @@
 import React from 'react';
-import BulmaCalendar from 'bulma-extensions/bulma-calendar';
+
+import Cal from './calendar/cal';
 
 const Calendar = () => (
   <section className="section">
@@ -14,10 +15,10 @@ const Calendar = () => (
       <p className="membertagline">
         Ask about how to be sponsored for a membership.
       </p>
-    </div>
     <div className="col-md-6">
       <br />
-      <BulmaCalendar />
+      <Cal />
+    </div>
     </div>
   </section>
 );

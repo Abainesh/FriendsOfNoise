@@ -1,5 +1,5 @@
 import React from 'react';
-import FormContainer from './signin/FormContainer';
+import Auth from './signin/Auth';
 
 const Signin = () => (
   <section className="section">
@@ -14,10 +14,10 @@ const Signin = () => (
       <p className="membertagline">
         Ask about how to be sponsored for a membership.
       </p>
-    </div>
     <div className="col-md-6">
       <br />
-      <FormContainer />
+      <Auth />
+    </div>
     </div>
   </section>
 );

@@ -14,6 +14,7 @@ const Home = () =>  (
       <p className="membertagline">
         Ask about how to be sponsored for a membership.
       </p>
+<<<<<<< HEAD
     
     
     </div>
@@ -23,5 +24,12 @@ const Home = () =>  (
     </div>
   
     </section>
+=======
+    <div className="col-md-6">
+      <br />
+    </div>
+    </div>
+  </section>
+>>>>>>> 63ea0252c74c2e8e5e1d780eaa4de6463e43fe5d
 );
-export default Home
+export default Home;

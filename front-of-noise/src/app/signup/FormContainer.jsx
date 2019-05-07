@@ -1,11 +1,33 @@
 import React, {Component} from 'react';
 
 /* Import Components */
-import CheckBox from '../components/CheckBox';
-import Input from '../components/Input';
-import TextArea from '../components/TextArea';
-import Select from '../components/Select';
-import Button from '../components/Button';
+import {
+  Field,
+  Control,
+  Label,
+  Input,
+  Textarea,
+  Select,
+  Checkbox,
+  Radio,
+  Help,
+} from 'react-bulma-components/lib/components/form';
+import Button from 'react-bulma-components/lib/components/button';
+import Icon from 'react-bulma-components/lib/components/icon';
+import Tile from 'react-bulma-components/lib/components/tile';
+import Heading from 'react-bulma-components/lib/components/heading';
+
+
+const SignupButton = ({ icon, name, onClick }) => (
+  <div className="field">
+    <p className="control button is-small is-warning" style={{ width: '275px' }} onClick={onClick}>
+      <span className="icon">
+        <i className={`fab fa-${icon}`} aria-hidden="true"></i>
+      </span>
+      <span>{`Sign Up With ${name}`}</span>
+    </p>
+  </div>
+);
 
 class FormContainer extends Component {
   constructor(props) {
@@ -18,8 +40,10 @@ class FormContainer extends Component {
         age: '',
         gender: '',
         genrePrefs: [],
-        about: ''
-
+        about: '',
+        email: '',
+        password: '',
+        termsAccepted: false
       },
 
       genderOptions: ['Male', 'Female', 'Nonbinary'],
@@ -34,6 +58,8 @@ class FormContainer extends Component {
     this.handleClearForm = this.handleClearForm.bind(this);
     this.handleCheckBox = this.handleCheckBox.bind(this);
     this.handleInput = this.handleInput.bind(this);
+    this.handleEmail = this.handleEmail.bind(this);
+    this.handlePassword = this.handlePassword.bind(this);
   }
 
   /* This lifecycle hook gets executed when the component mounts */
@@ -96,7 +122,23 @@ class FormContainer extends Component {
         {...prevState.newUser, genrePrefs: newSelectionArray }
       })
       )
-}
+    }
+
+    handleEmail(e) {
+       let value = e.target.value;
+       this.setState( prevState => ({ newUser :
+            {...prevState.newUser, email: value
+            }
+          }), () => console.log(this.state.newUser))
+      }
+
+      handlePassword(e) {
+         let value = e.target.value;
+         this.setState( prevState => ({ newUser :
+              {...prevState.newUser, password: value
+              }
+            }), () => console.log(this.state.newUser))
+        }
 
   handleFormSubmit(e) {
     e.preventDefault();
@@ -132,19 +174,35 @@ class FormContainer extends Component {
   }
 
   render() {
-      
-   
     return (
+      <section className="section">
+        <Tile renderAs="article" notification color="primary">
+        <div style={{ margin: '10px 8px 10px' }}>
+        <Heading>Sign up!</Heading>
+        <Heading subtitle>or <a href="/signin">sign in</a>~</Heading>
+          <SignupButton icon="google" name="Google" onClick={this.loginWithProvider} />
+          <SignupButton icon="twitter" name="Twitter" onClick={this.loginWithProvider} />
+          <SignupButton icon="facebook" name="Facebook" onClick={this.loginWithProvider} />
 
-        <form className="container-fluid" onSubmit={this.handleFormSubmit}>
-
+          <span style={{ verticalAlign: 'middle', padding: '0 10px' }}><hr /> OR <hr /></span>
+          <form
+            onSubmit={e => {
+              e.preventDefault();
+              this.handleSubmit();
+            }}>
+        <Field>
+        <Label>First name: </Label>
+        <Control>
         <Input inputType={'text'}
                title= {'First Name'}
                name= {'fname'}
                value={this.state.newUser.fname}
                placeholder = {'Chanandler'}
                handleChange = {this.handleInput} />
+        </Control>
+        </Field>
 
+        Last name:
        <Input inputType={'text'}
               title= {'Last Name'}
               name= {'lname'}
@@ -153,7 +211,7 @@ class FormContainer extends Component {
               handleChange = {this.handleInput} />
 
               {/* Name of the user */}
-
+          Age:
           <Input inputType={'number'}
                 name={'age'}
                  title= {'Age'}
@@ -166,22 +224,42 @@ class FormContainer extends Component {
                   name={'gender'}
                   options = {this.state.genderOptions}
                   value = {this.state.newUser.gender}
-                  placeholder = {'Select Gender'}
+                  placeholder = {'Select gender'}
                   handleChange = {this.handleInput}
                   /> {/* Gender */}
-          <CheckBox  title={'Genres'}
+
+                  Email:
+                  <Input inputType={'email'}
+                         title= {'email'}
+                         name= {'email'}
+                         // value={this.state.User.email}
+                         placeholder = {'Chanandler@email.co.tk'}
+                         handleChange = {this.handleInput} />
+
+                  Password:
+                  <Input inputType={'password'}
+                        title= {'password'}
+                        name= {'password'}
+                        // value={this.state.User.password}
+                        placeholder = {'53cR3t!'}
+                        handleChange = {this.handleInput} />
+
+          Genre preferences: Rock, Pop, Hip-Hop, Electronic
+          <Checkbox  title={'Genres'}
                   name={'genres'}
                   options={this.state.genreOptions}
                   selectedOptions = { this.state.newUser.genres}
                   handleChange={this.handleCheckBox}
                    /> {/* Genre Favorites */}
-          <TextArea
+          Anything else?
+          <Textarea
             title={'About you.'}
             rows={10}
             value={this.state.newUser.about}
             name={'currentPetInfo'}
             handleChange={this.handleTextArea}
-            placeholder={'Let us get to know you, pal!'} />{/* About you */}
+            placeholder={'Let us get to know you, pal!'}
+            /> {/* About you */}
 
           <Button
               action = {this.handleFormSubmit}
@@ -196,8 +274,10 @@ class FormContainer extends Component {
             title = {'Clear'}
             style={buttonStyle}
           /> {/* Clear the form */}
-
         </form>
+        </div>
+        </Tile>
+        </section>
 
     );
   }
@@ -205,6 +285,6 @@ class FormContainer extends Component {
 
 const buttonStyle = {
   margin : '10px 10px 10px 10px'
-}
+};
 
 export default FormContainer;

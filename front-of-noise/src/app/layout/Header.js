@@ -88,13 +88,25 @@ class Header extends Component {
                 Overview
               </a>
               <div className="navbar-dropdown">
-                <a className="navbar-item" href="#Upcoming">
-                  Upcoming shows
-                </a>
+              <NavLink
+                className="navbar-item"
+                to="/about"
+                activeClassName="is-active"
+                >
+                <span className="icon has-text-primary" style={{ marginRight: 5 }}> <i class="fas fa-crow"></i>
+                </span>
+                About Us
+                </NavLink>
                 <hr className="navbar-divider" />
-                <a className="navbar-item" href="#memberships">
-                  Memberships
-                </a>
+                <NavLink
+                  className="navbar-item"
+                  to="/membership"
+                  activeClassName="is-active"
+                  >
+                  <span className="icon has-text-primary" style={{ marginRight: 5 }}> <i class="fas fa-crow"></i>
+                  </span>
+                  Membership
+                  </NavLink>
               </div>
             </div>
           </div>
@@ -113,4 +125,4 @@ class Header extends Component {
   }
 }
 
-export default Header
+export default Header;

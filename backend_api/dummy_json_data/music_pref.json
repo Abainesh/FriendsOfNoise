@@ -1,13 +1,6 @@
 {
-  "1" : [
-    {
-      "genre_pref" : [ "jazz", "classical", "ska", "international"]
-    }
-  ],
+  "1" : [ "jazz", "classical", "ska", "international"],
 
-  "2": [
-    {
-      "genre_pref" : ["lofi_hiphop", "pop", "rock"]
-    }
-  ]
+  "2": ["lofi_hiphop", "pop", "rock"]
+    
 }

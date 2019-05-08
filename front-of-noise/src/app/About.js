@@ -13,6 +13,11 @@ const About = () => (
       <p className="membertagline">
         Ask about how to be sponsored for a membership.
       </p>
+<<<<<<< HEAD
+    
+    </div>
+=======
+>>>>>>> 63ea0252c74c2e8e5e1d780eaa4de6463e43fe5d
     <div className="col-md-6">
       <br />
     </div>

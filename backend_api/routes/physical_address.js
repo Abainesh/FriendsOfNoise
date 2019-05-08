@@ -1,5 +1,7 @@
 /*Author: Gabby Saechao 4.30.2019*/
 
+// QRP - Would be nice feature: Use an external web service to validate address. Maybe USPS has a web api?
+
 var express = require('express');
 var router = express.Router();
 

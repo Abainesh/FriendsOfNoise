@@ -6,19 +6,29 @@
 var express = require('express');
 var router = express.Router();
 
-router.post('/', function(req, res next) {
+router.post('/', function(req, res, next) {
 	// non-nullable fields
 	var new_fn = trim(req.body.first_name);
+	console.log(new_fn);
 	var new_ln = trim(req.body.last_name);
+	console.log(new_ln);
 	var new_email = trim(req.body.email);
+	console.log(new_email);
 	// nullable fields
 	var new_address1 = trim(req.body.address1);
+	console.log(new_address1);
 	var new_address2 = trim(req.body.address2);
+	console.log(new_address2);
 	var new_city = trim(req.body.city);
+	console.log(new_city);
 	var new_state = trim(req.body.state);
+	console.log(new_state);
 	var new_zip = trim(req.body.zip);
+	console.log(new_zip);
 	var new_zip_ext = trim(req.body.zip_ext);
+	console.log(new_zip_ext);
 	var new_phone = trim(req.body.phone);
+	console.log(new_phone);
 	
 	// validate non-null fields
 	if (!isAllAlpha(new_fn)) {
@@ -30,11 +40,54 @@ router.post('/', function(req, res next) {
 	if (!validate_email(email)) {
 		res.status(500).send("email address format not valid.");
 	}
+	
+	// validate nullable fields
+	
 });
 
 // helper function - requires all alpha characters
 function isAllAlpha(str) {
 	var re = /^[A-Za-z]+$/;
+	if(re.test(str)) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+// helper function - is a two-letter state code?
+function isUS_StateCode(str) {
+	var re = /^[A-Z][A-Z]$/;
+	if(re.test(str)) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+// helper function - is a 5-number zip code?
+function isZipCode(str) {
+	var re = /^[0-9]{4}[0-9]$/;
+	if(re.test(str)) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+// helper function - is a 4-number zip extension?
+function isZipExtension(str) {
+	var re = /^[0-9]{3}[0-9]$/;
+	if(re.test(str)) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+// helper function - is a 10-digit phone number?
+function isUSPhoneNumber(str) {
+	var re = /^[0-9]{3}-[0-9]{3}-[0-9]{3}[0-9]$/;
 	if(re.test(str)) {
 		return true;
 	} else {

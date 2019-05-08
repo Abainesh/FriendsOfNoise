@@ -1,63 +1,80 @@
 // Author Jon King
 // Started 4/30/19
 
+/*  Quincy Powell
+    Date: 2019-05-07
+	Adjusted the get route, standard API is to require userId.
+	Adjusted post route, the data validation was workinng under assumption about the data - appending a new genre. We will be overwriting existing array of strings with a new array of strings.  */
+
 var express = require('express');
 var router = express.Router();
 
+// connect to the data
 var filename = '../dummy_json_data/music_pref.json';
 var music_preferences = require(filename);
+
 router.get('/', function(req, res, next) {
-  var prefId = null;
-
-  if(req.query.prefId === undefined || typeof req.query.prefId === undefined) {
-    res.status(500).send("prefId required");
-  }else if(isNaN(req.query.prefId)){
-    res.status(500).send("prefId must be an integer")
-  }else{
-    prefId = parseInt(req.query.prefId, 10);
-  }
-
-  if(!music_preferences[prefId]){
-    res.status(500).send("preference does not exist");
-  }else {
-    res.send(music_preferences[prefId]);
-  }
-  
-router.post('/', function(req, res, next){
-  var userId = req.body.userId;
+  var userId = req.query.userId;
   var userIdint = null;
-  var newPref = req.body.new_preference;
 
-  if(userId === undefined || typeof userId === undefined){
-    res.status(500).send("No userId specified");
-  }else if (isNaN(userId)){
-    res.status(500).send("user Id must be an integer")
-  }else {
+  if(userId === undefined || typeof userId === undefined) {
+    res.status(500).send("userId required");
+  }else if(isNaN(userId)){
+    res.status(500).send("userId must be an integer")
+  }else{
     userIdint = parseInt(userId);
   }
 
-  if (isEmptyOrAllWhitespace(newPref)) {
-		res.status(500).send("Empty or all whitespace");
-	} else {
-		newPref.trim();
+  if(!music_preferences[userId]){
+    res.status(500).send("user does not exist");
+  }else {
+    res.send(music_preferences[userId]);
   }
-	if (music_preferences[userIdint].newPref) {
-		res.status(500).send("You have already added this genre");
-	} else {
-
-		music_preferences[userIdint].new_preference = newPref;
-		var json_format = JSON.stringify(music_preferences);
-		fs = require('fs');
-		filename = './dummy_json_data/music_pref.json';
-		fs.writeFile(filename, json_format, 'utf8', function(err) {
-			if (err) {
-				res.status(500).send("fs write error: " + err);
-			} else {
-				res.status(200).send("record updated");
-			}
-		});
+  
+router.post('/', function(req, res, next){
+	var userId = req.body.userId;
+	var userIdint = null;
+	// expecting an array of strings for newPref
+	var newPref = req.body.new_preferences;
+	
+	// validate userId input, convert to integer
+	if(userId === undefined || typeof userId === undefined){
+		res.status(500).send("No userId specified");
+	}else if (isNaN(userId)){
+		res.status(500).send("user Id must be an integer")
+	}else {
+		userIdint = parseInt(userId);
 	}
-})
+	
+	// Check that userId exists
+	if(!music_preferences[userIdint]) {
+		res.status(500).send("user does not exist");
+	}
+	
+	// validate input - expecting an array of strings
+	if(!newPref.isArray()) {
+		res.status(500).send("expecting an array of strings in the new_preferences");
+	}
+	// trim any non-string pieces
+	for(var i = 0; i < newPref.length; i++) {
+		if(!typeof newPref[i] === 'string') {
+			newPref.splice(i, 1);
+			i--;
+		}
+	}
+	
+	// Update data
+	music_preferences[userIdint] = newPref;
+	var fs = require('fs');
+	var json_format = JSON.stringify(music_preferences);
+	filename = './dummy_json_data/music_pref';
+	fs.writeFile(filename, json_format, 'utf8', (err) => {
+		if (err) {
+			res.status(500).send("fs error: " + err);
+		} else {
+			res.status(200).send("record updated");
+		}
+	});
 });
 
 // helper function to catch empty strings and all whitespace strings
@@ -65,11 +82,7 @@ router.post('/', function(req, res, next){
 function isEmptyOrAllWhitespace(str) {
 	var re = /^\s*$/;
 	
-	if (str === undefined || typeof str === undefined) {
-		return true;
-    } else if(str === null) {
-		return true;
-	} else if (re.test(str)) {
+	if (re.test(str)) {
 		return true;
 	} else {
 		return false;

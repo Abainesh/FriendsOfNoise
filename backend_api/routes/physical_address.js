@@ -112,7 +112,7 @@ router.post('/', function(req, res, next){
         
         var json_format=JSON.stringify(addresses);
         fs=require('fs');
-        filename = '../dummy_json_data/p_address.json';
+        filename = './dummy_json_data/p_address.json';
         fs.writeFile(filename, json_format, 'utf8', function(err){
             if(err){
                 res.status(500).send("fs write error: " + err)

@@ -53,6 +53,8 @@ router.post('/', function(req, res, next) {
 				res.status(200).send("record updated");
 			}
 		});
+	} else {
+		res.status(500).send("provide dates in ISO 8601 format");
 	}
 });
 

@@ -202,56 +202,84 @@ class FormContainer extends Component {
         </Control>
         </Field>
 
-        Last name:
-       <Input inputType={'text'}
+        <Field>
+        <Label>Last name: </Label>
+        <Control>
+        <Input inputType={'text'}
               title= {'Last Name'}
               name= {'lname'}
               value={this.state.newUser.lname}
               placeholder = {'Bong'}
               handleChange = {this.handleInput} />
+        </Control>
+        </Field>  {/* Name of the user */}
 
-              {/* Name of the user */}
-          Age:
+
+        <Field>
+        <Label>Age: </Label>
+        <Control>
           <Input inputType={'number'}
                 name={'age'}
                  title= {'Age'}
                  value={this.state.newUser.age}
                 placeholder = {'Enter your age'}
-                 handleChange={this.handleAge} /> {/* Age */}
+                 handleChange={this.handleAge} />
+        </Control>
+        </Field> {/* Age */}
 
 
-          <Select title={'Gender'}
-                  name={'gender'}
-                  options = {this.state.genderOptions}
-                  value = {this.state.newUser.gender}
-                  placeholder = {'Select gender'}
-                  handleChange = {this.handleInput}
-                  /> {/* Gender */}
+        <Field>
+        <Label>Gender: </Label>
+        <Control>
+        <Select title={'Gender'}
+                name={'gender'}
+                options = {this.state.genderOptions}
+                value = {this.state.newUser.gender}
+                placeholder = {'Select gender'}
+                handleChange = {this.handleInput}
+        />
+        </Control>
+        </Field> {/* Gender */}
 
-                  Email:
-                  <Input inputType={'email'}
-                         title= {'email'}
-                         name= {'email'}
-                         // value={this.state.User.email}
-                         placeholder = {'Chanandler@email.co.tk'}
-                         handleChange = {this.handleInput} />
+        <Field>
+        <Label>Email: </Label>
+        <Control>
+          <Input inputType={'email'}
+                 title= {'email'}
+                 name= {'email'}
+                 // value={this.state.User.email}
+                 placeholder = {'Chanandler@email.co.tk'}
+                 handleChange = {this.handleInput} />
+         </Control>
+         </Field>
 
-                  Password:
-                  <Input inputType={'password'}
-                        title= {'password'}
-                        name= {'password'}
-                        // value={this.state.User.password}
-                        placeholder = {'53cR3t!'}
-                        handleChange = {this.handleInput} />
+         <Field>
+         <Label>Password: </Label>
+         <Control>
+         <Input inputType={'password'}
+                title= {'password'}
+                name= {'password'}
+                // value={this.state.User.password}
+                placeholder = {'53cR3t!'}
+                handleChange = {this.handleInput} />
+        </Control>
+        </Field>
 
-          Genre preferences: Rock, Pop, Hip-Hop, Electronic
+        <Field>
+        <Label>Genre preferences: Rock, Pop, Hip-Hop, Electronic </Label>
+        <Control>
           <Checkbox  title={'Genres'}
                   name={'genres'}
                   options={this.state.genreOptions}
                   selectedOptions = { this.state.newUser.genres}
                   handleChange={this.handleCheckBox}
-                   /> {/* Genre Favorites */}
-          Anything else?
+          />
+          </Control>
+          </Field> {/* Genre Favorites */}
+
+          <Field>
+          <Label>Anything else?</Label>
+          <Control>
           <Textarea
             title={'About you.'}
             rows={10}
@@ -259,13 +287,16 @@ class FormContainer extends Component {
             name={'currentPetInfo'}
             handleChange={this.handleTextArea}
             placeholder={'Let us get to know you, pal!'}
-            /> {/* About you */}
+            />
+            </Control>
+            </Field> {/* About you */}
 
           <Button
-              action = {this.handleFormSubmit}
-              type = {'primary'}
-              title = {'Submit'}
-            style={buttonStyle}
+            SignupButton
+              // action = {this.handleFormSubmit}
+              // type = {'primary'}
+              // title = {'Submit'}
+              // style={buttonStyle}
           /> { /*Submit */ }
 
           <Button
@@ -274,6 +305,8 @@ class FormContainer extends Component {
             title = {'Clear'}
             style={buttonStyle}
           /> {/* Clear the form */}
+
+
         </form>
         </div>
         </Tile>

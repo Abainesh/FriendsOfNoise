@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import NavLink from 'react-router-dom/NavLink';
+import { Field, Control } from 'react-bulma-components/lib/components/form';
+import Button from 'react-bulma-components/lib/components/button';
+import Navbar from 'react-bulma-components/lib/components/navbar';
 
 class Header extends Component {
 
@@ -15,40 +18,33 @@ class Header extends Component {
 
   render() {
     return (
-      <nav className="navbar"
-          aria-label="main navigation"
-          style={{
-            borderBottom: 'solid 1px',
-          }}>
-        <div className="navbar-brand">
-        <NavLink
-          className="navbar-item"
-          to="/"
-          activeClassName="is-active"
-          >
-          <img
-            style={{
-              borderTopLeftRadius: '50%',
-              borderTopRightRadius: '50%',
-              borderBottomLeftRadius: '50%',
-              borderBottomRightRadius: '50%',
-              marginRight: 15
-            }}
-            src="../images/logo.png"
-            width="50px"
-            alt="Home of Noise"
+      <Navbar>
+
+      <Navbar.Brand>
+        <Navbar.Item>
+          <NavLink
+            to="/"
+            activeClassName="navbar-menu is-active"
+            >
+            <img
+              src="../images/logo.png"
+              alt="Friends of Noise : Home of Noise!"
+              width="112"
+              height="28"
             />
           </NavLink>
-          <button className="button navbar-burger" onClick={this.toggleNav}>
-            <span></span>
-            <span></span>
-            <span></span>
-          </button>
-        </div>
-        <div className={ this.state.isActive ? 'navbar-menu is-active' : 'navbar-menu'}>
+        </Navbar.Item>
+
+        <Navbar.Burger
+          onClick={this.toggleNav}
+        />
+      </Navbar.Brand>
+
+      <Navbar.Menu>
+        <Navbar.Container>
           <div className="navbar-start">
+          <Navbar.Item>
           <NavLink
-            className="navbar-item"
             to="/"
             activeClassName="is-active"
             >
@@ -56,6 +52,8 @@ class Header extends Component {
             </span>
             Home
             </NavLink>
+            </Navbar.Item>
+
           <NavLink
             className="navbar-item"
             to="/signup"
@@ -65,6 +63,7 @@ class Header extends Component {
             </span>
             Sign up
             </NavLink>
+
             <NavLink
               className="navbar-item"
               to="/signin"
@@ -74,6 +73,7 @@ class Header extends Component {
               </span>
               Sign in
               </NavLink>
+
               <NavLink
                 className="navbar-item"
                 to="/calendar"
@@ -83,6 +83,7 @@ class Header extends Component {
                 </span>
                 Calendar
                 </NavLink>
+
             <div className="navbar-item has-dropdown is-hoverable">
               <a className="navbar-link"  href="#overview">
                 Overview
@@ -110,17 +111,20 @@ class Header extends Component {
               </div>
             </div>
           </div>
-          <div className="navbar-end">
-            <a className="navbar-item" href="https://twitter.com/friendsofnoise">
+
+        </Navbar.Container>
+
+        <Navbar.Container position="end">
+          <Navbar.Item href="https://twitter.com/friendsofnoise">
               <span className="icon has-text-info" style={{ color: '#0084FF' }}>
                 <i class="fab fa-lg fa-twitter"></i>
               </span>
-                @FriendsOfNoise
-            </a>
+              <span />@FriendsOfNoise
+          </Navbar.Item>
+        </Navbar.Container>
 
-          </div>
-        </div>
-      </nav>
+      </Navbar.Menu>
+    </Navbar>
     )
   }
 }

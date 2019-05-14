@@ -48,12 +48,14 @@ class Cal extends React.Component {
         <BigCalendar
           formats={formats}
           localizer={localizer}
+          drilldownView='agenda'
+          popup='true'
           events={[
             {
               'title': 'Celia Cruz on Ice!!!',
               'allDay': false,
-              'start': new Date(2018, 0, 1, 10, 0), // 10.00 AM
-              'end': new Date(2018, 0, 1, 14, 0), // 2.00 PM
+              'start': new Date(2019, 5, 0, 10, 0), // 10.00 AM
+              'end': new Date(2019, 5, 0, 14, 0), // 2.00 PM
             }
           ]}
           step={60}

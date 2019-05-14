@@ -284,7 +284,7 @@ class FormContainer extends Component {
             title={'About you.'}
             rows={10}
             value={this.state.newUser.about}
-            name={'currentPetInfo'}
+            name={'currentUserInfo'}
             handleChange={this.handleTextArea}
             placeholder={'Let us get to know you, pal!'}
             />

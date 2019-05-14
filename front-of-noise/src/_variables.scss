@@ -1,6 +1,6 @@
-// @import '~bulma/sass/utilities/initial-variables.sass';
-
-// ADD HERE variables you want to override
+////////////////////////////////////////////////
+// UNITED
+////////////////////////////////////////////////
 $grey-darker:  #222;
 $grey-dark:    #333;
 $grey:         #777;
@@ -14,8 +14,8 @@ $purple:       #772953;
 $red:          #DF382C;
 $blue:         #17a2b8;
 
-$primary: $purple !default;
-$info: $yellow;
+$primary: $yellow !default;
+$info: $purple;
 
 $yellow-invert: #fff;
 $warning-invert: $yellow-invert;
@@ -25,10 +25,10 @@ $body-size: 14px;
 
 $size-7: 0.8575rem;
 
-$subtitle-color: $yellow;
+$subtitle-color: $orange;
 
-$navbar-background-color: $primary;
-$navbar-item-color: $grey-light;
+$navbar-background-color: $purple;
+$navbar-item-color: $primary;
 $navbar-item-hover-color: $navbar-item-color;
 $navbar-item-active-color: $navbar-item-color;
 $navbar-item-hover-background-color: rgba(#000, 0.1);
@@ -36,6 +36,3 @@ $navbar-item-active-background-color: rgba(#000, 0.1);
 $navbar-dropdown-arrow: $navbar-item-color;
 
 $bulmaswatch-import-font: true !default;
-
-
-// @import '~bulma/sass/utilities/_all.sass';

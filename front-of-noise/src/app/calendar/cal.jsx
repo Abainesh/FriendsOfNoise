@@ -44,7 +44,7 @@ class Cal extends React.Component {
 
   render() {
     return (
-      <div className="calendar" style={{ height: 700 }}>
+      <div className="calendar" style={{ height: 550 }}>
         <BigCalendar
           formats={formats}
           localizer={localizer}

@@ -1,92 +1,28 @@
 import React from "react";
 import dateFns from "date-fns";
+import { render } from 'react-dom';
+import BigCalendar from 'react-big-calendar';
+import * as moment from 'moment';
+import 'react-big-calendar/lib/css/react-big-calendar.css';
+
+moment.locale('en-US');
+const localizer = BigCalendar.momentLocalizer(moment);
+let formats = {
+
+  dayRangeHeaderFormat: ({ start, end }, culture, localizer) =>
+    localizer.format(start, { date: 'short' }, culture) + ' — ' +
+    localizer.format(end, { date: 'short' }, culture)
+}
 
 class Cal extends React.Component {
+  constructor(props: any) {
+        super(props);
+  }
+
   state = {
     currentMonth: new Date(),
     selectedDate: new Date()
   };
-
-  renderHeader() {
-    const dateFormat = "MMMM YYYY";
-
-    return (
-      <div className="header row flex-middle">
-        <div className="col col-start">
-          <div className="icon" onClick={this.prevMonth}>
-            chevron_left
-          </div>
-        </div>
-        <div className="col col-center">
-          <span>{dateFns.format(this.state.currentMonth, dateFormat)}</span>
-        </div>
-        <div className="col col-end" onClick={this.nextMonth}>
-          <div className="icon">chevron_right</div>
-        </div>
-      </div>
-    );
-  }
-
-  renderDays() {
-    const dateFormat = "dddd";
-    const days = [];
-
-    let startDate = dateFns.startOfWeek(this.state.currentMonth);
-
-    for (let i = 0; i < 7; i++) {
-      days.push(
-        <div className="col col-center" key={i}>
-          {dateFns.format(dateFns.addDays(startDate, i), dateFormat)}
-        </div>
-      );
-    }
-
-    return <div className="days row">{days}</div>;
-  }
-
-  renderCells() {
-    const { currentMonth, selectedDate } = this.state;
-    const monthStart = dateFns.startOfMonth(currentMonth);
-    const monthEnd = dateFns.endOfMonth(monthStart);
-    const startDate = dateFns.startOfWeek(monthStart);
-    const endDate = dateFns.endOfWeek(monthEnd);
-
-    const dateFormat = "D";
-    const rows = [];
-
-    let days = [];
-    let day = startDate;
-    let formattedDate = "";
-
-    while (day <= endDate) {
-      for (let i = 0; i < 7; i++) {
-        formattedDate = dateFns.format(day, dateFormat);
-        const cloneDay = day;
-        days.push(
-          <div
-            className={`col cell ${
-              !dateFns.isSameMonth(day, monthStart)
-                ? "disabled"
-                : dateFns.isSameDay(day, selectedDate) ? "selected" : ""
-            }`}
-            key={day}
-            onClick={() => this.onDateClick(dateFns.parse(cloneDay))}
-          >
-            <span className="number">{formattedDate}</span>
-            <span className="bg">{formattedDate}</span>
-          </div>
-        );
-        day = dateFns.addDays(day, 1);
-      }
-      rows.push(
-        <div className="row" key={day}>
-          {days}
-        </div>
-      );
-      days = [];
-    }
-    return <div className="body">{rows}</div>;
-  }
 
   onDateClick = day => {
     this.setState({
@@ -108,10 +44,25 @@ class Cal extends React.Component {
 
   render() {
     return (
-      <div className="calendar">
-        {this.renderHeader()}
-        {this.renderDays()}
-        {this.renderCells()}
+      <div className="calendar" style={{ height: 700 }}>
+        <BigCalendar
+          formats={formats}
+          localizer={localizer}
+          events={[
+            {
+              'title': 'Celia Cruz on Ice!!!',
+              'allDay': false,
+              'start': new Date(2018, 0, 1, 10, 0), // 10.00 AM
+              'end': new Date(2018, 0, 1, 14, 0), // 2.00 PM
+            }
+          ]}
+          step={60}
+          view='month'
+          views={['month']}
+          min={new Date(2018, 0, 1, 8, 0)} // 8.00 AM
+          max={new Date(2021, 0, 1, 17, 0)} // Max will be 6.00 PM!
+          date={new Date()}
+        />
       </div>
     );
   }

@@ -30,6 +30,7 @@ router.get('/', function(req, res, next) {
   }else {
     res.send(music_preferences[userId]);
   }
+});
   
 router.post('/', function(req, res, next){
 	var userId = req.body.userId;
@@ -38,11 +39,11 @@ router.post('/', function(req, res, next){
 	var newPref = req.body.new_preferences;
 	
 	// validate userId input, convert to integer
-	if(userId === undefined || typeof userId === undefined){
+	if (userId === undefined || typeof userId === undefined){
 		res.status(500).send("No userId specified");
-	}else if (isNaN(userId)){
+	} else if (isNaN(userId)){
 		res.status(500).send("user Id must be an integer")
-	}else {
+	} else {
 		userIdint = parseInt(userId);
 	}
 	

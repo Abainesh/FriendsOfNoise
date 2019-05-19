@@ -1,6 +1,6 @@
 import React from "react";
 import dateFns from "date-fns";
-import { render } from 'react-dom';
+// import { render } from 'react-dom';
 import BigCalendar from 'react-big-calendar';
 import * as moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
@@ -15,9 +15,9 @@ let formats = {
 }
 
 class Cal extends React.Component {
-  constructor(props: any) {
-        super(props);
-  }
+  // constructor(props: any) {
+  //       super(props);
+  // }
 
   state = {
     currentMonth: new Date(),

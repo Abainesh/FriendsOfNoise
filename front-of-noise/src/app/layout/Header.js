@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import NavLink from 'react-router-dom/NavLink';
-import { Field, Control } from 'react-bulma-components/lib/components/form';
-import Button from 'react-bulma-components/lib/components/button';
+// import { Field, Control } from 'react-bulma-components/lib/components/form';
+// import Button from 'react-bulma-components/lib/components/button';
 import Navbar from 'react-bulma-components/lib/components/navbar';
 
 class Header extends Component {
@@ -15,8 +15,7 @@ class Header extends Component {
 
   render() {
     return (
-      <Navbar color="info" fixed="top"
-        onToggle={this.toggleNav}>
+      <Navbar collapseOnSelect color="info" fixed="top" >
 
       <Navbar.Brand>
         <Navbar.Item>

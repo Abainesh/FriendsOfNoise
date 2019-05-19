@@ -6,19 +6,16 @@ import Navbar from 'react-bulma-components/lib/components/navbar';
 
 class Header extends Component {
 
-  state = {
-    isActive: false,
-  }
+  state = { active: false }
 
   toggleNav = () => {
-    this.setState(prevState => ({
-      isActive: !prevState.isActive
-    }))
+     const { active } = this.state;
+     this.setState({ active: !active });
   }
 
   render() {
     return (
-      <Navbar>
+      <Navbar color="info" fixed="top" active={this.state.active}>
 
       <Navbar.Brand>
         <Navbar.Item>
@@ -36,6 +33,7 @@ class Header extends Component {
         </Navbar.Item>
 
         <Navbar.Burger
+          active={this.state.active}
           onClick={this.toggleNav}
         />
       </Navbar.Brand>
@@ -48,7 +46,7 @@ class Header extends Component {
             to="/"
             activeClassName="is-active"
             >
-            <span className="icon has-text-primary" style={{ marginRight: 5 }}> <i class="fas fa-heart"></i>
+            <span className="icon has-text-warning" style={{ marginRight: 5 }}> <i class="fas fa-laugh-squint"></i>
             </span>
             Home
             </NavLink>
@@ -59,64 +57,66 @@ class Header extends Component {
             to="/signup"
             activeClassName="is-active"
             >
-            <span className="icon has-text-primary" style={{ marginRight: 5 }}> <i class="fas fa-heart"></i>
+            <span className="icon has-text-warning" style={{ marginRight: 5 }}> <i class="fas fa-heart"></i>
             </span>
             Sign up
-            </NavLink>
+          </NavLink>
 
-            <NavLink
-              className="navbar-item"
-              to="/signin"
-              activeClassName="is-active"
-              >
-              <span className="icon has-text-primary" style={{ marginRight: 5 }}> <i class="fas fa-crow"></i>
-              </span>
-              Sign in
-              </NavLink>
+          <NavLink
+            className="navbar-item"
+            to="/signin"
+            activeClassName="is-active"
+            >
+            <span className="icon has-text-warning" style={{ marginRight: 5 }}> <i class="fas fa-grin-tongue-squint"></i>
+            </span>
+            Sign in
+          </NavLink>
 
-              <NavLink
-                className="navbar-item"
-                to="/calendar"
-                activeClassName="is-active"
-                >
-                <span className="icon has-text-primary" style={{ marginRight: 5 }}> <i class="fas fa-crow"></i>
-                </span>
-                Calendar
-                </NavLink>
+          <NavLink
+            className="navbar-item"
+            to="/calendar"
+            activeClassName="is-active"
+            >
+            <span className="icon has-text-warning" style={{ marginRight: 5 }}> <i class="fas fa-crow"></i>
+            </span>
+            Calendar
+          </NavLink>
 
-            <div className="navbar-item has-dropdown is-hoverable">
-              <a className="navbar-link"  href="#overview">
-                Overview
-              </a>
-              <div className="navbar-dropdown">
+          <div className="navbar-item has-dropdown is-hoverable">
+            <a className="navbar-link"  href="#overview">
+              Overview
+            </a>
+            <div className="navbar-dropdown">
+
               <NavLink
                 className="navbar-item"
                 to="/about"
                 activeClassName="is-active"
                 >
-                <span className="icon has-text-primary" style={{ marginRight: 5 }}> <i class="fas fa-crow"></i>
+                <span className="icon has-text-warning" style={{ marginRight: 5 }}> <i class="fas fa-hand-peace"></i>
                 </span>
                 About Us
                 </NavLink>
+
                 <hr className="navbar-divider" />
+
                 <NavLink
                   className="navbar-item"
                   to="/membership"
                   activeClassName="is-active"
                   >
-                  <span className="icon has-text-primary" style={{ marginRight: 5 }}> <i class="fas fa-crow"></i>
+                  <span className="icon has-text-warning" style={{ marginRight: 5 }}> <i class="fas fa-gem"></i>
                   </span>
                   Membership
-                  </NavLink>
+                </NavLink>
               </div>
             </div>
           </div>
-
         </Navbar.Container>
 
         <Navbar.Container position="end">
           <Navbar.Item href="https://twitter.com/friendsofnoise">
-              <span className="icon has-text-info" style={{ color: '#0084FF' }}>
+              <span className="icon" style={{ color: '#0084FF' }}>
                 <i class="fab fa-lg fa-twitter"></i>
               </span>
               <span />@FriendsOfNoise

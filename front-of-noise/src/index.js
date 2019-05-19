@@ -6,8 +6,7 @@ import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 
-//Firebase imports
-// import Firebase, {FirebaseContext} from './app/components/Firebase';
+import Firebase, {FirebaseContext} from './Firebase';
 
 
 

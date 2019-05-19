@@ -20,7 +20,7 @@ render() {
     </div>
   </div>
 
-  <div class="pricing-plan is-warning">
+  <div class="pricing-plan is-info">
     <div class="plan-header">Friend</div>
     <div class="plan-items">
       <div class="plan-item">You!</div>
@@ -48,12 +48,12 @@ render() {
     </div>
   </div>
 
-  <div class="pricing-plan is-active">
+  <div class="pricing-plan is-warning">
     <div class="plan-header">Best Friend</div>
     <div class="plan-items">
       <div class="plan-item">You!</div>
       <div class="plan-item">+5 Lucky others</div>
-      <div class="plan-item">Your membership free!</div>
+      <div class="plan-item">Your membership <strong>free!</strong></div>
       <div class="plan-item">-</div>
     </div>
     <div class="plan-footer">

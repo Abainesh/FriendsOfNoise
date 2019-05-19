@@ -4,7 +4,6 @@ import React, {Component} from 'react';
 import Tile from 'react-bulma-components/lib/components/tile';
 import Heading from 'react-bulma-components/lib/components/heading';
 import Section from 'react-bulma-components/lib/components/section';
-import Box from 'react-bulma-components/lib/components/box';
 
 class Auth extends Component {
 
@@ -20,39 +19,42 @@ class Auth extends Component {
 
   render() {
     return(
-      <section className="section">
-        <Tile renderAs="article" notification color="primary">
-        <div style={{ margin: '10px 8px 10px' }}>
-        <Heading>Log in!</Heading>
-        <Heading subtitle>or <a href="/signup">register</a>~</Heading>
-        </div>
-        <div className="has-text-centered" style={{ margin: '10px auto' }}>
-          <LoginButton icon="google" name="Google" onClick={this.loginWithProvider} />
-          <LoginButton icon="twitter" name="Twitter" onClick={this.loginWithProvider} />
-          <LoginButton icon="facebook" name="Facebook" onClick={this.loginWithProvider} />
-        </div>
+      <Section>
+      <Tile kind="ancestor">
+      <Tile kind="parent">
+        <Tile renderAs="article" kind="child" size="8" notification color="primary">
 
-        <div className="has-text-centered" style={{ margin: '10px 0' }}>
-          <span style={{ verticalAlign: 'middle', padding: '0 10px' }}><hr /> OR <hr /></span>
-        </div>
+          <Heading size="2" weight="semibold" spaced >Welcome back, friend!</Heading>
+          <Heading subtitle>need to <a href="/signup">register</a> or <a href="/forgot">forgot password</a>?
+          </Heading>
 
-        <LoginForm handleSubmit={this.loginWithEmailAndPassword} />
+        <Section size="4by3">
+          <div className="has-text-centered">
+            <LoginButton icon="google" name="Google" onClick={this.loginWithProvider} />
+            <LoginButton icon="twitter" name="Twitter" onClick={this.loginWithProvider} />
+            <LoginButton icon="facebook" name="Facebook" onClick={this.loginWithProvider} />
+            <Section>
+              <LoginForm handleSubmit={this.loginWithEmailAndPassword} />
+            </Section>
+          </div>
+        </Section>
 
         <SignInSuccess active={this.state.authenticated} handleClose={this.handleClose} />
         </Tile>
-
-      </section>
+        </Tile>
+      </Tile>
+      </Section>
     )
   }
 }
 
 const LoginButton = ({ icon, name, onClick }) => (
   <div className="field">
-    <p className="control button is-small is-warning" style={{ width: '275px' }} onClick={onClick}>
+    <p className="control button is-small is-warning" style={{ width: '325px' }} onClick={onClick}>
       <span className="icon">
         <i className={`fab fa-${icon}`} aria-hidden="true"></i>
       </span>
-      <span>{`Sign In With ${name}`}</span>
+      <span>{`Sign in with ${name}`}</span>
     </p>
   </div>
 );
@@ -80,7 +82,7 @@ class LoginForm extends Component {
           <p class="control has-icons-left has-icons-right">
             <label className="label" htmlFor="email">Email</label>
             <div className="control">
-              <input className="input" name="email" type="email" placeholder="email" required onChange={this.handleChange} />
+              <input className="input" name="email" type="email" placeholder="e@mail.com" required onChange={this.handleChange} />
               <span class="icon is-small is-left">
               <i class="fas fa-envelope"></i>
             </span>
@@ -95,7 +97,7 @@ class LoginForm extends Component {
            <p class="control has-icons-left">
             <label className="label" htmlFor="password">Password</label>
             <div className="control">
-              <input className="input" name="password" type="password" placeholder="password" required onChange={this.handleChange}/>
+              <input className="input" name="password" type="password" placeholder="p@55w0rd" required onChange={this.handleChange}/>
               <span class="icon is-small is-left">
                 <i class="fas fa-lock"></i>
               </span>
@@ -124,7 +126,7 @@ const SignInSuccess = ({ active, handleClose }) => (
           <span className="icon is-large">
             <i className="fa fa-check-square fa-2x"></i>
           </span>
-          <span className="title"> Sign In Succesful!</span>
+          <span className="title">Sign In Succesful!</span>
         </p>
 
       </div>

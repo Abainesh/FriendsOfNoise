@@ -5,9 +5,6 @@ const Home = () =>  (
 
     <div className="container">
       <h1 className="title">Friends of Noise</h1>
-      <nav className="navbar">
-
-      </nav>
       <p className="subtitle">
         All ages <strong>always</strong>!
       </p>

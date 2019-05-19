@@ -15,7 +15,8 @@ class Header extends Component {
 
   render() {
     return (
-      <Navbar color="info" fixed="top" active={this.state.active}>
+      <Navbar color="info" fixed="top"
+        onToggle={this.toggleNav}>
 
       <Navbar.Brand>
         <Navbar.Item>

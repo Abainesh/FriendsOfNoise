@@ -4,9 +4,6 @@ const About = () => (
   <section className="section">
     <div className="container">
       <h1 className="title">Friends of Noise</h1>
-      <nav className="navbar">
-
-      </nav>
       <p className="subtitle">
         All ages <strong>always</strong>!
       </p>
@@ -14,7 +11,7 @@ const About = () => (
         Ask about how to be sponsored for a membership.
       </p>
     </div>
-    
+
     <div className="col-md-6">
       <br />
     </div>

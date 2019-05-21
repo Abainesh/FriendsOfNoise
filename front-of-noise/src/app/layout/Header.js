@@ -15,7 +15,7 @@ class Header extends Component {
 
   render() {
     return (
-      <Navbar collapseOnSelect color="info" fixed="top" active={this.state.active}>
+      <Navbar collapseOnSelect color="primary" fixed="top" active={this.state.active}>
 
       <Navbar.Brand>
         <Navbar.Item>

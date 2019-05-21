@@ -1,23 +1,29 @@
-////////////////////////////////////////////////
-// UNITED
-////////////////////////////////////////////////
-$grey-darker:  #222;
+@charset "utf-8";@import "../node_modules/bulma/sass/utilities/initial-variables";
+// _variables.scss
+
+$grey-darker:  #231f20;
 $grey-dark:    #333;
 $grey:         #777;
 $grey-light:   #AEA79F;
 $grey-lighter: #ddd;
 
-$orange:       #E95420;
+$pink:         #ed484a;
 $yellow:       #EFB73E;
-$green:        #38B44A;
+$green:        #0a8743;
 $purple:       #772953;
-$red:          #DF382C;
-$blue:         #17a2b8;
+$red:          #f31d25;
+$blue:         #144880;
+$white:        #f1f1f3;
 
-$primary: $yellow !default;
-$info: $purple;
+$primary: $green !default;
+$info:    $pink;
+$success: $blue;
+$warning: $purple;
+$danger:  $red;
+$link:    $yellow;
 
-$yellow-invert: #fff;
+
+$yellow-invert: $white;
 $warning-invert: $yellow-invert;
 
 $family-sans-serif: "Ubuntu", Tahoma, "Helvetica Neue", Arial, sans-serif;
@@ -25,10 +31,10 @@ $body-size: 14px;
 
 $size-7: 0.8575rem;
 
-$subtitle-color: $orange;
+$subtitle-color: $yellow;
 
-$navbar-background-color: $purple;
-$navbar-item-color: $primary;
+$navbar-background-color: $green;
+$navbar-item-color: $pink;
 $navbar-item-hover-color: $navbar-item-color;
 $navbar-item-active-color: $navbar-item-color;
 $navbar-item-hover-background-color: rgba(#000, 0.1);

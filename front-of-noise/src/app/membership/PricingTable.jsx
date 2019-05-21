@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 
+import 'bulma-extensions/bulma-pricingtable/dist/css/bulma-pricingtable.min.css';
+
 class PricingTable extends Component {
 
 render() {

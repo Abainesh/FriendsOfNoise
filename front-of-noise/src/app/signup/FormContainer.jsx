@@ -9,13 +9,14 @@ import {
   Textarea,
   Select,
   Checkbox,
-  Radio,
-  Help,
+  // Radio,
+  // Help,
 } from 'react-bulma-components/lib/components/form';
 import Button from 'react-bulma-components/lib/components/button';
-import Icon from 'react-bulma-components/lib/components/icon';
+// import Icon from 'react-bulma-components/lib/components/icon';
 import Tile from 'react-bulma-components/lib/components/tile';
 import Heading from 'react-bulma-components/lib/components/heading';
+import Section from 'react-bulma-components/lib/components/section';
 
 
 const SignupButton = ({ icon, name, onClick }) => (
@@ -159,7 +160,6 @@ class FormContainer extends Component {
   }
 
   handleClearForm(e) {
-
       e.preventDefault();
       this.setState({
         newUser: {
@@ -175,23 +175,30 @@ class FormContainer extends Component {
 
   render() {
     return (
-      <section className="section">
-        <Tile renderAs="article" notification color="primary">
-        <div style={{ margin: '10px 8px 10px' }}>
-        <Heading>Sign up!</Heading>
+      <Section>
+      <Tile kind="parent">
+        <Tile renderAs="article" kind="child" notification color="info">
+
+        <Heading size="2" weight="semibold" spaced >Sign up!</Heading>
         <Heading subtitle>or <a href="/signin">sign in</a>~</Heading>
+
+        <Section size="3by3">
+          <div className="has-text-centered">
           <SignupButton icon="google" name="Google" onClick={this.loginWithProvider} />
           <SignupButton icon="twitter" name="Twitter" onClick={this.loginWithProvider} />
           <SignupButton icon="facebook" name="Facebook" onClick={this.loginWithProvider} />
+          </div>
+        </Section>
 
-          <span style={{ verticalAlign: 'middle', padding: '0 10px' }}><hr /> OR <hr /></span>
-
+          <Section>
+            <div className="container box" style={{ maxWidth: '600px' }}>
           <form
             onSubmit={e => {
               e.preventDefault();
-              this.handleSubmit();
+              this.handleFormSubmit();
             }}>
 
+          <Section>
           <Field>
           <Label>First name: </Label>
           <Control>
@@ -222,10 +229,10 @@ class FormContainer extends Component {
           <Control>
             <Input inputType={'number'}
                   name={'age'}
-                   title= {'Age'}
-                   value={this.state.newUser.age}
+                  title= {'Age'}
+                  value={this.state.newUser.age}
                   placeholder = {'Enter your age'}
-                   handleChange={this.handleAge} />
+                  handleChange={this.handleAge} />
           </Control>
           </Field> {/* Age */}
 
@@ -270,7 +277,7 @@ class FormContainer extends Component {
           <Field>
           <Label>Genre preferences: Rock, Pop, Hip-Hop, Electronic </Label>
           <Control>
-            <Checkbox  title={'Genres'}
+            <Checkbox title={'Genres'}
                     name={'genres'}
                     options={this.state.genreOptions}
                     selectedOptions = { this.state.newUser.genres}
@@ -290,36 +297,39 @@ class FormContainer extends Component {
               handleChange={this.handleTextArea}
               placeholder={'Let us get to know you, pal!'}
             />
-            </Control>
-            </Field> {/* About you */}
+          </Control>
+          </Field> {/* About you */}
 
+          </Section>
+
+          <Section>
           <Button
             SignupButton
-                // action = {this.handleFormSubmit}
-                // type = {'primary'}
-                // title = {'Submit'}
+                action = {this.handleFormSubmit}
+                type = {'primary'}
+                title = {'Submit'}
                 // style={buttonStyle}
           /> { /*Submit */ }
 
           <Button
-              action = {this.handleClearForm}
-              type = {'secondary'}
-              title = {'Clear'}
-              // style={buttonStyle}
+            action = {this.handleClearForm}
+            type = {'secondary'}
+            title = {'Clear'}
           /> {/* Clear the form */}
-
+          </Section>
 
         </form>
         </div>
+        </Section>
+
         </Tile>
-        </section>
+        </Tile>
+        </Section>
 
     );
   }
 }
 
-const buttonStyle = {
-  margin : '10px 10px 10px 10px'
-};
+// const buttonStyle = {{ padding:'10px 10px 10px 10px' }};
 
 export default FormContainer;

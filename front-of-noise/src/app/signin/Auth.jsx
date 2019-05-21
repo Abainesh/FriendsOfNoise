@@ -20,7 +20,6 @@ class Auth extends Component {
   render() {
     return(
       <Section>
-      <Tile kind="ancestor">
       <Tile kind="parent">
         <Tile renderAs="article" kind="child" size="8" notification color="primary">
 
@@ -42,7 +41,6 @@ class Auth extends Component {
         <SignInSuccess active={this.state.authenticated} handleClose={this.handleClose} />
         </Tile>
         </Tile>
-      </Tile>
       </Section>
     )
   }
@@ -72,12 +70,14 @@ class LoginForm extends Component {
 
   render() {
     return (
-      <div className="container has-text-centered box" style={{ maxWidth: '350px' }}>
+      <div className="container box" style={{ maxWidth: '400px' }}>
+
         <form
           onSubmit={e => {
             e.preventDefault();
             this.handleSubmit();
           }}>
+
           <div className="field">
           <p class="control has-icons-left has-icons-right">
             <label className="label" htmlFor="email">Email</label>

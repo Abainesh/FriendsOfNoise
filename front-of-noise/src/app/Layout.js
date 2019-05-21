@@ -2,6 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 
+import Tile from 'react-bulma-components/lib/components/tile';
+
 import Site from './layout/Site'
 import Header from './layout/Header'
 import Content from './layout/Content'
@@ -26,7 +28,9 @@ const Layout = ({ children }) => (
     <Header />
     <Content>
       <Router />
+      <Tile kind="ancestor">
 	    {/* {children()} */}
+      </Tile>
     </Content>
     <Footer />
   </Site>

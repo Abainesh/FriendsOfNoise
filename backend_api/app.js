@@ -2,6 +2,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var cors = require("cors");
 
 // member information routes
 var physicalAddressRouter = require('./routes/physical_address');
@@ -13,6 +14,7 @@ var musicPreferencesRouter = require('./routes/music_preferences');
 
 var app = express();
 
+app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -25,6 +27,10 @@ app.use('/name', nameRouter);
 app.use('/member_end_date', membershipEndDateRouter);
 app.use('/music_preferences', musicPreferencesRouter);
 //app.use('/new_person', newPersonRouter);
+
+// testing integration!!!
+var testAPIRouter = require('./routes/testAPIroute');
+app.use('/testAPIroute', testAPIRouter);
 
 
 module.exports = app;

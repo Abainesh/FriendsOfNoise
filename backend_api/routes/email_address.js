@@ -8,7 +8,21 @@ var router = express.Router();
 var filename = '../dummy_json_data/email.json';
 var emails = require(filename);
 
-
+/**
+ * API definition, get email address given a userId
+ * Route syntax
+ * HTTP request = GET
+ * http://<servername>:<port>/email_address
+ *		Query parameter: userId = An integer quoted as a string
+ * Error: The response will be a 500 error with a message if
+ * 1 - the query parameter is not provided
+ * 2 - the query parameter is not parseable as an integer
+ * 3 - the provided userId does not exist in the data source
+ * Success: responds with a JSON object similar to
+ * {
+ *   "email": "bob@coontoso.com"
+ * } 
+ */
 router.get('/', function(req, res, next) {
 	// Validate query and convert
 	// ToDo: refactor this as an exportable function
@@ -29,6 +43,21 @@ router.get('/', function(req, res, next) {
 	}
 });
 
+
+ /**
+  * API definition, set email address given a userId and an email address
+  * Route syntax
+  * HTTP request = POST
+  * http://<servername>:<port>/email_address
+  *    HTTP request body: userId = an integer quoted as a string
+  *    HTTP request body: email = an email address quoted as a string
+  * Error: response will be a 500 error with a message if
+  * 1 - userId was not provided in body
+  * 2 - userId was not parsable as an integer
+  * 3 - method was unable to write to the data source
+  * 4 - email provided does not conform to our email regexp
+  * Success: responds with "record updated"
+  */
 router.post('/', function(req, res, next) {
 	var userId = req.body.userId;
 	var userIdint = null;
@@ -59,7 +88,7 @@ router.post('/', function(req, res, next) {
 			if (err) {
 				res.status(500).send("fs error: " + err);
 			} else {
-				res.status(200).send("Record updated");
+				res.status(200).send("record updated");
 			}
 		});
 	} else {

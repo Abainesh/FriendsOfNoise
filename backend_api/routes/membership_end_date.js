@@ -8,6 +8,21 @@ var router = express.Router();
 var filename = '../dummy_json_data/member_date.json';
 var member_exp_dates = require(filename);
 
+/**
+ * API definition, get membership end date given a userId
+ * Route syntax
+ * HTTP request = GET
+ * http://<servername>:<port>/member_end_date
+ *     Query parameter: userId = an integer quoted as a string
+ * Error: the response will be an error code 500 if
+ * 1 - the query parameter is not provided
+ * 2 - the query parameter is not parseable as an integer
+ * 3 - the provided userId does not exist in the data source
+ * Success: responds with a JSON object similar to:
+ * {
+ *     "membership_exp_date": "2019-08-08"
+ * }
+ */
 router.get('/', function(req, res, next) {
   var userIdint = null;
   if(req.query.userId === undefined || typeof req.query.userId === undefined) {
@@ -26,6 +41,19 @@ router.get('/', function(req, res, next) {
 	}
 });
 
+/**
+ * API definition, set member end date given a userId and new member end date
+ * Route syntax
+ * HTTP request = POST
+ * http://<servername>:<port>/member_end_date
+ *    HTTP request body: userId = an integer quoted as a string
+ *    HTTP request body: new_membership_exp_date = a quoted date in ISO-8601 format
+ * Error: response will be a 500 error with a message if
+ * 1 - userId was not provided in body
+ * 2 - userId was not parseable as an integer
+ * 3 - method was unable to write to the data source
+ * 4 - new_membership_exp_date was not provided in ISO-8601 format
+ */
 router.post('/', function(req, res, next) {
 	var userId = req.body.userId;
 	var userIdint = null;

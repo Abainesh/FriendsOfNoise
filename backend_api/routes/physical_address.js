@@ -9,7 +9,26 @@ var router = express.Router();
 var filename = '../dummy_json_data/p_address.json';
 var addresses = require(filename);
 
-/* GET home page. */
+/**
+ * API definition, get physical address given a userId
+ * Route syntax
+ * HTTP request = GET
+ * http://<servername>:<port>/physical_address
+ *     Query parameter: userId = an integer quoted as a string
+ * Error: the response will be a 500 error with a message if
+ * 1 - the query parameter is not provided
+ * 2 - the query parameter is not parseable as an integer
+ * 3 - the provided userId does not exist in the data source
+ * Success: responds with a JSON object similar to
+ * {
+ *   "address1": "1900 N Urban Way",
+ *   "address2": "",
+ *   "city": "Tukwilla",
+ *   "state": "WA",
+ *   "zip": "98543",
+ *   "zip_ext": ""
+ * }
+ */
 router.get('/', function(req, res, next) {
 
     var userIdint = null;
@@ -33,10 +52,21 @@ router.get('/', function(req, res, next) {
     
 });
 
-
-router.post('/', function(req, res, next){
-
-    
+/**
+ * API definition, set a physical address given a userId, address1, address2, city, state, zip, and zip_ext
+ * Route syntax
+ * HTTP request = POST
+ * http://<servername>:<port>/physical_address
+ *     HTTP request body fields
+       userId = an integer quoted as a string
+	   address1 = a string, representing house number and street
+	   address2 = optional string, representing unit or appartment number
+	   city = a string, representing city name
+	   state = a string, 2 characters in length, representing a U.S. state or territory postal code
+	   zip = a string of integers, 5 characters in length, representing a U.S. zip code
+	   zip_ext = optional strinng of integers, 4 characters in length, representing a U.S. zip extension
+ */
+router.post('/', function(req, res, next){  
 	var userId = req.body.userId;
 	var userIdint = null;
     var address1 = req.body.address1;

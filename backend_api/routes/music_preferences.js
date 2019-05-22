@@ -13,6 +13,24 @@ var router = express.Router();
 var filename = '../dummy_json_data/music_pref.json';
 var music_preferences = require(filename);
 
+/**
+ * API definition, get music preferences given a userId
+ * Route syntax
+ * HTTP request = GET
+ * http://<servername>:<port>/music_preferences
+ *     Query paramegter: userId = an integer quoted as a string
+ * Error: The response will be a 500 error code with a message if
+ * 1 - the query parameter is not provided
+ * 2 - the query parameter is not parseable as an integer
+ * 3 - the provided userId does not exist in the data source
+ * Success: responds with a JSON object similar to:
+ * [
+ *   "jazz",
+ *   "classical",
+ *   "ska",
+ *   "international"
+ * ]
+ */
 router.get('/', function(req, res, next) {
   var userId = req.query.userId;
   var userIdint = null;
@@ -31,7 +49,21 @@ router.get('/', function(req, res, next) {
     res.send(music_preferences[userId]);
   }
 });
-  
+
+/**
+ * API definition, set music preferences given a userId and an array of strings
+ * Route syntax
+ * HTTP request = POST
+ * http://<servername>:<port>/music_preferences
+ *     HTTP request body: userId = an integer quoted as a string
+ *     HTTP request body: new_preferences = an array of strings, representing a list of new user preferences
+ * Error: The response will be a 500 error with a message if
+ * 1 - userId was not provided in body
+ * 2 - userId was not parseable as an integer
+ * 3 - method was unable to write to the data source
+ * Note: an empty array is accepted, and will be stored
+ * Success: responds with "record updated"
+ */
 router.post('/', function(req, res, next){
 	var userId = req.body.userId;
 	var userIdint = null;

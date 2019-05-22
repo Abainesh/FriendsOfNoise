@@ -9,7 +9,22 @@ var filename = '../dummy_json_data/name.json';
 var names = require(filename);
 
 
-// GET request - given userID, provide first name & last name
+/**
+ * API definition, get first and last name given a userId
+ * Route syntax
+ * HTTP request = GET
+ * http://<servername>:<port>/name
+ *     Query parameter: userId = an integer quoted as a string
+ * Error: the response will be a 500 error with a message if
+ * 1 - the query parameter is not provided
+ * 2 - the query parameter is not parseable as an integer
+ * 3 - the provided userId does not exist in the data source
+ * Success: responds with a JSON object similar to
+ * {
+ *   "first_name": "Quincy",
+ *   "last_name": "Powell"
+ * }
+ */
 router.get('/', function(req, res, next) {
 	var userIdint = null;
 	
@@ -34,8 +49,21 @@ router.get('/', function(req, res, next) {
 });
 
 
-// POST request - given userID, first_name, and last_name set those values
-// but only for an existing record
+/**
+ * API definition, set name given a userId, first and last name
+ * Route syntax
+ * HTTP request = POST
+ * http://<servername>:<port>/name
+ *     HTTP request body: userId = an integer quoted as a string
+ *     HTTP request body: first_name = first name as a string
+ *     HTTP request body: last_name = last name as a string
+ * Error: response will be a 500 error with a message if
+ * 1 - userId was not provided in body
+ * 2 - userId was not parseable as an integer
+ * 3 - method was unable to write to the data source
+ * 4 - either first_name OR last_name were blank
+ * Success: responds with "record updated"
+ */
 router.post('/', function(req, res, next) {
 	var userId = req.body.userId;
 	var userIdint = null;

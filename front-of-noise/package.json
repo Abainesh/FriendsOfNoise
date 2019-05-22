@@ -2,6 +2,7 @@
   "name": "front-of-noise",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:9000/",
   "dependencies": {
     "bulma": "^0.7.4",
     "bulma-extensions": "^6.2.4",

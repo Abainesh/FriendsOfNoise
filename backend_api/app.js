@@ -30,7 +30,7 @@ app.use('/music_preferences', musicPreferencesRouter);
 
 // testing integration!!!
 var testAPIRouter = require('./routes/testAPIroute');
-app.use('/testAPIroute', testAPIRouter);
+app.use('/testAPI', testAPIRouter);
 
 
 module.exports = app;

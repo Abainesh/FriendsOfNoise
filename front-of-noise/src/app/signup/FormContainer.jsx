@@ -308,17 +308,19 @@ class FormContainer extends Component {
             action = {this.handleFormSubmit}
             type = {'primary'}
             title = {'Submit'}
+            outlined = {true}
             style= {{ margin: '10px', width: '100px', padding:'20px' }}
-          />
+          >Submit </Button>
         { /*Submit */ }
 
           <Button
             action = {this.handleClearForm}
             type = {'secondary'}
             title = {'Clear'}
+            outlined = {true}
             className={"control button is-small is-warning"}
             style= {{ margin: '10px', width: '100px', padding:'20px' }}
-          /> {/* Clear the form */}
+          >Clear</Button> {/* Clear the form */}
           </Section>
 
         </form>

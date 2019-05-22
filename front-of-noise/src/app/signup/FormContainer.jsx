@@ -90,12 +90,12 @@ class FormContainer extends Component {
   }
 
   handleInput(e) {
-       let value = e.target.value;
-       let name = e.target.name;
-   this.setState( prevState => ({ newUser :
-        {...prevState.newUser, [name]: value
-        }
-      }), () => console.log(this.state.newUser))
+    let value = e.target.value;
+    let name = e.target.name;
+    this.setState( prevState => ({ newUser :
+      {...prevState.newUser, [name]: value
+      }
+    }), () => console.log(this.state.newUser))
   }
 
   handleTextArea(e) {
@@ -123,7 +123,7 @@ class FormContainer extends Component {
         {...prevState.newUser, genrePrefs: newSelectionArray }
       })
       )
-    }
+  }
 
     handleEmail(e) {
        let value = e.target.value;
@@ -207,7 +207,7 @@ class FormContainer extends Component {
                  name= {'fname'}
                  value={this.state.newUser.fname}
                  placeholder = {'Chanandler'}
-                 handleChange = {this.handleInput} />
+                 handleChange = {this.handleFirstName} />
           </Control>
           </Field>
 
@@ -219,7 +219,7 @@ class FormContainer extends Component {
                 name= {'lname'}
                 value={this.state.newUser.lname}
                 placeholder = {'Bong'}
-                handleChange = {this.handleInput} />
+                handleChange = {this.handleLastName} />
           </Control>
           </Field>  {/* Name of the user */}
 
@@ -245,7 +245,7 @@ class FormContainer extends Component {
                   options = {this.state.genderOptions}
                   value = {this.state.newUser.gender}
                   placeholder = {'Select gender'}
-                  handleChange = {this.handleInput}
+                  handleChange = {this.handleChange}
           />
           </Control>
           </Field> {/* Gender */}
@@ -256,9 +256,9 @@ class FormContainer extends Component {
             <Input inputType={'email'}
                    title= {'email'}
                    name= {'email'}
-                   // value={this.state.User.email}
+                   value={this.state.newUser.email}
                    placeholder = {'Chanandler@email.co.tk'}
-                   handleChange = {this.handleInput} />
+                   handleChange = {this.handleEmail} />
            </Control>
            </Field>
 
@@ -268,9 +268,9 @@ class FormContainer extends Component {
           <Input inputType={'password'}
                   title= {'password'}
                   name= {'password'}
-                  // value={this.state.User.password}
+                  value={this.state.newUser.password}
                   placeholder = {'53cR3t!'}
-                  handleChange = {this.handleInput} />
+                  handleChange = {this.handlePassword} />
           </Control>
           </Field>
 
@@ -291,7 +291,7 @@ class FormContainer extends Component {
           <Control>
           <Textarea
               title={'About you.'}
-              rows={10}
+              rows={4}
               value={this.state.newUser.about}
               name={'currentUserInfo'}
               handleChange={this.handleTextArea}
@@ -304,18 +304,23 @@ class FormContainer extends Component {
 
           <Section>
           <Button
-            SignupButton
-                action = {this.handleFormSubmit}
-                type = {'primary'}
-                title = {'Submit'}
-                // style={buttonStyle}
-          /> { /*Submit */ }
+            className={"control button is-small is-warning"}
+            action = {this.handleFormSubmit}
+            type = {'primary'}
+            title = {'Submit'}
+            outlined = {true}
+            style= {{ margin: '10px', width: '100px', padding:'20px' }}
+          >Submit </Button>
+        { /*Submit */ }
 
           <Button
             action = {this.handleClearForm}
             type = {'secondary'}
             title = {'Clear'}
-          /> {/* Clear the form */}
+            outlined = {true}
+            className={"control button is-small is-warning"}
+            style= {{ margin: '10px', width: '100px', padding:'20px' }}
+          >Clear</Button> {/* Clear the form */}
           </Section>
 
         </form>
@@ -330,6 +335,6 @@ class FormContainer extends Component {
   }
 }
 
-// const buttonStyle = {{ padding:'10px 10px 10px 10px' }};
+// const buttonStyle = { padding:'10px 10px 10px 10px' };
 
 export default FormContainer;

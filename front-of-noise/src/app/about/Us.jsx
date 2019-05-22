@@ -16,7 +16,7 @@ class Us extends Component{
       return(
       <Section>
         <Tile kind="parent">
-          <Tile renderAs="article" kind="child" size="5" notification color="warning">
+          <Tile renderAs="article" kind="child" size="7" notification color="warning">
 
           <Section>
           <div className="has-text-centered">

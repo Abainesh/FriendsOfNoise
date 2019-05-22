@@ -1,5 +1,5 @@
 import React from 'react';
-
+import Us from './about/Us';
 const About = () => (
   <section className="section">
     <div className="container">
@@ -14,6 +14,7 @@ const About = () => (
 
     <div className="col-md-6">
       <br />
+      <Us />
     </div>
   </section>
 );

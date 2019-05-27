@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 // import {Helmet} from 'react-helmet';
-import './styles/css/App.css';
+import './styles/css/Client.css';
 import Layout from './app/Layout'
 
-class App extends Component {
+class Client extends Component {
   state = {
     response: '',
     post: '',
@@ -61,4 +61,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Client;

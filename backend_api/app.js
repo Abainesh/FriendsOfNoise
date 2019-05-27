@@ -29,8 +29,8 @@ app.use('/music_preferences', musicPreferencesRouter);
 //app.use('/new_person', newPersonRouter);
 
 // testing integration!!!
-var testAPIRouter = require('./routes/testAPIroute');
-app.use('/testAPI', testAPIRouter);
+// var testAPIRouter = require('./routes/testAPIroute');
+// app.use('/testAPI', testAPIRouter);
 
 
 module.exports = app;

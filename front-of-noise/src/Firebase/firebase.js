@@ -1,15 +1,15 @@
 var firebase = require('firebase/app');
 require ('firebase/auth');
 
-  const config = {
-    apiKey: "AIzaSyDbc4W4kEjyqFkqwdG8fkFiqStzTPiOVPA",
-    authDomain: "friendsofnoise.firebaseapp.com",
-    databaseURL: "https://friendsofnoise.firebaseio.com",
-    projectId: "friendsofnoise",
-    storageBucket: "friendsofnoise.appspot.com",
-    messagingSenderId: "771386493067",
-    appId: "1:771386493067:web:0c92ef05a443a7c9"
-  };
+const app = firebase.initializeApp({
+  apiKey: process.env.REACT_APP_FIREBASE_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_DOMAIN,
+  databaseURL: process.env.REACT_APP_FIREBASE_DATABASE,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_SENDER_ID
+});
+
 
 class Firebase {
     constructor(){

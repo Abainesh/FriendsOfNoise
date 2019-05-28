@@ -7,15 +7,15 @@ import Section from 'react-bulma-components/lib/components/section';
 
 class Auth extends Component {
 
-  state = {
-    authenticated: false
-  }
-
-  loginWithEmailAndPassword = () => { this.setState({ authenticated: true }) }
-
-  loginWithProvider = () => { this.setState({ authenticated: true }) }
-
-  handleClose = () => { this.setState({ authenticated: false }) }
+//  state = {
+//    authenticated: false
+//  }
+//
+//  loginWithEmailAndPassword = () => { this.setState({ authenticated: true }) }
+//
+//  loginWithProvider = () => { this.setState({ authenticated: true }) }
+//
+//  handleClose = () => { this.setState({ authenticated: false }) }
 
   render() {
     return(

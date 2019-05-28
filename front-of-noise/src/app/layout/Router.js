@@ -10,10 +10,10 @@ import Membership from './../Membership'
 
 const Router = () => (
   <Switch>
-    <Route exact path='/' component={Home}/>
-    <Route path='/signup' component={Signup}/>
-    <Route path='/signin' component={Signin}/>
-    <Route path='/about'  component={About}/>
+    <Route exact path='/'     component={Home}/>
+    <Route path='/signup'     component={Signup}/>
+    <Route path='/signin'     component={Signin}/>
+    <Route path='/about'      component={About}/>
     <Route path='/calendar'   component={Calendar}/>
     <Route path='/profile'    component={Profile}/>
     <Route path='/membership' component={Membership}/>

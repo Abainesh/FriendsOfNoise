@@ -119,7 +119,7 @@ class Header extends Component {
               <span className="icon" style={{ color: '#0084FF' }}>
                 <i class="fab fa-lg fa-twitter"></i>
               </span>
-              <span />@FriendsOfNoise
+              <span /> @FriendsOfNoise
           </Navbar.Item>
         </Navbar.Container>
 

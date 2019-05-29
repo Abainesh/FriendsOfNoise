@@ -7,6 +7,9 @@ import Section from 'react-bulma-components/lib/components/section';
 
 class Auth extends Component {
 
+    state = {loadin: true, authenticated: false, user: null};
+    
+    
 //  state = {
 //    authenticated: false
 //  }

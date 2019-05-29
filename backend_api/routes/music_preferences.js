@@ -154,6 +154,8 @@ router.post('/', function(req, res, next){
 		
 	});
 	console.log("database updated");
+	res.send("database updated");
+	res.end();
 });
 
 

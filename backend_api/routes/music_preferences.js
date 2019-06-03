@@ -12,15 +12,17 @@ const admin = require('firebase-admin');
 const functions = require('firebase-functions');
 
 
-// TO OBTAIN SERVICE ACCOUNT KEY go to our Firestore App > Project Settings > Service Accounts
-// Click GENERATE NEW KEY. Save this to your disk and add the file location  to the below variable
-var serviceAccount = require("/Users/kingj/OneDrive/Documents/North Seattle/AD410_Web_App_Practicum/friendsofnoise-2ced6-firebase-adminsdk-pih7o-8eaac3cb45.json");
+// // TO OBTAIN SERVICE ACCOUNT KEY go to our Firestore App > Project Settings > Service Accounts
+// // Click GENERATE NEW KEY. Save this to your disk and add the file location  to the below variable
+// var serviceAccount = require("/Users/kingj/OneDrive/Documents/North Seattle/AD410_Web_App_Practicum/friendsofnoise-2ced6-firebase-adminsdk-pih7o-8eaac3cb45.json");
 
 
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://friendsofnoise-2ced6.firebaseio.com"
-});
+// admin.initializeApp({
+//   credential: admin.credential.cert(serviceAccount),
+//   databaseURL: "https://friendsofnoise-2ced6.firebaseio.com"
+// });
+
+var Initialize = require('../firebase_initialize')
 
 var db = admin.firestore();
 var express = require('express');
@@ -54,7 +56,7 @@ router.get('/', function(req, res, next) {
 	
 	var userId = req.query.userId;
 	var userIdint = null;
-	var music_preferences = db.collection('user').doc(""+userId);
+	var music_preferences = db.collection('user').doc(""+userId).collection('prefs').doc('music_prefs');
 	var getDoc = music_preferences.get()
   .then(doc => {
     if (!doc.exists) {
@@ -123,7 +125,7 @@ router.post('/', function(req, res, next){
 		
 		
 	// check for existing user in db
-	var checkUser = db.collection('user').doc(""+userId);
+	var checkUser = db.collection('user').doc(""+userId).collection(name).doc(name_doc);
 	var getDoc = checkUser.get()
   .then(doc => {
     if (!doc.exists) {

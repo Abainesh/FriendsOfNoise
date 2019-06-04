@@ -74,12 +74,32 @@ class Header extends Component {
 
           <NavLink
             className="navbar-item"
+            to="/profile"
+            activeClassName="is-active"
+            >
+            <span className="icon has-text-warning" style={{ marginRight: 5 }}> <i class="fas fa-trophy"></i>
+            </span>
+            My Profile
+          </NavLink>
+
+          <NavLink
+            className="navbar-item"
             to="/calendar"
             activeClassName="is-active"
             >
             <span className="icon has-text-warning" style={{ marginRight: 5 }}> <i class="fas fa-crow"></i>
             </span>
             Calendar
+          </NavLink>
+
+          <NavLink
+            className="navbar-item"
+            to="/store"
+            activeClassName="is-active"
+            >
+            <span className="icon has-text-warning" style={{ marginRight: 5 }}> <i class="fas fa-store"></i>
+            </span>
+            Store
           </NavLink>
 
           <div className="navbar-item has-dropdown is-hoverable">

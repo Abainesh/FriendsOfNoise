@@ -4,13 +4,17 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require("cors");
 
+
+const port = 3000;
+
+
 // member information routes
 var physicalAddressRouter = require('./routes/physical_address');
 var emailAddressRouter = require('./routes/email_address');
 var nameRouter = require('./routes/name');
 var membershipEndDateRouter = require('./routes/membership_end_date');
 var musicPreferencesRouter = require('./routes/music_preferences');
-//var newPersonRouter = require('./routes/new_person');
+var newPersonRouter = require('./routes/new_person');
 
 var app = express();
 
@@ -26,11 +30,20 @@ app.use('/email_address', emailAddressRouter);
 app.use('/name', nameRouter);
 app.use('/member_end_date', membershipEndDateRouter);
 app.use('/music_preferences', musicPreferencesRouter);
-//app.use('/new_person', newPersonRouter);
+// app.use('/new_person', newPersonRouter);
 
 // testing integration!!!
 // var testAPIRouter = require('./routes/testAPIroute');
 // app.use('/testAPI', testAPIRouter);
+
+// store
+app.get('/api/products', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dummy_json_data', 'products.json'));
+});
+
+app.listen(port, () => {
+  console.log(`[products] API listening on port ${port}.`);
+});
 
 
 module.exports = app;

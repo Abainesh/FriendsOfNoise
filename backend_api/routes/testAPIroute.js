@@ -12,7 +12,7 @@ router.get('/myStuff', (req, res) => {
 router.post('/yourStuff', (req, res) => {
   console.log(req.body);
   res.send(
-    'I received your POST. Want to see?... : ${req.body.post}',
+    'I received your POST. Want to see?... : `${req.body.post}`',
   );
 });
 

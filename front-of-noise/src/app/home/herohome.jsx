@@ -18,7 +18,7 @@ render() {
                 src="../images/logo.png"
                 alt="Friends of Noise : Home of Noise!"
               /></Heading>
-              <Heading subtitle size={3}>
+              <Heading spaced subtitle size={1}>
                 Members' Only Portal
               </Heading>
             </Container>

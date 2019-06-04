@@ -1,6 +1,14 @@
 import React from 'react';
+import { Provider } from 'react-redux';
 
-const Store = () => (
+import store from '../_services/store';
+import StoreBox from './store/StoreBox';
+
+const Root = ({ children, initialState = {} }) => (
+  <Provider store={store(initialState)}>{children}</Provider>
+);
+
+const Store = ({ children, initialState = {} }) => (
   <section className="section">
     <div className="container">
       <h1 className="title">Friends of Noise</h1>
@@ -15,7 +23,10 @@ const Store = () => (
     <div className="col-md-6">
       <br />
 
-      
+
+      <Root>
+        <StoreBox />
+      </Root>
 
     </div>
   </section>

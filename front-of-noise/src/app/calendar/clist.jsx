@@ -51,9 +51,9 @@ class Clist extends React.Component {
     return (
       <Columns.Column size="one-third">
       <Section position="right">
-      <Tile kind="parent">
+      <Tile kind="parent" notification color="success">
         <Tile renderAs="article" kind="child">
-        <div style={{ color: '#144880', margin: '0px auto', width: 340 }}>
+        <div style={{ a: '#144880', margin: '20px auto' }}>
 
         <Card>
           <Card.Header>
@@ -72,20 +72,20 @@ class Clist extends React.Component {
               </Media.Item>
             </Media>
             <Content>
-              Tickets officially in pre-sale! <a>@friendsofnoise</a>
-              <a href="#1"> #tonight</a> <a href="#2">#ska</a> Save a seat?
+              Tickets officially in pre-sale! <a style={{ color: '#144880' }}>@friendsofnoise</a>
+              <a href="#1" style={{ color: '#144880' }}> #tonight</a> <a style={{ color: '#144880' }} href="#2">#ska</a> Save a seat?
               <br />
               <time dateTime="2020-1-1">8:32 PM - 1 Jun 2020</time>
             </Content>
           </Card.Content>
           <Card.Footer>
-            <Card.Footer.Item renderAs="a" href="#Yes">
+            <Card.Footer.Item  style={{ color: '#144880' }} renderAs="a" href="#Yes">
               Yes
             </Card.Footer.Item>
-            <Card.Footer.Item renderAs="a" href="#No">
+            <Card.Footer.Item  style={{ color: '#144880' }} renderAs="a" href="#No">
               No
             </Card.Footer.Item>
-            <Card.Footer.Item renderAs="a" href="#Maybe">
+            <Card.Footer.Item style={{ color: '#144880' }} renderAs="a" href="#Maybe">
               Maybe
             </Card.Footer.Item>
           </Card.Footer>
@@ -105,20 +105,20 @@ class Clist extends React.Component {
               </Media.Item>
             </Media>
             <Content>
-              Tickets officially in pre-sale! <a>@friendsofnoise</a>
-              <a href="#1"> #nextweek</a> <a href="#2">#salsa</a> Save a seat?
+              Tickets officially in pre-sale! <a style={{ color: '#144880' }}>@friendsofnoise</a>
+              <a style={{ color: '#144880' }} href="#1"> #nextweek</a> <a style={{ color: '#144880' }} href="#2">#salsa</a> Save a seat?
               <br />
               <time dateTime="2020-1-1">11:09 PM - 1 Jan 2020</time>
             </Content>
           </Card.Content>
           <Card.Footer>
-            <Card.Footer.Item renderAs="a" href="#Yes">
+            <Card.Footer.Item style={{ color: '#144880' }} renderAs="a" href="#Yes">
               Yes
             </Card.Footer.Item>
-            <Card.Footer.Item renderAs="a" href="#No">
+            <Card.Footer.Item style={{ color: '#144880' }} renderAs="a" href="#No">
               No
             </Card.Footer.Item>
-            <Card.Footer.Item renderAs="a" href="#Maybe">
+            <Card.Footer.Item style={{ color: '#144880' }} renderAs="a" href="#Maybe">
               Maybe
             </Card.Footer.Item>
           </Card.Footer>

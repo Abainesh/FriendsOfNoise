@@ -1,8 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import Thumb from '../Thumb';
-import formatPrice from '../_services/util';
+import Thumb from './Thumb';
+// import { formatPrice } from '../../../_services/util';
+
+const formatPrice = (x, currency) => {
+  switch (currency) {
+    case 'BRL':
+      return x.toFixed(2).replace('.', ',');
+    default:
+      return x.toFixed(2);
+  }
+};
 
 class CartProduct extends Component {
   static propTypes = {
@@ -41,7 +50,7 @@ class CartProduct extends Component {
         />
         <Thumb
           classes="shelf-item__thumb"
-          src={require(`../../../static/products/${product.sku}_2.jpg`)}
+          src={require(`../../static/products/${product.sku}_2.jpg`)}
           alt={product.title}
         />
         <div className="shelf-item__details">

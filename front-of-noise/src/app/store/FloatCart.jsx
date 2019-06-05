@@ -4,10 +4,20 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { loadCart, removeProduct } from '../../_services/cart/actions';
 import { updateCart } from '../../_services/total/actions';
-import CartProduct from './floatcart/CartProduct';
-import { formatPrice } from '../../../_services/util';
+import CartProduct from './CartProduct';
+
 
 import '../../styles/css/store.css'
+
+
+const formatPrice = (x, currency) => {
+  switch (currency) {
+    case 'BRL':
+      return x.toFixed(2).replace('.', ',');
+    default:
+      return x.toFixed(2);
+  }
+};
 
 class FloatCart extends Component {
   static propTypes = {

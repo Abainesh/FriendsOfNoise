@@ -7,4 +7,6 @@ const formatPrice = (x, currency) => {
   }
 };
 
-export default formatPrice;
+export default {
+  formatPrice
+};

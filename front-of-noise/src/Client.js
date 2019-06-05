@@ -42,7 +42,7 @@ class Client extends Component {
   render() {
     return (
       <div>
-        
+
       <Layout />
     </div>
     );

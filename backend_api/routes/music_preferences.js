@@ -125,7 +125,7 @@ router.post('/', function(req, res, next){
 		
 		
 	// check for existing user in db
-	var checkUser = db.collection('user').doc(""+userId).collection(name).doc(name_doc);
+	var checkUser = db.collection('user').doc(""+userId).collection('prefs').doc('music_prefs');
 	var getDoc = checkUser.get()
   .then(doc => {
     if (!doc.exists) {
@@ -133,7 +133,7 @@ router.post('/', function(req, res, next){
 			res.status(500).send("user does not exist");
 		} else {
 			console.log('good user ID')
-		}
+		
 
 
 	// validate input - expecting an array of strings
@@ -146,8 +146,7 @@ router.post('/', function(req, res, next){
 // 			newPref.splice(i, 1);
 // 			i--;
 // 		}
- 	})
-};
+ 
 	
 	// Update data
 	var prefRef = db.collection('user').doc(""+userId).collection('prefs').doc('music_prefs');
@@ -158,6 +157,11 @@ router.post('/', function(req, res, next){
 	console.log("database updated");
 	res.send("database updated");
 	res.end();
+		}
+	});
+	
+
+}
 });
 
 

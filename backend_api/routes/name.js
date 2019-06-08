@@ -111,7 +111,7 @@ router.post('/', function(req, res, next) {
 
 /** 
  * helper function to catch various null-like conditions:
- * uninisialized variables as indicated by the JS undefined type
+ * uninitialized variables as indicated by the JS undefined type
  * strings set to the null value
  * empty strings and all whitespace strings by RegExp
  * source of the RegExp syntax: StackOverflow questionId 10232366

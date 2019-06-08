@@ -13,11 +13,6 @@
 	var express = require('express');
 	var router = express.Router();
 
-// connect to the data source
-// var filename = '../dummy_json_data/name.json';
-// var names = require(filename);
-
-
 /**
  * API definition, get first and last name given a userId
  * Route syntax
@@ -34,7 +29,6 @@
  *   "last_name": "Powell"
  * }
  */
-
 router.get('/', function(req, res, next) {
 	
 	var userId = req.query.userId;
@@ -53,30 +47,6 @@ router.get('/', function(req, res, next) {
     console.log('Error getting document', err);
 	});
 });
-
-
-// router.get('/', function(req, res, next) {
-// 	var userIdint = null;
-	
-// 	//console.log("userId value: " + req.query.userId);
-// 	//console.log("userId type: " + typeof req.query.userId);
-	
-// 	// Validate query and convert
-// 	if(req.query.userId === undefined || typeof req.query.userId === undefined) {
-// 		res.status(500).send("query parameter userId is required");
-// 	} else if(isNaN(req.query.userId)) {
-// 		res.status(500).send("query parameter userId must be parseable as integer");
-// 	} else {
-// 		userIdint = parseInt(req.query.userId, 10);
-// 	}
-	
-// 	// Find if userId exists in the JSON, send result data if it does.
-// 	if(!names[userIdint]) {
-// 		res.status(500).send("user does not exist");
-// 	} else {	
-// 		res.send(names[userIdint]);
-// 	}
-// });
 
 
 /**
@@ -98,27 +68,20 @@ router.post('/', function(req, res, next) {
 	var userId = req.body.userId;
 	var userIdint = null;
 	var fn = req.body.first_name;
-	var ln = req.body.last_name;
+	if (!isEmptyOrAllWhitespace(fn)) {
+		res.status(500).send("First name is undefined, null, or all whitespace");
+	}
+	if (typeof fn === "string") {
+		fn.trim();
+	}
 	
-	// validate userId input, convert to integer
-	// if(userId === undefined || typeof userId === undefined) {
-	// 	res.status(500).send("No userId specified");
-	// } else if (isNaN(userId)) {
-	// 	res.status(500).send("userId must be parseable as integer");
-	// } else {
-	// 	userIdint = parseInt(userId);
-	// }
-	// // validate name input using helper function, trim whitespace
-	// if (isEmptyOrAllWhitespace(fn)) {
-	// 	res.status(500).send("Empty or all whitespace first_name");
-	// } else {
-	// 	fn.trim();
-	// }
-	// if (isEmptyOrAllWhitespace(ln)) {
-	// 	res.status(500).send("Empty or all whitespace last_name");
-	// } else {
-	// 	ln.trim();
-	// }
+	var ln = req.body.last_name;
+	if (!isEmptyOrAllWhitespace(ln)) {
+		res.status(500).send("Last name is undefined, null, or all whitespace");
+	}
+	if (typeof ln === "string") {
+		ln.trim();
+	}
 
 	var checkUser = db.collection('user').doc(""+userId);
 	var getDoc = checkUser.get()
@@ -128,9 +91,7 @@ router.post('/', function(req, res, next) {
 			res.status(500).send("user does not exist");
 		} else {
 			console.log('good user ID');
-		// At this point the following should be true: userId exists
-		// in the database, first_name and last_name at least contain
-		// some text
+		}
 
 		var nameRef = db.collection('user').doc(""+userId).collection('data').doc('name');
 		var setWithOptions = nameRef.set(
@@ -140,31 +101,23 @@ router.post('/', function(req, res, next) {
 			},
 			{merge: true});
 
-
 		console.log("database updated");
 		res.send("database updated");
 		res.end();
-
-
-
-		// names[userIdint].first_name = fn;
-		// names[userIdint].last_name = ln;
-		// var json_format = JSON.stringify(names);
-		// fs = require('fs');
-		// filename = './dummy_json_data/name.json';
-		// fs.writeFile(filename, json_format, 'utf8', function(err) {
-		// 	if (err) {
-		// 		res.status(500).send("fs write error: " + err);
-		// 	} else {
-		// 		res.status(200).send("record updated");
-		// 	}
 		}
 	});
 });                        
 
 
-// helper function to catch empty strings and all whitespace strings
-// source: StackOverflow questionId 10232366
+/** 
+ * helper function to catch various null-like conditions:
+ * uninisialized variables as indicated by the JS undefined type
+ * strings set to the null value
+ * empty strings and all whitespace strings by RegExp
+ * source of the RegExp syntax: StackOverflow questionId 10232366
+ * choosing to accept any non-null string is dangerous so I'm adding
+ * ToDo: add DB injection screening as a separate input validation method
+ */
 function isEmptyOrAllWhitespace(str) {
 	var re = /^\s*$/;
 	
@@ -178,7 +131,5 @@ function isEmptyOrAllWhitespace(str) {
 		return false;
 	}
 }
-
-
 
 module.exports = router;

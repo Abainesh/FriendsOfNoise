@@ -8,20 +8,7 @@
 
 	const admin = require('firebase-admin');
 	const functions = require('firebase-functions');
-	
-	
-	// // TO OBTAIN SERVICE ACCOUNT KEY go to our Firestore App > Project Settings > Service Accounts
-	// // Click GENERATE NEW KEY. Save this to your disk and add the file location  to the below variable
-	// var serviceAccount = require("/Users/kingj/OneDrive/Documents/North Seattle/AD410_Web_App_Practicum/friendsofnoise-2ced6-firebase-adminsdk-pih7o-8eaac3cb45.json");
-	
-	
-	// admin.initializeApp({
-	//   credential: admin.credential.cert(serviceAccount),
-	//   databaseURL: "https://friendsofnoise-2ced6.firebaseio.com"
-	// });
-
 	var initialize = require('../firebase_initialize')
-	
 	var db = admin.firestore();
 	var express = require('express');
 	var router = express.Router();
@@ -52,12 +39,12 @@ router.get('/', function(req, res, next) {
 	
 	var userId = req.query.userId;
 	var userIdint = null;
-	var name = db.collection('user').doc(""+userId).collection('name').doc('name_doc');
+	var name = db.collection('user').doc(""+userId).collection('data').doc('name');
 	var getDoc = name.get()
   .then(doc => {
     if (!doc.exists) {
-			console.log('No such document!');
-			res.status(500).send("user does not exist");
+			console.log('name set for user');
+			res.status(500).send("no name set for user");
 		} else {
 			res.send(doc.data());
 		}
@@ -66,9 +53,6 @@ router.get('/', function(req, res, next) {
     console.log('Error getting document', err);
 	});
 });
-
-
-
 
 
 // router.get('/', function(req, res, next) {
@@ -140,7 +124,7 @@ router.post('/', function(req, res, next) {
 	var getDoc = checkUser.get()
   .then(doc => {
     if (!doc.exists) {
-			console.log('No such document!');
+			console.log('user does not exist');
 			res.status(500).send("user does not exist");
 		} else {
 			console.log('good user ID');
@@ -148,7 +132,7 @@ router.post('/', function(req, res, next) {
 		// in the database, first_name and last_name at least contain
 		// some text
 
-		var nameRef = db.collection('user').doc(""+userId).collection('name').doc('name_doc');
+		var nameRef = db.collection('user').doc(""+userId).collection('data').doc('name');
 		var setWithOptions = nameRef.set(
 			{
 				first_name: fn,

@@ -94,91 +94,114 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res, next){  
 	var userId = req.body.userId;
 	var userIdint = null;
-    var address1 = req.body.address1;
-    var address2 = req.body.address2;
-    var city = req.body.city;
-    var state = req.body.state;
-    var zip = req.body.zip;
-    var zip_ext = req.body.zip_ext;
+    var new_address1 = req.body.address1;
+    var new_address2 = req.body.address2;
+    var new_city = req.body.city;
+    var new_state = req.body.state;
+    var new_zip = req.body.zip;
+    var new_zip_ext = req.body.zip_ext;
+    var new_phone = req.body.phone;
 	
     
     if(userId === undefined || typeof userId === undefined) {
-		res.status(500).send("No userId specified");
-	} else if (isNaN(userId)) {
-		res.status(500).send("UserId must be parseable as an int");
-	} else {
-		userIdint = parseInt(userId);
-	}
+        res.status(500).send("No userId specified");
+    } else {
+	// } else if (isNaN(userId)) {
+	// 	res.status(500).send("UserId must be parseable as an int");
+	// } else {
+	// 	userIdint = parseInt(userId);
+	// }
     
     
     //WHITESPACE
-    if(isEmptyOrAllWhitespace(address1)){
+    if(isEmptyOrAllWhitespace(new_address1)){
         res.status(500).send("Empty or all whitespace address1");
     }else{
-        address1.trim();
+        new_address1.trim();
     }
     
-    if(isEmptyOrAllWhitespace(city)){
+    if(isEmptyOrAllWhitespace(new_city)){
         res.status(500).send("Empty of all whitespace city");
     }else{
-        city.trim();
+        new_city.trim();
     }
     
-    if(isEmptyOrAllWhitespace(state)){
+    if(isEmptyOrAllWhitespace(new_state)){
         res.status(500).send("Empty of all whitespace state");
     }else{
-        state.trim();
+        new_state.trim();
     }
     
-    if(isEmptyOrAllWhitespace(zip)){
+    if(isEmptyOrAllWhitespace(new_zip)){
         res.status(500).send("Empty of all whitespace zip");
     }else{
-        zip.trim();
+        new_zip.trim();
     }
     
     //TRIMS NONREQUIRED ADDRESS LINES
     
-    if(isEmptyOrAllWhitespace(address2)){
-        address2="";
+    if(isEmptyOrAllWhitespace(new_address2)){
+        new_address2="";
     }else{
-        address2.trim();
+        new_address2.trim();
     }
     
-    if(isEmptyOrAllWhitespace(zip_ext)){
-        zip_ext="";
+    if(isEmptyOrAllWhitespace(new_zip_ext)){
+        new_zip_ext="";
     }else{
-        zip_ext.trim();
-    }    
+        new_zip_ext.trim();
+    }
     
+    
+    var addressRef = db.collection('user').doc(""+userId).collection('data').doc('address');
+    var setWithOptions = addressRef.set(
+        {
+            address1: new_address1,
+            address2: new_address2,
+            city: new_city,
+            state: new_state,
+            zip: new_zip,
+            zip_ext: new_zip_ext,
+            phone: new_phone
+        },
+        {merge:true});
+    console.log("database updated");
+    res.send("database updated");
+    res.end();
+    }
+});
+
     
     //CHECKS IF ID IS IN DB
     //IF TRUE, UPDATE
     //IF FALSE, THROW ERROR
     
-    if(!addresses[userIdint]){
-        res.status(500).send("User does not exist in database");
-    }else{
-        addresses[userIdint].address1=address1;
-        addresses[userIdint].address2=address2;
-        addresses[userIdint].city=city;
-        addresses[userIdint].state=state;
-        addresses[userIdint].zip=zip;
-        addresses[userIdint].zip_ext=zip_ext;
+//     if(!addresses[userIdint]){
+//         res.status(500).send("User does not exist in database");
+//     }else{
+//         addresses[userIdint].address1=address1;
+//         addresses[userIdint].address2=address2;
+//         addresses[userIdint].city=city;
+//         addresses[userIdint].state=state;
+//         addresses[userIdint].zip=zip;
+//         addresses[userIdint].zip_ext=zip_ext;
         
-        var json_format=JSON.stringify(addresses);
-        fs=require('fs');
-        filename = './dummy_json_data/p_address.json';
-        fs.writeFile(filename, json_format, 'utf8', function(err){
-            if(err){
-                res.status(500).send("fs write error: " + err)
-            }else{
-                res.status(200).send("Record updated!");
-            }
-        });
-    }
-    
-    
-});
+//         var json_format=JSON.stringify(addresses);
+//         fs=require('fs');
+//         filename = './dummy_json_data/p_address.json';
+//         fs.writeFile(filename, json_format, 'utf8', function(err){
+//             if(err){
+//                 res.status(500).send("fs write error: " + err)
+//             }else{
+//                 res.status(200).send("Record updated!");
+//             }
+//         });
+//     }
+     
+// });
+
+
+
 
 
 // helper function to catch empty strings and all whitespace strings

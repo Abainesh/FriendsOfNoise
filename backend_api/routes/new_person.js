@@ -30,10 +30,7 @@ router.post('/', function(req, res, next) {
 			res.status(500).send("user already exists");
 			//res.end();
 		} else {
-			var newUser = {
-
-
-			}
+			var newUser = {}
 			//var newUser = db.collection('user').doc();
 			var setNewUser = db.collection('user').doc(userId).set(newUser);
 			res.send("user created");

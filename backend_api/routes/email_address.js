@@ -1,8 +1,16 @@
 /*  Author: Quincy Powell
 	Date: 2019-04-30  */
 
-var express = require('express');
-var router = express.Router();
+	/*  Jon King
+		Date: 2019-06-08
+		Added firebase functionality    */
+
+	const admin = require('firebase-admin');
+	const functions = require('firebase-functions');
+	var initialize = require('../firebase_initialize')
+	var db = admin.firestore();
+	var express = require('express');
+	var router = express.Router();
 
 // connect to the data source
 var filename = '../dummy_json_data/email.json';
@@ -23,25 +31,41 @@ var emails = require(filename);
  *   "email": "bob@coontoso.com"
  * } 
  */
-router.get('/', function(req, res, next) {
-	// Validate query and convert
-	// ToDo: refactor this as an exportable function
-	var userIdint = null;
-	if(req.query.userId === undefined || typeof req.query.userId === undefined) {
-		res.status(500).send("query parameter userId is required");
-	} else if(isNaN(req.query.userId)) {
-		res.status(500).send("query parameter userId must be parseable as integer");
-	} else {
-		userIdint = parseInt(req.query.userId, 10);
-	}
+// router.get('/', function(req, res, next) {
+// 	// Validate query and convert
+// 	// ToDo: refactor this as an exportable function
+// 	var userIdint = null;
+// 	if(req.query.userId === undefined || typeof req.query.userId === undefined) {
+// 		res.status(500).send("query parameter userId is required");
+// 	} else if(isNaN(req.query.userId)) {
+// 		res.status(500).send("query parameter userId must be parseable as integer");
+// 	} else {
+// 		userIdint = parseInt(req.query.userId, 10);
+// 	}
 	
-	// Find if userId exists in the json, send result data if it does
-	if(!emails[userIdint]) {
-		res.status(500).send("user does not exist");
-	} else {	
-		res.send(emails[userIdint]);
-	}
-});
+// 	// Find if userId exists in the json, send result data if it does
+// 	if(!emails[userIdint]) {
+// 		res.status(500).send("user does not exist");
+// 	} else {	
+// 		res.send(emails[userIdint]);
+// 	}
+// });
+
+router.get('/', function(req, res, next){
+
+	var userId = req.query.userId;
+	var user_email = db.collection('user').doc(""+userId).collection('data').doc('email');
+	var getEmail = user_email.get()
+	.then(doc => {
+		if (!doc.exists){
+			console.log('No email data');
+			res.status(500).send("No address data");
+		} else {
+			console.log('valid email data');
+			res.send(doc.data());
+		}
+	})
+})
 
 
  /**
@@ -60,18 +84,31 @@ router.get('/', function(req, res, next) {
   */
 router.post('/', function(req, res, next) {
 	var userId = req.body.userId;
-	var userIdint = null;
-	var email = req.body.email;
+	var new_email = req.body.email;
+
+	var emailRef = db.collection('user').doc(""+userId).collection('data').doc('email');
+	var setWithOptions = emailRef.set(
+		{
+			email: new_email
+		},
+		{merge: true});
+	console.log("database updated");
+	res.send("datbase updated");
+	res.end();
+});
+
+
+	
 	
 	// Validate userId and convert to int
 	// ToDo: refactor this as an exportable function
-	if(userId === undefined || typeof userId === undefined) {
-		res.status(500).send("query parameter userId is required");
-	} else if(isNaN(userId)) {
-		res.status(500).send("userId must be parseable as integer");
-	} else {
-		userIdint = parseInt(userId);
-	}
+	// if(userId === undefined || typeof userId === undefined) {
+	// 	res.status(500).send("query parameter userId is required");
+	// } else if(isNaN(userId)) {
+	// 	res.status(500).send("userId must be parseable as integer");
+	// } else {
+	// 	userIdint = parseInt(userId);
+	// }
 	
 	// debugging console logs
 	//console.log("Post body:email = " + email);
@@ -79,22 +116,22 @@ router.post('/', function(req, res, next) {
 	//console.log("Json array[index].email = " + emails[userIdint].email);
 	
 	// validate email address and write if valid
-	if(validate_email(email)) {
-		emails[userIdint].email = email;
-		var fs = require('fs');
-		var json_format = JSON.stringify(emails);
-		filename = './dummy_json_data/email.json';
-		fs.writeFile(filename, json_format, 'utf8', (err) => {
-			if (err) {
-				res.status(500).send("fs error: " + err);
-			} else {
-				res.status(200).send("record updated");
-			}
-		});
-	} else {
-		res.status(500).send("No email provided, or does not match W3C email regexp");
-	}
-});
+// 	if(validate_email(email)) {
+// 		emails[userIdint].email = email;
+// 		var fs = require('fs');
+// 		var json_format = JSON.stringify(emails);
+// 		filename = './dummy_json_data/email.json';
+// 		fs.writeFile(filename, json_format, 'utf8', (err) => {
+// 			if (err) {
+// 				res.status(500).send("fs error: " + err);
+// 			} else {
+// 				res.status(200).send("record updated");
+// 			}
+// 		});
+// 	} else {
+// 		res.status(500).send("No email provided, or does not match W3C email regexp");
+// 	}
+// });
 
 // helper function to validate an email address using a regexp
 // slightly modified from source: 

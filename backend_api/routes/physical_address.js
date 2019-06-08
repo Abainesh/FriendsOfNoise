@@ -1,13 +1,22 @@
 /*Author: Gabby Saechao 4.30.2019*/
 
+/*  Jon King
+    Date: 2019-06-08
+    Added firebase functionality    */
+
 // QRP - Would be nice feature: Use an external web service to validate address. Maybe USPS has a web api?
 
+
+const admin = require('firebase-admin');
+const functions = require('firebase-functions');
+var initialize = require('../firebase_initialize')
+var db = admin.firestore();
 var express = require('express');
 var router = express.Router();
 
 //Connects to data source
-var filename = '../dummy_json_data/p_address.json';
-var addresses = require(filename);
+// var filename = '../dummy_json_data/p_address.json';
+// var addresses = require(filename);
 
 /**
  * API definition, get physical address given a userId
@@ -29,27 +38,43 @@ var addresses = require(filename);
  *   "zip_ext": ""
  * }
  */
-router.get('/', function(req, res, next) {
+// router.get('/', function(req, res, next) {
 
-    var userIdint = null;
+//     var userIdint = null;
     
-    //Validates userId
-    if(req.query.userId === undefined || typeof req.query.userId===undefined)
-    {
-        res.status(500).set("userId is required");
-    } else if (isNaN(req.query.userId)) {
-        res.status(500).send("userId must be a parseable integer");
-    } else {
-      userIdint = parseInt(req.query.userId, 10);
-    }
+//     //Validates userId
+//     if(req.query.userId === undefined || typeof req.query.userId===undefined)
+//     {
+//         res.status(500).set("userId is required");
+//     } else if (isNaN(req.query.userId)) {
+//         res.status(500).send("userId must be a parseable integer");
+//     } else {
+//       userIdint = parseInt(req.query.userId, 10);
+//     }
     
-    //Find if userId exists in JSON and sends the result data if it does.
-    if(!addresses[userIdint]){
-        res.status(500).send("Address does not exist");
-    }else {
-        res.send(addresses[userIdint]);
-    }
+//     //Find if userId exists in JSON and sends the result data if it does.
+//     if(!addresses[userIdint]){
+//         res.status(500).send("Address does not exist");
+//     }else {
+//         res.send(addresses[userIdint]);
+//     }
     
+// });
+
+router.get('/', function(req, res, next) {
+	
+	var userId = req.query.userId;
+    var user_address = db.collection('user').doc(""+userId).collection('data').doc('address');
+	var getAddress = user_address.get()
+	.then(doc => {
+		if (!doc.exists) {
+			console.log('No address data');
+			res.status(500).send("No address data");
+		} else {
+				console.log('valid address data');
+				res.send(doc.data());
+			}
+	})
 });
 
 /**

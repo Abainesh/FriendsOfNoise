@@ -17,6 +17,33 @@ var router = express.Router();
 
 
 
+// router.get('/', function(req, res, next) {
+	
+// 	var userId = req.query.userId;
+// 	// console.log(userId);
+// 	var userIdint = null;
+// 	var checkUser = db.collection('user').doc(""+userId);
+// 	var getDoc = checkUser.get()
+//   .then(doc => {
+//     if (!doc.exists) {
+// 			console.log('user does not exist');
+// 			res.status(500).send("user does not exist");
+// 		} else {
+// 			//snapshot.forEach(doc => {
+// 				console.log('valid user')
+// 				//res.send(doc.data());
+// 			// });
+// 		}
+// 	})
+//   .catch(err => {
+//     console.log('Error getting document', err);
+// 	});
+
+
+	
+//Check if UserId already exists. If not, create new user
+//and add all user data.
+
 router.post('/', function(req, res, next) {
 	var userId = req.body.userId;
 	var checkUser = db.collection('user').doc(""+userId);

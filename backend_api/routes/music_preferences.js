@@ -56,19 +56,32 @@ router.get('/', function(req, res, next) {
 	
 	var userId = req.query.userId;
 	var userIdint = null;
-	var music_preferences = db.collection('user').doc(""+userId).collection('prefs').doc('music_prefs');
-	var getDoc = music_preferences.get()
+	var checkUser = db.collection('user').doc(""+userId);
+	var prefRef = db.collection('user').doc(""+userId).collection('data').doc('music_prefs');
+	var getDoc = checkUser.get()
   .then(doc => {
     if (!doc.exists) {
-			console.log('No such document!');
+			console.log('user does not exist');
 			res.status(500).send("user does not exist");
-		} else {
-			res.send(doc.data());
 		}
-	})
-  .catch(err => {
+		console.log ('valid user');
+			getDoc = prefRef.get()
+			.then(doc => {
+				if (!doc.exists){
+					console.log('no preferences set');
+					res.status(500).send("no preferences set");
+				} else {
+					console.log('valid prefs data');
+					res.send(doc.data());
+				}
+				})
+			.catch(err => {
+				console.log('Error getting document', err);
+			})
+		.catch(err => {
     console.log('Error getting document', err);
 	});
+});
 });
 
  // router.get('/', function(req, res, next) {
@@ -125,17 +138,33 @@ router.post('/', function(req, res, next){
 		
 		
 	// check for existing user in db
-	var checkUser = db.collection('user').doc(""+userId).collection('prefs').doc('music_prefs');
+	var checkUser = db.collection('user').doc(""+userId);
 	var getDoc = checkUser.get()
   .then(doc => {
     if (!doc.exists) {
 			console.log('No such document!');
 			res.status(500).send("user does not exist");
 		} else {
-			console.log('good user ID')
-		
+			console.log('good user ID');
+		}
+	})
 
+	// check for existing music_prefs array in db
+	var checkPrefs = db.collection('user').doc(""+userId).collection('data').doc('music_prefs');
+	getDoc = checkPrefs.get()
+  .then(doc => {
+    if (!doc.exists) {
+			// create music_prefs array
+			var emptyArray = {}
+			var newPrefArray = db.collection('user').doc(""+userId).collection('data').doc('music_prefs').set(emptyArray);
+			console.log('music_prefs array created');
+			
+		} else {
+			console.log('existing music_prefs array');
+		}
+	})
 
+	
 	// validate input - expecting an array of strings
 // 	if(!newPref.isArray()) {
 // 		res.status(500).send("expecting an array of strings in the new_preferences");
@@ -149,22 +178,16 @@ router.post('/', function(req, res, next){
  
 	
 	// Update data
-	var prefRef = db.collection('user').doc(""+userId).collection('prefs').doc('music_prefs');
-	var arrUnion = prefRef.update({
-		genre: admin.firestore.FieldValue.arrayUnion(""+newPref)
-		
-	});
+	var prefRef = db.collection('user').doc(""+userId).collection('data').doc('music_prefs');
+	console.log(newPref);
+	var arrUnion = prefRef.set({
+		genre: admin.firestore.FieldValue.arrayUnion(newPref)});
 	console.log("database updated");
 	res.send("database updated");
 	res.end();
 		}
 	});
 	
-
-}
-});
-
-
 
 //  router.post('/', function(req, res, next){
 // 	var userId = req.body.userId;

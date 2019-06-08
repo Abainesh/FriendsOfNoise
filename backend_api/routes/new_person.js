@@ -110,7 +110,7 @@ var new_fn =  req.body.first_name ;
 			{merge: true});
 	
 	var dataRef = db.collection('user').doc(""+userId).collection('data').doc('address');
-		var setWithOption = dataRef.set(
+		setWithOptions = dataRef.set(
 			{
 				//email: new_email,
 				address1: new_address1,
@@ -122,6 +122,9 @@ var new_fn =  req.body.first_name ;
 				phone: new_phone
 			},
 			{merge: true});
+	
+	var prefRef = db.collection('user').doc(""+userId).collection('data').doc('music_prefs');
+		setWithOptions = prefRef.set({});
 
 
 		console.log("database updated");

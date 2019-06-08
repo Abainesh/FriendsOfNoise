@@ -1,12 +1,20 @@
 /*  Quincy Powell
-    Date: 2019-05-07  */
+	Date: 2019-05-07  */
+	
+	/*	Jon King
+Date: 2019-06-08
+Added firebase functionality	*/
 
+const admin = require('firebase-admin');
+const functions = require('firebase-functions');
+var initialize = require('../firebase_initialize')
+var db = admin.firestore();
 var express = require('express');
 var router = express.Router();
 
 // connect to data source
-var filename = '../dummy_json_data/member_date.json';
-var member_exp_dates = require(filename);
+// var filename = '../dummy_json_data/member_date.json';
+// var member_exp_dates = require(filename);
 
 /**
  * API definition, get membership end date given a userId
@@ -25,20 +33,37 @@ var member_exp_dates = require(filename);
  */
 router.get('/', function(req, res, next) {
   var userIdint = null;
+  var userId = req.query.userId;
+
   if(req.query.userId === undefined || typeof req.query.userId === undefined) {
 		res.status(500).send("query parameter userId is required");
-	} else if(isNaN(req.query.userId)) {
-		res.status(500).send("query parameter userId must be parseable as integer");
-	} else {
-		userIdint = parseInt(req.query.userId, 10);
-	}
+  } else {
+	// } else if(isNaN(req.query.userId)) {
+	// 	res.status(500).send("query parameter userId must be parseable as integer");
+	// } else {
+	// 	userIdint = parseInt(req.query.userId, 10);
+	// }
 	
 	// Find if userId exists in the data, send result if exists
-	if(!member_exp_dates[userIdint]) {
-		res.status(500).send("user does not exist");
-	} else {
-		res.send(member_exp_dates[userIdint]);
-	}
+
+	// if(!member_exp_dates[userIdint]) {
+	// 	res.status(500).send("user does not exist");
+	// } else {
+	// 	res.send(member_exp_dates[userIdint]);
+	// }
+
+	var member_end_date = db.collection('user').doc(""+userId).collection('data').doc('member_end_date');
+	var getEndDate = member_end_date.get()
+	.then(doc => {
+		if (!doc.exists){
+			console.log("No membership end date");
+			res.status(500).send("No membership end date");
+		} else {
+			console.log('valid membership end date data');
+			res.send(doc.data());
+		}
+	})
+}
 });
 
 /**
@@ -57,34 +82,51 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res, next) {
 	var userId = req.body.userId;
 	var userIdint = null;
-	var new_member_exp_date = req.body.new_membership_exp_date;
+	var new_member_end_date = req.body.member_end_date;
 	
 	// validate userId
 	if(userId === undefined || typeof userId === undefined) {
 		res.status(500).send("query parameter userId is required");
-	} else if(isNaN(userId)) {
-		res.status(500).send("userId must be parseable as integer");
+	// } else if(isNaN(userId)) {
+	// 	res.status(500).send("userId must be parseable as integer");
+	// } else {
+	// 	userIdint = parseInt(userId);
+	// }
+
 	} else {
-		userIdint = parseInt(userId);
-	}
+		var dateRef = {
+			date: new_member_end_date
+		}
+		var endDateRef = db.collection('user').doc(""+userId).collection('data').doc('member_end_date').set(dateRef);
+		// var setWithOption = endDateRef.set(
+		// 	{
+		// 		date: new_member_end_date
+		// 	}
+		console.log("database updated");
+		res.send("database updated");
+		res.end();
+		}
+});
+		
+
+
 	
 	// validate new_member_exp_date valid format
-	if(isIso8601(new_member_exp_date)) {
-		member_exp_dates[userIdint].membership_exp_date = new_member_exp_date;
-		var fs = require('fs');
-		var json_format = JSON.stringify(member_exp_dates);
-		filename = './dummy_json_data/member_date.json';
-		fs.writeFile(filename, json_format, 'utf8', (err) => {
-			if (err) {
-				res.status(500).send("fs error: " + err);
-			} else {
-				res.status(200).send("record updated");
-			}
-		});
-	} else {
-		res.status(500).send("provide dates in ISO 8601 format");
-	}
-});
+	// if(isIso8601(new_member_exp_date)) {
+	// 	member_exp_dates[userIdint].membership_exp_date = new_member_exp_date;
+	// 	var fs = require('fs');
+	// 	var json_format = JSON.stringify(member_exp_dates);
+	// 	filename = './dummy_json_data/member_date.json';
+	// 	fs.writeFile(filename, json_format, 'utf8', (err) => {
+	// 		if (err) {
+	// 			res.status(500).send("fs error: " + err);
+	// 		} else {
+	// 			res.status(200).send("record updated");
+	// 		}
+	// 	});
+	// } else {
+	// 	res.status(500).send("provide dates in ISO 8601 format");
+	// }
 
 // helper function to validate an ISO 8601 date format
 function isIso8601(date) {

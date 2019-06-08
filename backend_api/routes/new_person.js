@@ -23,6 +23,7 @@ router.post('/', function(req, res, next) {
 	var userId = req.body.userId;
 	var checkUser = db.collection('user').doc(""+userId);
 	console.log(userId);
+	
 	var getDoc = checkUser.get()
 	.then(doc => {
 		if (doc.exists){
@@ -138,51 +139,31 @@ var new_fn =  req.body.first_name ;
 // helper function - requires all alpha characters
 function isAllAlpha(str) {
 	var re = /^[A-Za-z]+$/;
-	if(re.test(str)) {
-		return true;
-	} else {
-		return false;
-	}
+	return (re.test(str));
 }
 
 // helper function - is a two-letter state code?
 function isUS_StateCode(str) {
 	var re = /^[A-Z][A-Z]$/;
-	if(re.test(str)) {
-		return true;
-	} else {
-		return false;
-	}
+	return (re.test(str));
 }
 
 // helper function - is a 5-number zip code?
 function isZipCode(str) {
 	var re = /^[0-9]{4}[0-9]$/;
-	if(re.test(str)) {
-		return true;
-	} else {
-		return false;
-	}
+	return (re.test(str));
 }
 
 // helper function - is a 4-number zip extension?
 function isZipExtension(str) {
 	var re = /^[0-9]{3}[0-9]$/;
-	if(re.test(str)) {
-		return true;
-	} else {
-		return false;
-	}
+	return (re.test(str));
 }
 
 // helper function - is a 10-digit phone number?
 function isUSPhoneNumber(str) {
 	var re = /^[0-9]{3}-[0-9]{3}-[0-9]{3}[0-9]$/;
-	if(re.test(str)) {
-		return true;
-	} else {
-		return false;
-	}
+	return (re.test(str));
 }
 
 // helper function to validate an email address using a regexp

@@ -50,8 +50,6 @@ var router = express.Router();
  *   "international"
  * ]
  */
-
-
 router.get('/', function(req, res, next) {
 	
 	var userId = req.query.userId;
@@ -84,25 +82,6 @@ router.get('/', function(req, res, next) {
 });
 });
 
- // router.get('/', function(req, res, next) {
-//   var userId = req.query.userId;
-//   var userIdint = null;
-
-//   if(userId === undefined || typeof userId === undefined) {
-//     res.status(500).send("userId required");
-//   }else if(isNaN(userId)){
-//     res.status(500).send("userId must be an integer")
-//   }else{
-//     userIdint = parseInt(userId);
-//   }
-
-//   if(!music_preferences[userId]){
-//     res.status(500).send("user does not exist");
-//   }else {
-//     res.send(music_preferences[userId]);
-//   }
-// });
-
 /**
  * API definition, set music preferences given a userId and an array of strings
  * Route syntax
@@ -117,15 +96,11 @@ router.get('/', function(req, res, next) {
  * Note: an empty array is accepted, and will be stored
  * Success: responds with "record updated"
  */
-
-
 router.post('/', function(req, res, next){
 	var newPref = req.body.newPref;
 	toString(newPref);
 	var userId = req.body.userId;
-	var userIdint = null;
-	// validate userId input
-	
+		
 	console.log("starting post")
 	if (userId === undefined || typeof userId === undefined){
 		res.status(500).send("No userId specified");
@@ -133,7 +108,7 @@ router.post('/', function(req, res, next){
 	} else if (newPref === undefined || typeof newPref === undefined){
 		console.log("no newPref");
 		res.status(500).send("No preference specified");
-	} else {
+	}
 
 		
 		
@@ -163,80 +138,26 @@ router.post('/', function(req, res, next){
 			console.log('existing music_prefs array');
 		}
 	})
-
-	
-	// validate input - expecting an array of strings
-// 	if(!newPref.isArray()) {
-// 		res.status(500).send("expecting an array of strings in the new_preferences");
-// 	}
-// 	// trim any non-string pieces
-// 	for(var i = 0; i < newPref.length; i++) {
-// 		if(!typeof newPref[i] === 'string') {
-// 			newPref.splice(i, 1);
-// 			i--;
-// 		}
- 
 	
 	// Update data
 	var prefRef = db.collection('user').doc(""+userId).collection('data').doc('music_prefs');
 	console.log(newPref);
 	var arrUnion = prefRef.set({
 		genre: admin.firestore.FieldValue.arrayUnion(newPref)});
-	console.log("database updated");
-	res.send("database updated");
-	res.end();
-		}
-	});
-	
+		console.log("database updated");
+		res.send("database updated");
+		res.end();
+});
 
-//  router.post('/', function(req, res, next){
-// 	var userId = req.body.userId;
-// 	var userIdint = null;
-// 	// expecting an array of strings for newPref
-// 	var newPref = req.body.new_preferences;
-	
-// 	// validate userId input, convert to integer
-// 	if (userId === undefined || typeof userId === undefined){
-// 		res.status(500).send("No userId specified");
-// 	} else if (isNaN(userId)){
-// 		res.status(500).send("user Id must be an integer")
-// 	} else {
-// 		userIdint = parseInt(userId);
-// 	}
-	
-// 	// Check that userId exists
-// 	if(!music_preferences[userIdint]) {
-// 		res.status(500).send("user does not exist");
-// 	}
-	
-// 	// validate input - expecting an array of strings
-// 	if(!newPref.isArray()) {
-// 		res.status(500).send("expecting an array of strings in the new_preferences");
-// 	}
-// 	// trim any non-string pieces
-// 	for(var i = 0; i < newPref.length; i++) {
-// 		if(!typeof newPref[i] === 'string') {
-// 			newPref.splice(i, 1);
-// 			i--;
-// 		}
-// 	}
-	
-// 	// Update data
-// 	music_preferences[userIdint] = newPref;
-// 	var fs = require('fs');
-// 	var json_format = JSON.stringify(music_preferences);
-// 	filename = './dummy_json_data/music_pref';
-// 	fs.writeFile(filename, json_format, 'utf8', (err) => {
-// 		if (err) {
-// 			res.status(500).send("fs error: " + err);
-// 		} else {
-// 			res.status(200).send("record updated");
-// 		}
-// 	});
-// });
-
-// helper function to catch empty strings and all whitespace strings
-// source: StackOverflow questionId 10232366
+/** 
+ * helper function to catch various null-like conditions:
+ * uninitialized variables as indicated by the JS undefined type
+ * strings set to the null value
+ * empty strings and all whitespace strings by RegExp
+ * source of the RegExp syntax: StackOverflow questionId 10232366
+ * choosing to accept any non-null string is dangerous so I'm adding
+ * ToDo: add DB injection screening as a separate input validation method
+ */
 function isEmptyOrAllWhitespace(str) {
 	var re = /^\s*$/;
 	

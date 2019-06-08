@@ -84,51 +84,29 @@ router.post('/', function(req, res, next) {
 	var userIdint = null;
 	var new_member_end_date = req.body.member_end_date;
 	
-	// validate userId
 	if(userId === undefined || typeof userId === undefined) {
 		res.status(500).send("query parameter userId is required");
-	// } else if(isNaN(userId)) {
-	// 	res.status(500).send("userId must be parseable as integer");
-	// } else {
-	// 	userIdint = parseInt(userId);
-	// }
-
-	} else {
-		var dateRef = {
-			date: new_member_end_date
-		}
-		var endDateRef = db.collection('user').doc(""+userId).collection('data').doc('member_end_date').set(dateRef);
-		// var setWithOption = endDateRef.set(
-		// 	{
-		// 		date: new_member_end_date
-		// 	}
-		console.log("database updated");
-		res.send("database updated");
-		res.end();
-		}
-});
-		
-
-
+	}
 	
-	// validate new_member_exp_date valid format
-	// if(isIso8601(new_member_exp_date)) {
-	// 	member_exp_dates[userIdint].membership_exp_date = new_member_exp_date;
-	// 	var fs = require('fs');
-	// 	var json_format = JSON.stringify(member_exp_dates);
-	// 	filename = './dummy_json_data/member_date.json';
-	// 	fs.writeFile(filename, json_format, 'utf8', (err) => {
-	// 		if (err) {
-	// 			res.status(500).send("fs error: " + err);
-	// 		} else {
-	// 			res.status(200).send("record updated");
-	// 		}
-	// 	});
-	// } else {
-	// 	res.status(500).send("provide dates in ISO 8601 format");
-	// }
+	if(!isIso8601(new_member_end_date)) {
+		res.status(500).send("New membership end date appears to be invalid. Expected: date in ISO-8601 format. Example: 2019-02-28");
+	}
+	
+	var dateRef = {
+		date: new_member_end_date
+	}
+	var endDateRef = db.collection('user').doc(""+userId).collection('data').doc('member_end_date').set(dateRef);
+	console.log("database updated");
+	res.send("database updated");
+	res.end();
+});
 
-// helper function to validate an ISO 8601 date format
+/**
+ * helper function to check for ISO-8601 date format
+ * currently just checks for the general format: 4 numerals, a dash, 2 numerals, a dash, 2 numerals
+ * ToDo: improve this to validate the date received is a real date.
+ * At present non existent dates such as "0002-99-75" would be accepted.
+ */
 function isIso8601(date) {
 	var re = /^\d{4}-\d{2}-\d{2}$/;
 	if (re.test(date)) {

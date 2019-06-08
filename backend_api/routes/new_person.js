@@ -101,7 +101,7 @@ var new_fn =  req.body.first_name ;
 	// // validate nullable fields
 
 
-	var nameRef = db.collection('user').doc(""+userId).collection('name').doc('name_doc');
+	var nameRef = db.collection('user').doc(""+userId).collection('data').doc('name');
 		var setWithOptions = nameRef.set(
 			{
 				first_name: new_fn,

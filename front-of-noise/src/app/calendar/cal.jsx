@@ -7,6 +7,7 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 import '../../styles/css/calendar.css'
 import Tile from 'react-bulma-components/lib/components/tile';
 import Section from 'react-bulma-components/lib/components/section';
+import Columns from 'react-bulma-components/lib/components/columns';
 
 moment.locale('en-US');
 const localizer = BigCalendar.momentLocalizer(moment);
@@ -46,7 +47,9 @@ class Cal extends React.Component {
 
   render() {
     return (
-      <Section>
+
+      <Columns.Column>
+      <Section position="left">
       <Tile kind="parent">
         <Tile renderAs="article" kind="child" notification color="warning">
         <div className="calendar" style={{ height: 600, color: '#17a2b8' }}>
@@ -83,6 +86,7 @@ class Cal extends React.Component {
         </Tile>
       </Tile>
       </Section>
+      </Columns.Column>
     );
   }
 }

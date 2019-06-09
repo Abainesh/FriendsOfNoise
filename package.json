@@ -4,6 +4,9 @@
   "description": "Friends of Noise Organization now has a web app for members!",
   "main": "app.js",
   "scripts": {
+    "client": "cd front-of-noise && npm start",
+    "server": "cd backend_api && npm start",
+    "dev": "concurrently --kill-others-on-fail \"npm run client\" \"npm run server\"",
     "test": "echo \"Error: PLEASE MAKE A TEST!!!!! :)\" && exit 1",
     "sass:compile": "node-sass public/stylesheets/scss/main.scss public/stylesheets/css/style.css -w"
   },
@@ -26,5 +29,9 @@
   "homepage": "https://github.com/Abainesh/FriendsOfNoise#readme",
   "dependencies": {
     "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "concurrently": "^4.1.0",
+    "nodemon": "^1.19.0"
   }
 }

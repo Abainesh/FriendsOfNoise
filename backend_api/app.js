@@ -2,6 +2,11 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var cors = require("cors");
+
+
+const port = 9000;
+
 
 // member information routes
 var physicalAddressRouter = require('./routes/physical_address');
@@ -13,6 +18,7 @@ var newPersonRouter = require('./routes/new_person');
 
 var app = express();
 
+app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -25,6 +31,19 @@ app.use('/name', nameRouter);
 app.use('/member_end_date', membershipEndDateRouter);
 app.use('/music_preferences', musicPreferencesRouter);
 app.use('/new_person', newPersonRouter);
+
+// testing integration!!!
+// var testAPIRouter = require('./routes/testAPIroute');
+// app.use('/testAPI', testAPIRouter);
+
+
+app.get('/api/products', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dummy_json_data', 'products.json'));
+});
+
+app.listen(port, () => {
+  console.log(`[products] API listening on port ${port}.`);
+});
 
 
 module.exports = app;

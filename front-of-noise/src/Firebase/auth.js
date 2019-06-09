@@ -1,8 +1,21 @@
-import React from 'react';
+import firebase from './firebase';
 
+export const getAuth = () => {
+  return firebase.auth();
+};
 
-//The FireBaseContext.Provider component is used to provide a Firebase instance once at the top-level of the React component tree
+export const githubOAuth = () => {
+  return new firebase.firebase_.auth.GithubAuthProvider();
+};
 
-const FirebaseContext = React.createContext(null);
+export const twitterOAuth = () => {
+  return new firebase.firebase_.auth.TwitterAuthProvider();
+};
 
-export default FirebaseContext
+export const facebookOAuth = () => {
+  return new firebase.firebase_.auth.FacebookAuthProvider();
+};
+
+export const emailOAuth = () => {
+  return new firebase.firebase_.auth.EmailAuthProvider();
+};

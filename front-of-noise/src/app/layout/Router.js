@@ -7,6 +7,7 @@ import About from './../About'
 import Calendar from './../Calendar'
 import Profile from './../Profile'
 import Membership from './../Membership'
+import withAuthentication from'./../withAuthentication';
 
 const Router = () => (
   <Switch>
@@ -15,7 +16,7 @@ const Router = () => (
     <Route path='/signin' component={Signin}/>
     <Route path='/about'  component={About}/>
     <Route path='/calendar'   component={Calendar}/>
-    <Route path='/profile'    component={Profile}/>
+    <Route path='/profile'    component={withAuthentication(Profile)}/>
     <Route path='/membership' component={Membership}/>
   </Switch>
 )

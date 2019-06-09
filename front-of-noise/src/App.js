@@ -2,28 +2,32 @@ import React, { Component } from 'react';
 // import {Helmet} from 'react-helmet';
 import './styles/css/App.css';
 import Layout from './app/Layout';
-import withFirebaseAuth from "react-with-firebase-auth";
-import * as firebase from 'firebase';
-import FirebaseKeys from './firebase'
 
-const firebaseApp = firebase.initializeApp(FirebaseKeys);
+import withAuthentication from './app/withAuthentication.js';
 
-const firebaseAppAuth = firebaseApp.auth();
+//import withFirebaseAuth from "react-with-firebase-auth";
+//import * as firebase from 'firebase';
+//import FirebaseKeys from './firebase'
 
-const providers = {
-    googleProvider:new firebase.auth.GoogleAuthProvider(),   
-};
+//const firebaseApp = firebase.initializeApp(FirebaseKeys);
+
+//const firebaseAppAuth = firebaseApp.auth();
+
+//const providers = {
+    //googleProvider:new firebase.auth.GoogleAuthProvider(),   
+//};
 
 class App extends Component {
     state = {authenticated: false, user: null};
     render(){
       const {authenticated} = this.state;  
-        const{user, signIn, signOut, signInWithGoogle,signInwithFacebook, signInWithTwitter}=this.props;
+    
     return (
       <Layout />
     );
-  }
-
+    }
+}
+/*
   componentWillMount() {
   firebaseApp.auth().onAuthStateChanged(user => {
     if (user) {
@@ -40,10 +44,7 @@ class App extends Component {
   });
 }
 }
+*/
 
 
-
-export default withFirebaseAuth({
-    providers, 
-    firebaseAppAuth,
-})(App);
+export default App;

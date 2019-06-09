@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {auth} from ..\.\firebase'
 
 /* Import Components */
 import Tile from 'react-bulma-components/lib/components/tile';

@@ -1,42 +1,16 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
-
-//import PropTypes from 'prop-types';
-import {auth} from '../../firebase';
-//import { withRouter } from 'react-router-dom';
+import {auth} from '../../firebase'
+import SocialButtonList from '../../_components/SocialButtonList'
 
 /* Import Components */
-import {
-  Field,
-  Control,
-  Label,
-  Input,
-  Textarea,
-  Select,
-  Checkbox,
-  Radio,
-  Help,
-} from 'react-bulma-components/lib/components/form';
-import Button from 'react-bulma-components/lib/components/button';
-import Icon from 'react-bulma-components/lib/components/icon';
 import Tile from 'react-bulma-components/lib/components/tile';
 import Heading from 'react-bulma-components/lib/components/heading';
 import Section from 'react-bulma-components/lib/components/section';
-import Modal from 'react-bulma-components/lib/components/modal';
-import SocialButtonList from'../../_components/SocialButtonList.js';
-
-//const propTypes = {
-  //  auth: PropTypes.func.isRequired, currentProviders: PropTypes.func
-//};
-
-//const defaultProps = {
-  //  currentProviders:null
-//};
 
 const buttonList = {
     github: {
-        visible:true,
-        provider:()=> {
+        visible:true, 
+        provider:()=>{
             const provider = auth.githubOAuth();
             provider.addScope('user');
             return provider;
@@ -54,47 +28,35 @@ const buttonList = {
 };
 
 class Auth extends Component {
-    /*
-    constructor(props){
-        super(props);
-    //this.state = {loadin: true, //authenticated: false, user: //null};
-    //}
-    //*/
-    componentDidMount(){
-        auth.getAuth().onAuthStateChanged(user=> {
-            if (user){
-                this.props.history.push('/profile');
-            }
-        });
-    }
-    
-    
-//  state = {
-//    authenticated: false
-//  }
-//
-//  loginWithEmailAndPassword = () => { this.setState({ authenticated: true }) }
-//
-//  loginWithProvider = () => { this.setState({ authenticated: true }) }
-//
-//  handleClose = () => { this.setState({ authenticated: false }) }
+
+  state = {
+    authenticated: false
+  }
+
+  loginWithEmailAndPassword = () => { this.setState({ authenticated: true }) }
+
+  loginWithProvider = () => { this.setState({ authenticated: true }) }
+
+  handleClose = () => { this.setState({ authenticated: false }) }
 
   render() {
     return(
       <Section>
       <Tile kind="parent">
-        <Tile renderAs="article" kind="child" notification color="info">
+        <Tile renderAs="article" kind="child" size="8" notification color="primary">
 
           <Heading size="2" weight="semibold" spaced >Welcome back, friend!</Heading>
           <Heading subtitle>need to <a href="/signup">register</a> or <a href="/forgot">forgot password</a>?
           </Heading>
-            <Section size="4by3">
+
+        <Section size="4by3">
           <div className="has-text-centered">
-            <LoginButton icon="google" name="Google" onClick={this.handleClose()} />
-            <LoginButton icon="twitter" name="Twitter" onClick={this.handleClose()} />
-            <LoginButton icon="facebook" name="Facebook" onClick={this.handleClose()} />
+              <SocialButtonList buttonList={buttonList} auth={auth.getAuth} />
+            <LoginButton icon="google" name="Google" onClick={this.loginWithProvider} />
+            <LoginButton icon="twitter" name="Twitter" onClick={this.loginWithProvider} />
+            <LoginButton icon="facebook" name="Facebook" onClick={this.loginWithProvider} />
             <Section>
-              <LoginForm handleSubmit={this.handleClose()} />
+              <LoginForm handleSubmit={this.loginWithEmailAndPassword} />
             </Section>
           </div>
         </Section>
@@ -119,11 +81,11 @@ const LoginButton = ({ icon, name, onClick }) => (
 );
 
 class LoginForm extends Component {
-//
-  //state = {
-    //email: null,
-    //password: null
-  //}
+
+  state = {
+    email: null,
+    password: null
+  }
 
   handleChange = (event) => this.setState({ [event.target.name]: event.target.value })
 

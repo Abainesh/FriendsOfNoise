@@ -9,14 +9,15 @@ import {
   Textarea,
   Select,
   Checkbox,
-  // Radio,
-  // Help,
+  Radio,
+  Help,
 } from 'react-bulma-components/lib/components/form';
 import Button from 'react-bulma-components/lib/components/button';
-// import Icon from 'react-bulma-components/lib/components/icon';
+import Icon from 'react-bulma-components/lib/components/icon';
 import Tile from 'react-bulma-components/lib/components/tile';
 import Heading from 'react-bulma-components/lib/components/heading';
 import Section from 'react-bulma-components/lib/components/section';
+import Modal from 'react-bulma-components/lib/components/modal';
 
 
 const SignupButton = ({ icon, name, onClick }) => (
@@ -37,8 +38,15 @@ class FormContainer extends Component {
 
     this.state = {
       newUser: {
-        fname: '',
-        lname: '',
+        first_name: '',
+        last_name: '',
+        phone: '',
+        address1: '',
+        address2: '',
+        city: '',
+        state: '',
+        zip: '',
+        zip_ext: '',
         age: '',
         gender: '',
         genrePrefs: [],
@@ -52,6 +60,9 @@ class FormContainer extends Component {
       genreOptions: ['Rock', 'Pop', 'Hip Hop', 'Electronic']
 
     }
+
+
+
     this.handleTextArea = this.handleTextArea.bind(this);
     this.handleAge = this.handleAge.bind(this);
     this.handleFirstName = this.handleFirstName.bind(this);
@@ -69,7 +80,7 @@ class FormContainer extends Component {
   handleFirstName(e) {
    let value = e.target.value;
    this.setState( prevState => ({ newUser :
-        {...prevState.newUser, fname: value
+        {...prevState.newUser, first_name: value
         }
       }), () => console.log(this.state.newUser))
   }
@@ -77,7 +88,7 @@ class FormContainer extends Component {
   handleLastName(e) {
      let value = e.target.value;
      this.setState( prevState => ({ newUser :
-          {...prevState.newUser, lname: value
+          {...prevState.newUser, last_name: value
           }
         }), () => console.log(this.state.newUser))
     }
@@ -126,27 +137,27 @@ class FormContainer extends Component {
       )
   }
 
-    handleEmail(e) {
-       let value = e.target.value;
-       this.setState( prevState => ({ newUser :
-            {...prevState.newUser, email: value
-            }
-          }), () => console.log(this.state.newUser))
-      }
+  handleEmail(e) {
+     let value = e.target.value;
+     this.setState( prevState => ({ newUser :
+          {...prevState.newUser, email: value
+          }
+        }), () => console.log(this.state.newUser))
+    }
 
-      handlePassword(e) {
-         let value = e.target.value;
-         this.setState( prevState => ({ newUser :
-              {...prevState.newUser, password: value
-              }
-            }), () => console.log(this.state.newUser))
-        }
+  handlePassword(e) {
+     let value = e.target.value;
+     this.setState( prevState => ({ newUser :
+          {...prevState.newUser, password: value
+          }
+        }), () => console.log(this.state.newUser))
+  }
 
   handleFormSubmit(e) {
     e.preventDefault();
     let userData = this.state.newUser;
 
-    fetch('http://example.com',{
+    fetch('/new_person/',{
         method: "POST",
         body: JSON.stringify(userData),
         headers: {
@@ -164,12 +175,22 @@ class FormContainer extends Component {
       e.preventDefault();
       this.setState({
         newUser: {
-          fname: '',
-          lname: '',
+          first_name: '',
+          last_name: '',
+          phone: '',
+          address1: '',
+          address2: '',
+          city: '',
+          state: '',
+          zip: '',
+          zip_ext: '',
           age: '',
           gender: '',
           genrePrefs: [],
-          about: ''
+          about: '',
+          email: '',
+          password: '',
+          termsAccepted: false
         },
       })
   }
@@ -205,8 +226,8 @@ class FormContainer extends Component {
           <Control>
           <Input inputType={'text'}
                  title= {'First Name'}
-                 name= {'fname'}
-                 value={this.state.newUser.fname}
+                 name= {'first_name'}
+                 value={this.state.newUser.first_name}
                  placeholder = {'Chanandler'}
                  handleChange = {this.handleFirstName} />
           </Control>
@@ -217,8 +238,8 @@ class FormContainer extends Component {
           <Control>
           <Input inputType={'text'}
                 title= {'Last Name'}
-                name= {'lname'}
-                value={this.state.newUser.lname}
+                name= {'last_name'}
+                value={this.state.newUser.last_name}
                 placeholder = {'Bong'}
                 handleChange = {this.handleLastName} />
           </Control>
@@ -237,6 +258,41 @@ class FormContainer extends Component {
           </Control>
           </Field> {/* Age */}
 
+          <Field>
+          <Label>Phone: </Label>
+          <Control>
+            <Input inputType={'phone'}
+                  name={'phone'}
+                  title= {'Phone'}
+                  value={this.state.newUser.phone}
+                  placeholder = {'xxx-xxx-xxxx'}
+                  handleChange={this.handlePhone} />
+          </Control>
+          </Field> {/* Phone number */}
+
+          <Field>
+          <Label>Address: </Label>
+          <Control>
+            <Input inputType={'text'}
+                  name={'address'}
+                  title= {'Address'}
+                  value={this.state.newUser.address1}
+                  placeholder = {'123 Fake Street'}
+                  handleChange={this.handleAddress} />
+          </Control>
+          </Field> {/* Address */}
+
+          <Field>
+          <Label>City, State: </Label>
+          <Control>
+            <Input inputType={'text'}
+                  name={'citystate'}
+                  title= {'CityState'}
+                  value={this.state.newUser.city}
+                  placeholder = {'Springfield, OH'}
+                  handleChange={this.handleCity} />
+          </Control>
+          </Field> {/* City, State */}
 
           <Field>
           <Label>Gender: </Label>
@@ -292,7 +348,7 @@ class FormContainer extends Component {
           <Control>
           <Textarea
               title={'About you.'}
-              rows={4}
+              rows={2}
               value={this.state.newUser.about}
               name={'currentUserInfo'}
               handleChange={this.handleTextArea}
@@ -300,6 +356,20 @@ class FormContainer extends Component {
             />
           </Control>
           </Field> {/* About you */}
+
+          <Field>
+          <Control>
+            <Checkbox>
+              I agree to the
+              <div>
+               <Button onClick={this.open}>terms and conditions.</Button>
+               <Modal show={this.state.show} onClose={this.close} {...this.props.modal}>
+                 {this.props.children}
+               </Modal>
+             </div>
+            </Checkbox>
+          </Control>
+          </Field> {/* accept terms */}
 
           </Section>
 
@@ -309,7 +379,7 @@ class FormContainer extends Component {
             action = {this.handleFormSubmit}
             type = {'primary'}
             title = {'Submit'}
-            outlined = {true}
+            outlined = {false}
             style= {{ margin: '10px', width: '100px', padding:'20px' }}
           >Submit </Button>
         { /*Submit */ }

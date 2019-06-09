@@ -2,15 +2,17 @@
   "name": "front-of-noise",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:9000/",
   "dependencies": {
+    "axios": "^0.19.0",
     "bulma": "^0.7.4",
     "bulma-extensions": "^6.2.4",
     "bulmaswatch": "^0.7.2",
     "date-fns": "^1.30.1",
     "dotenv": "^8.0.0",
     "firebase": "^5.11.1",
-    "firebase-tools": "^6.8.0",
     "moment": "^2.24.0",
+    "moxios": "^0.4.0",
     "node-sass-chokidar": "^1.3.4",
     "npm-run-all": "^4.1.5",
     "react": "^16.8.6",
@@ -19,9 +21,17 @@
     "react-delay": "^0.1.0",
     "react-dom": "^16.8.6",
     "react-helmet": "^5.2.0",
+<<<<<<< HEAD
     "react-router-dom": "^5.0.1",
     "react-scripts": "2.1.8",
     "react-with-firebase-auth": "^1.0.3",
+=======
+    "react-redux": "^7.0.3",
+    "react-router-dom": "^5.0.0",
+    "react-scripts": "2.1.8",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0",
+>>>>>>> master
     "styled-components": "^4.2.0"
   },
   "scripts": {
@@ -46,7 +56,17 @@
   ],
   "devDependencies": {
     "chai": "^4.2.0",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "enzyme-to-json": "^3.3.5",
+    "fetch-mock": "^7.3.3",
+    "firebase-tools": "^6.11.0",
     "mocha": "^6.1.4",
-    "node-sass": "^4.11.0"
+    "node-sass": "^4.11.0",
+    "prop-types": "^15.7.2",
+    "react-test-renderer": "^16.8.6",
+    "redux-mock-store": "^1.5.3",
+    "sinon": "^7.3.2",
+    "webdriverio": "^5.9.6"
   }
 }

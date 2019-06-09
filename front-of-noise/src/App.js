@@ -18,9 +18,9 @@ import withAuthentication from './app/withAuthentication.js';
 //};
 
 class App extends Component {
-    state = {authenticated: false, user: null};
+    //state = {authenticated: false, user: null};
     render(){
-      const {authenticated} = this.state;  
+      //const {authenticated} = this.state;  
     
     return (
       <Layout />
@@ -45,6 +45,5 @@ class App extends Component {
 }
 }
 */
-
 
 export default App;

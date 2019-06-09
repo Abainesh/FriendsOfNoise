@@ -1,15 +1,10 @@
 import React, {Component} from 'react';
+import {auth} from ..\.\firebase'
 
 /* Import Components */
 import Tile from 'react-bulma-components/lib/components/tile';
 import Heading from 'react-bulma-components/lib/components/heading';
 import Section from 'react-bulma-components/lib/components/section';
-var firebase = require("firebase/app");
-
-require("firebase/auth");
-require("firebase/firestore");
-var provider = new firebase.auth.GoogleAuthProvider();
-provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
 
 class Auth extends Component {
     

@@ -1,13 +1,19 @@
 /*Author: Gabby Saechao 4.30.2019*/
 
+/*  Jon King
+    Date: 2019-06-08
+    Added firebase functionality    */
+
 // QRP - Would be nice feature: Use an external web service to validate address. Maybe USPS has a web api?
 
+
+const admin = require('firebase-admin');
+const functions = require('firebase-functions');
+var initialize = require('../firebase_initialize')
+var db = admin.firestore();
 var express = require('express');
 var router = express.Router();
 
-//Connects to data source
-var filename = '../dummy_json_data/p_address.json';
-var addresses = require(filename);
 
 /**
  * API definition, get physical address given a userId
@@ -28,28 +34,23 @@ var addresses = require(filename);
  *   "zip": "98543",
  *   "zip_ext": ""
  * }
+ * Note: address2 and zip_ext are nullable fields (may be blank)
+ * all others are required
  */
 router.get('/', function(req, res, next) {
-
-    var userIdint = null;
-    
-    //Validates userId
-    if(req.query.userId === undefined || typeof req.query.userId===undefined)
-    {
-        res.status(500).set("userId is required");
-    } else if (isNaN(req.query.userId)) {
-        res.status(500).send("userId must be a parseable integer");
-    } else {
-      userIdint = parseInt(req.query.userId, 10);
-    }
-    
-    //Find if userId exists in JSON and sends the result data if it does.
-    if(!addresses[userIdint]){
-        res.status(500).send("Address does not exist");
-    }else {
-        res.send(addresses[userIdint]);
-    }
-    
+	
+	var userId = req.query.userId;
+    var user_address = db.collection('user').doc(""+userId).collection('data').doc('address');
+	var getAddress = user_address.get()
+	.then(doc => {
+		if (!doc.exists) {
+			console.log('No address data');
+			res.status(500).send("No address data");
+		} else {
+				console.log('valid address data');
+				res.send(doc.data());
+			}
+	})
 });
 
 /**
@@ -68,96 +69,88 @@ router.get('/', function(req, res, next) {
  */
 router.post('/', function(req, res, next){  
 	var userId = req.body.userId;
-	var userIdint = null;
-    var address1 = req.body.address1;
-    var address2 = req.body.address2;
-    var city = req.body.city;
-    var state = req.body.state;
-    var zip = req.body.zip;
-    var zip_ext = req.body.zip_ext;
+    var new_address1 = req.body.address1;
+    var new_address2 = req.body.address2;
+    var new_city = req.body.city;
+    var new_state = req.body.state;
+    var new_zip = req.body.zip;
+    var new_zip_ext = req.body.zip_ext;
+    var new_phone = req.body.phone;
 	
     
     if(userId === undefined || typeof userId === undefined) {
-		res.status(500).send("No userId specified");
-	} else if (isNaN(userId)) {
-		res.status(500).send("UserId must be parseable as an int");
-	} else {
-		userIdint = parseInt(userId);
+        res.status(500).send("No userId specified");
+    }
+    
+	new_address1.trim();
+    if(isEmptyOrAllWhitespace(new_address1)){
+        res.status(500).send("Empty or all whitespace address1");
+    }
+    
+	new_address2.trim();
+	if(isEmptyOrAllWhitespace(new_address2)) {
+		new_address2 = "";
+	}
+	
+	new_city.trim();
+    if(isEmptyOrAllWhitespace(new_city)){
+        res.status(500).send("Empty of all whitespace city");
+    }
+    
+	new_state.trim();
+	new_state.toUpperCase();
+    if(isEmptyOrAllWhitespace(new_state)){
+        res.status(500).send("Empty of all whitespace state");
+    }
+	if(!isValidStateCode(new_state)) {
+		res.status(500).send("State code appears to be invalid. Expected: two upper case letters in English alphabet.");
+	}
+    
+	new_zip.trim();
+    if(isEmptyOrAllWhitespace(new_zip)){
+        res.status(500).send("Empty of all whitespace zip");
+    }
+	if(!isValidZipCode(new_zip)) {
+		res.status(500).send("Zip code appears to be invalid. Expected: 5 arabic numerals with no extraneous characters.");
+	}
+    
+	new_zip_ext.trim();
+    if(isEmptyOrAllWhitespace(new_zip_ext)){
+        new_zip_ext="";
+    } else {
+		if(!isValidZipExtension(new_zip_ext)) {
+			res.status(500).send("Zip extension appears to be invalid. Expected: empty string OR 4 arabic numerals with no extraneous characters.");
+		}
 	}
     
     
-    //WHITESPACE
-    if(isEmptyOrAllWhitespace(address1)){
-        res.status(500).send("Empty or all whitespace address1");
-    }else{
-        address1.trim();
+    var addressRef = db.collection('user').doc(""+userId).collection('data').doc('address');
+    var setWithOptions = addressRef.set(
+        {
+            address1: new_address1,
+            address2: new_address2,
+            city: new_city,
+            state: new_state,
+            zip: new_zip,
+            zip_ext: new_zip_ext,
+            phone: new_phone
+        },
+        {merge:true});
+    console.log("database updated");
+    res.send("database updated");
+    res.end();
     }
-    
-    if(isEmptyOrAllWhitespace(city)){
-        res.status(500).send("Empty of all whitespace city");
-    }else{
-        city.trim();
-    }
-    
-    if(isEmptyOrAllWhitespace(state)){
-        res.status(500).send("Empty of all whitespace state");
-    }else{
-        state.trim();
-    }
-    
-    if(isEmptyOrAllWhitespace(zip)){
-        res.status(500).send("Empty of all whitespace zip");
-    }else{
-        zip.trim();
-    }
-    
-    //TRIMS NONREQUIRED ADDRESS LINES
-    
-    if(isEmptyOrAllWhitespace(address2)){
-        address2="";
-    }else{
-        address2.trim();
-    }
-    
-    if(isEmptyOrAllWhitespace(zip_ext)){
-        zip_ext="";
-    }else{
-        zip_ext.trim();
-    }    
-    
-    
-    //CHECKS IF ID IS IN DB
-    //IF TRUE, UPDATE
-    //IF FALSE, THROW ERROR
-    
-    if(!addresses[userIdint]){
-        res.status(500).send("User does not exist in database");
-    }else{
-        addresses[userIdint].address1=address1;
-        addresses[userIdint].address2=address2;
-        addresses[userIdint].city=city;
-        addresses[userIdint].state=state;
-        addresses[userIdint].zip=zip;
-        addresses[userIdint].zip_ext=zip_ext;
-        
-        var json_format=JSON.stringify(addresses);
-        fs=require('fs');
-        filename = './dummy_json_data/p_address.json';
-        fs.writeFile(filename, json_format, 'utf8', function(err){
-            if(err){
-                res.status(500).send("fs write error: " + err)
-            }else{
-                res.status(200).send("Record updated!");
-            }
-        });
-    }
-    
-    
 });
 
-
-// helper function to catch empty strings and all whitespace strings
-// source: StackOverflow questionId 10232366
+/** 
+ * helper function to catch various null-like conditions:
+ * uninitialized variables as indicated by the JS undefined type
+ * strings set to the null value
+ * empty strings and all whitespace strings by RegExp
+ * source of the RegExp syntax: StackOverflow questionId 10232366
+ * choosing to accept any non-null string is dangerous so I'm adding
+ * ToDo: add DB injection screening as a separate input validation method
+ */
 function isEmptyOrAllWhitespace(str) {
 	var re = /^\s*$/;
 	
@@ -170,6 +163,34 @@ function isEmptyOrAllWhitespace(str) {
 	} else {
 		return false;
 	}
+}
+
+/**
+ * helper for identifying state codes
+ * currently just verifies two capital letters
+ * ToDo: update to check for any valid state, U.S. territory, or APO
+ */
+function isValidStateCode(str) {
+	var re = /^[A-Z][A-Z]$/;
+	return re.test(str);
+}
+
+/**
+ * helper function for identifying zip codes
+ * currently just verifies five arabic numerals in a row and no extraneous characters
+ */
+function isValidZipCode(str) {
+	var re = /^[0-9]{4}[0-9]$/;
+	return re.test(str);
+}
+
+/**
+ * helper function for identifying zip extension codes
+ * currently just verifies four arabic numerals in a row and no extraneous characters
+ */
+function isValidZipExtension(str) {
+	var re = /^[0-9]{3}[0-9]$/;
+	return re.test(str);
 }
 
 module.exports = router;

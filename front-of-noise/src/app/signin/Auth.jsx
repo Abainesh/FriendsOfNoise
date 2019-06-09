@@ -4,10 +4,19 @@ import React, {Component} from 'react';
 import Tile from 'react-bulma-components/lib/components/tile';
 import Heading from 'react-bulma-components/lib/components/heading';
 import Section from 'react-bulma-components/lib/components/section';
+var firebase = require("firebase/app");
+
+require("firebase/auth");
+require("firebase/firestore");
+var provider = new firebase.auth.GoogleAuthProvider();
+provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
 
 class Auth extends Component {
-
-    state = {loadin: true, authenticated: false, user: null};
+    
+    constructor(props){
+        super(props);
+    this.state = {loadin: true, authenticated: false, user: null};
+    }
     
     
 //  state = {
@@ -32,11 +41,11 @@ class Auth extends Component {
 
         <Section size="4by3">
           <div className="has-text-centered">
-            <LoginButton icon="google" name="Google" onClick={this.loginWithProvider} />
-            <LoginButton icon="twitter" name="Twitter" onClick={this.loginWithProvider} />
-            <LoginButton icon="facebook" name="Facebook" onClick={this.loginWithProvider} />
+            <LoginButton icon="google" name="Google" onClick={firebase.auth().signInWithGoogle} />
+            <LoginButton icon="twitter" name="Twitter" onClick={this.signInWithTwitter} />
+            <LoginButton icon="facebook" name="Facebook" onClick={firebase.auth().signInWithFacebook} />
             <Section>
-              <LoginForm handleSubmit={this.loginWithEmailAndPassword} />
+              <LoginForm handleSubmit={firebase.auth().signInWithEmailAndPassword} />
             </Section>
           </div>
         </Section>

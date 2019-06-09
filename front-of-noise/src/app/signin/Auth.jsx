@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {auth} from '../../firebase';
 
 /* Import Components */
 import Tile from 'react-bulma-components/lib/components/tile';
@@ -6,10 +7,18 @@ import Heading from 'react-bulma-components/lib/components/heading';
 import Section from 'react-bulma-components/lib/components/section';
 
 class Auth extends Component {
-    
+    /*
     constructor(props){
         super(props);
     this.state = {loadin: true, authenticated: false, user: null};
+    }
+    */
+    componentDidMount(){
+        auth.getAuth().onAuthStateChanged(user=> {
+            if (user){
+                this.props.history.push('/profile');
+            }
+        });
     }
     
     
@@ -64,11 +73,11 @@ const LoginButton = ({ icon, name, onClick }) => (
 );
 
 class LoginForm extends Component {
-
-  state = {
-    email: null,
-    password: null
-  }
+//
+  //state = {
+    //email: null,
+    //password: null
+  //}
 
   handleChange = (event) => this.setState({ [event.target.name]: event.target.value })
 

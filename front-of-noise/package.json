@@ -21,17 +21,14 @@
     "react-delay": "^0.1.0",
     "react-dom": "^16.8.6",
     "react-helmet": "^5.2.0",
-<<<<<<< HEAD
-    "react-router-dom": "^5.0.1",
-    "react-scripts": "2.1.8",
+    //"react-router-dom": "^5.0.1",
+    //"react-scripts": "2.1.8",
     "react-with-firebase-auth": "^1.0.3",
-=======
     "react-redux": "^7.0.3",
     "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.8",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
->>>>>>> master
     "styled-components": "^4.2.0"
   },
   "scripts": {

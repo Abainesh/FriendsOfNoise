@@ -1,5 +1,5 @@
 import React from 'react';
-import Auth from './signin/Auth';
+//import Auth from './signin/Auth';
 
 const Signin = () => (
   <section className="section">
@@ -13,7 +13,6 @@ const Signin = () => (
       </p>
     <div className="col-md-6">
       <br />
-      <Auth />
     </div>
     </div>
   </section>

@@ -1,18 +1,65 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
+
+//import PropTypes from 'prop-types';
 import {auth} from '../../firebase';
+//import { withRouter } from 'react-router-dom';
 
 /* Import Components */
+import {
+  Field,
+  Control,
+  Label,
+  Input,
+  Textarea,
+  Select,
+  Checkbox,
+  Radio,
+  Help,
+} from 'react-bulma-components/lib/components/form';
+import Button from 'react-bulma-components/lib/components/button';
+import Icon from 'react-bulma-components/lib/components/icon';
 import Tile from 'react-bulma-components/lib/components/tile';
 import Heading from 'react-bulma-components/lib/components/heading';
 import Section from 'react-bulma-components/lib/components/section';
+import Modal from 'react-bulma-components/lib/components/modal';
+import SocialButtonList from'../../_components/SocialButtonList.js';
+
+//const propTypes = {
+  //  auth: PropTypes.func.isRequired, currentProviders: PropTypes.func
+//};
+
+//const defaultProps = {
+  //  currentProviders:null
+//};
+
+const buttonList = {
+    github: {
+        visible:true,
+        provider:()=> {
+            const provider = auth.githubOAuth();
+            provider.addScope('user');
+            return provider;
+        }
+    }, 
+    twitter: {
+    visible: true,
+    provider: () => auth.twitterOAuth()
+  },
+  facebook: {
+    visible: true,
+    provider: () => auth.facebookOAuth()
+  }
+    
+};
 
 class Auth extends Component {
     /*
     constructor(props){
         super(props);
-    this.state = {loadin: true, authenticated: false, user: null};
-    }
-    */
+    //this.state = {loadin: true, //authenticated: false, user: //null};
+    //}
+    //*/
     componentDidMount(){
         auth.getAuth().onAuthStateChanged(user=> {
             if (user){
@@ -36,19 +83,18 @@ class Auth extends Component {
     return(
       <Section>
       <Tile kind="parent">
-        <Tile renderAs="article" kind="child" size="8" notification color="primary">
+        <Tile renderAs="article" kind="child" notification color="info">
 
           <Heading size="2" weight="semibold" spaced >Welcome back, friend!</Heading>
           <Heading subtitle>need to <a href="/signup">register</a> or <a href="/forgot">forgot password</a>?
           </Heading>
-
-        <Section size="4by3">
+            <Section size="4by3">
           <div className="has-text-centered">
-            <LoginButton icon="google" name="Google" onClick={firebase.auth().signInWithGoogle} />
-            <LoginButton icon="twitter" name="Twitter" onClick={this.signInWithTwitter} />
-            <LoginButton icon="facebook" name="Facebook" onClick={firebase.auth().signInWithFacebook} />
+            <LoginButton icon="google" name="Google" onClick={this.handleClose()} />
+            <LoginButton icon="twitter" name="Twitter" onClick={this.handleClose()} />
+            <LoginButton icon="facebook" name="Facebook" onClick={this.handleClose()} />
             <Section>
-              <LoginForm handleSubmit={firebase.auth().signInWithEmailAndPassword} />
+              <LoginForm handleSubmit={this.handleClose()} />
             </Section>
           </div>
         </Section>

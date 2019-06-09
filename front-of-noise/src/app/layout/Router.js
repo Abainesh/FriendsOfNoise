@@ -7,11 +7,8 @@ import About from './../About'
 import Calendar from './../Calendar'
 import Profile from './../Profile'
 import Membership from './../Membership'
-<<<<<<< HEAD
 import withAuthentication from'./../withAuthentication';
-=======
 import Store from './../Store'
->>>>>>> master
 
 const Router = () => (
   <Switch>

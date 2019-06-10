@@ -1,4 +1,5 @@
 import React from 'react';
+import user from './profile/user';
 
 const Profile = () => (
   <section className="section">

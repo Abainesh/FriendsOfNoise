@@ -140,7 +140,7 @@ router.post('/', function(req, res, next){
     res.send("database updated");
     res.end();
     }
-});
+);
 
 /** 
  * helper function to catch various null-like conditions:

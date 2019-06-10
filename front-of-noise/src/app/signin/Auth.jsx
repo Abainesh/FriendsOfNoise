@@ -6,8 +6,6 @@ import{withRouter} from 'react-router-dom'
 import PropTypes from 'prop-types';
 
 
-// import {sendFormData} from './_services/';
-
 /* Import Components */
 import Tile from 'react-bulma-components/lib/components/tile';
 import Heading from 'react-bulma-components/lib/components/heading';
@@ -126,7 +124,9 @@ const SocialButtonList = ({ history, buttonList, auth, currentProviders }) => {
     //accounts associated to the current User
   const authenticate = (e, provider) => {
     const providerOAuth = buttonList[provider].provider();
-
+//function is called when someone clicks 
+      //one of social buttons to login to connect
+      // a social account
     if (!auth().currentUser) {
       auth()
         .signInWithPopup(providerOAuth)
@@ -139,10 +139,13 @@ const SocialButtonList = ({ history, buttonList, auth, currentProviders }) => {
         .catch(err => console.error(err));
     }
   };
-
+//this prop object has the firebase function to call 
+    //each specific provider oAuth method
+    //and is used to sign in or link another provider
+    //to current user
   const renderButtonList = provder => {
     const visible = buttonList[provder].visible;
-
+//this is where we call the authenticate method
     return (
       <button
         key={provder}
@@ -153,7 +156,7 @@ const SocialButtonList = ({ history, buttonList, auth, currentProviders }) => {
       </button>
     );
   };
-
+//this finally returns list of social buttons
   return (
     <div className="btn__social--list">
       {Object.keys(buttonList).map(renderButtonList)}

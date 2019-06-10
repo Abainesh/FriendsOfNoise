@@ -5,7 +5,7 @@ var logger = require('morgan');
 var cors = require("cors");
 
 
-const port = 9000;
+const port = 3000;
 
 
 // member information routes

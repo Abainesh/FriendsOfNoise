@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Delay from 'react-delay';
 
-import { auth } from '../firebase';
+import { auth } from '../Firebase';
 
 export default WrappedComponent => {
   class WithAuthentication extends Component {
@@ -15,7 +15,7 @@ export default WrappedComponent => {
             this.setState({ providerData: user.providerData });
         } else {
             console.log('Must be authenticated')
-            this.props.history.push('/');
+            this.props.history.push('/signup');
         }
       });
     }

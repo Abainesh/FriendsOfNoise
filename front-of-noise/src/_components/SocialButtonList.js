@@ -10,6 +10,10 @@ const propTypes = {
       visible: PropTypes.bool.isRequired,
       provider: PropTypes.func.isRequired
     }),
+      email: PropTypes.shape({
+      visible: PropTypes.bool.isRequired,
+      provider: PropTypes.func.isRequired
+    }),
     twitter: PropTypes.shape({
       visible: PropTypes.bool.isRequired,
       provider: PropTypes.func.isRequired

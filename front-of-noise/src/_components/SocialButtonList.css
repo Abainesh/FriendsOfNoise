@@ -9,7 +9,7 @@
 }
 
 .btn--github {
-  background-color: #1b1c1d;
+  background-color: beige;
 }
 
 .btn--github:hover {
@@ -31,3 +31,12 @@
 .btn--facebook:hover {
   background-color: rgb(45, 77, 146);
 }
+
+.btn--email {
+  background-color: lightcoral;
+}
+
+.btn--email:hover {
+  background-color: rgb(45, 77, 146);
+}
+

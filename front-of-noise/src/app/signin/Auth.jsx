@@ -6,6 +6,8 @@ import{withRouter} from 'react-router-dom'
 import PropTypes from 'prop-types';
 
 
+// import {sendFormData} from './_services/';
+
 /* Import Components */
 import Tile from 'react-bulma-components/lib/components/tile';
 import Heading from 'react-bulma-components/lib/components/heading';

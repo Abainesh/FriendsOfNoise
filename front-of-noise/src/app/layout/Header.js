@@ -141,6 +141,16 @@ class Header extends Component {
               </span>
               <span /> @FriendsOfNoise
           </Navbar.Item>
+
+          <NavLink
+            className="navbar-item"
+            to="/logout"
+            activeClassName="is-active"
+            >
+            <span className="icon has-text-warning" style={{ marginRight: 5 }}> <i class="fas fa-wave"></i>
+            </span>
+            Logout
+          </NavLink>
         </Navbar.Container>
 
       </Navbar.Menu>

@@ -3,17 +3,13 @@ import { render } from 'react-dom'
 
 class UserProfile extends Component {
 
-
-
-
-
-
-
-
   render() {
     return (
       <div>
       <div className="container box" style={{ maxWidth: '800px' }}>
+
+
+
         <table>
  <tr>
    <th>Info</th>

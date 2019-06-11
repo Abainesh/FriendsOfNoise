@@ -32,6 +32,7 @@ const SignupButton = ({ icon, name, onClick }) => (
 );
 
 class FormContainer extends Component {
+    
   constructor(props) {
     super(props);
 
@@ -215,7 +216,7 @@ class FormContainer extends Component {
             <div className="container box" style={{ maxWidth: '600px' }}>
           <form
             onSubmit={e => {
-              e.preventDefault();
+//              e.preventDefault();
               this.handleFormSubmit();
             }}>
 

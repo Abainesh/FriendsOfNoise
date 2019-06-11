@@ -1,9 +1,7 @@
 
 //FirebaseContext.Consumer component used to retrieve the Firebase instance if it is needed in a React component. 
 
-import FirebaseContext from './context';
-import Firebase from './firebase';
+import firebase from './firebase';
+import * as auth from './auth';
 
-export default Firebase;
-
-export { FirebaseContext };
+export { firebase, auth };

@@ -1,4 +1,5 @@
 import React from 'react';
+import UserProfile from './profile/UserProfile';
 
 const Profile = () => (
   <section className="section">
@@ -12,6 +13,7 @@ const Profile = () => (
       </p>
     <div className="col-md-6">
       <br />
+      <UserProfile />
     </div>
     </div>
   </section>

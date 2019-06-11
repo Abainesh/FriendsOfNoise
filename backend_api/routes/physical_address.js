@@ -138,8 +138,8 @@ router.post('/', function(req, res, next){
         {merge:true});
     console.log("database updated");
     res.send("database updated");
-    res.end();
-    }
+	res.end();
+    
 });
 
 /** 

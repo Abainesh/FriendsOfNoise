@@ -1,148 +1,120 @@
 import React, { Component } from 'react'
-import { render } from 'react-dom'
+import PropTypes from 'prop-types';
+import SocialButtonList from '../../_components/SocialButtonList';
+import SocialProfileList from '../../_components/SocialProfileList';
+import Layout from '../../_components/Layout';
+import {auth} from '../../Firebase'
+
+//import { render } from 'react-dom'
+import '../../_components/UserProfile.css'
 
 class UserProfile extends Component {
+    static propTypes = {
+        providerData: PropTypes.arrayOf(PropTypes.object).isRequired
+    };
+
+static defaultProps = {
+    providerData:[]
+};
+
+state = {
+    buttonList: {
+      github: {
+        visible: true,
+        provider: () => {
+          const provider = auth.githubOAuth();
+          provider.addScope('user');
+          return provider;
+        }
+      },
+      twitter: {
+        visible: true,
+        provider: () => auth.twitterOAuth()
+      },
+      email: {
+        visible:true,
+        provider:()=>auth.emailOAuth()
+      },
+      facebook: {
+        visible: true,
+        provider: () => auth.facebookOAuth()
+      }
+    },
+    providerData: this.props.providerData
+  };
+componentDidMount() {
+    this.updateProviders(this.state.providerData);
+  }
+
+handleCurrentProviders = providerData => {
+    this.updateProviders(providerData);
+  };
+
+  updateProviders = providerData => {
+    let buttonList = { ...this.state.buttonList };
+
+    providerData.forEach(provider => {
+      const providerName = provider.providerId.split('.')[0];
+      buttonList = this.updateButtonList(buttonList, providerName, false);
+    });
+
+    this.setState({ buttonList, providerData });
+  };
+
+  handleUnlinkedProvider = (providerName, providerData) => {
+    if (providerData.length < 1) {
+      auth
+        .getAuth()
+        .currentUser.delete()
+        .then(() => console.log('User Deleted'))
+        .catch(() => console.error('Error deleting user'));
+    }
+
+    let buttonList = { ...this.state.buttonList };
+    buttonList = this.updateButtonList(buttonList, providerName, true);
+
+    this.setState({ buttonList, providerData });
+  };
+
+  updateButtonList = (buttonList, providerName, visible) => ({
+    ...buttonList,
+    [providerName]: {
+      ...buttonList[providerName],
+      visible
+    }
+  });
 
   render() {
     return (
-      <div>
-      <div className="container box" style={{ maxWidth: '800px' }}>
-
-
-
-        <table>
- <tr>
-   <th>Info</th>
-   <th></th>
- </tr>
- <tr>
-   <td>First Name:</td>
-   <td>
-   <div>James</div> </td>
- </tr>
- <tr>
-   <td>Last Name:</td>
-   <td>
-   <div>Bond</div> </td>
- </tr>
- <tr>
-   <td>Age:</td>
-   <td>
-   <div>28</div> </td>
- </tr>
- <tr>
-   <td>Phone:</td>
-   <td>
-   <div>206.444.2343</div> </td>
- </tr>
- <tr>
-   <td>Address:</td>
-   <td>
-   <div>444 E. Madison St, Seattle, WA 98112</div> </td>
- </tr>
-</table>
-      </div>
-      <div className="container box" style={{ maxWidth: '800px' }}>
-        <table>
- <tr>
-   <th>Membership</th>
-   <th></th>
- </tr>
- <tr>
-   <td>Status:</td>
-   <td>
-   <div>active</div> </td>
- </tr>
- <tr>
-   <td>Start Date:</td>
-   <td>
-   <div>07/18/18</div> </td>
- </tr>
- <tr>
-   <td>End Date:</td>
-   <td>
-   <div>07/18/19</div> </td>
- </tr>
- <tr>
-   <td>Membership Fee:</td>
-   <td>
-   <div>$100</div> </td>
- </tr>
- <tr><td>Card Info:</td>
- <td>
- <div>Visa</div> </td>
- <td>
- <div>...7689</div> </td>
-</tr>
-</table>
-      </div>
-      <div className="container box" style={{ maxWidth: '800px' }}>
-      <h1>My Events</h1>
-        <table>
- <tr>
-   <th>My Up Coming Events</th>
-   <th></th>
- </tr>
- <tr>
-   <td>Venue:</td>
-   <td>
-   <div>2343 Denny Way</div> </td>
- </tr>
- <tr>
-   <td>Event Name:</td>
-   <td>
-   <div>Rock It Out</div> </td>
- </tr>
- <tr>
-   <td>Date:</td>
-   <td>
-   <div>08/28/19</div> </td>
- </tr>
- <tr>
-   <td>Band:</td>
-   <td>
-   <div>The Lizards</div> </td>
- </tr>
- <tr>
-   <td>Genre:</td>
-   <td>
-   <div>Rock</div> </td>
- </tr>
-</table>
-        <table>
- <tr>
-   <th>Past Events</th>
-   <th></th>
- </tr>
- <tr>
-   <td>Venue:</td>
-   <td>
-   <div>2343 Denny Way</div> </td>
- </tr>
- <tr>
-   <td>Event Name:</td>
-   <td>
-   <div>Rock It Out</div> </td>
- </tr>
- <tr>
-   <td>Date:</td>
-   <td>
-   <div>08/28/19</div> </td>
- </tr>
- <tr>
-   <td>Band:</td>
-   <td>
-   <div>The Lizards</div> </td>
- </tr>
- <tr>
-   <td>Genre:</td>
-   <td>
-   <div>Rock</div> </td>
- </tr>
-</table>
-      </div>
-        </div>
+      <Layout>
+        <h1>Secure Area</h1>
+            
+//should display connected accounts here
+        <SocialProfileList
+          auth={auth.getAuth}
+          providerData={this.state.providerData}
+          unlinkedProvider={this.handleUnlinkedProvider}
+        />
+        <p style={{ textAlign: 'center' }}>
+          <strong>Connect Other Social Accounts</strong>
+        </p>
+        <SocialButtonList
+          buttonList={this.state.buttonList}
+          auth={auth.getAuth}
+          currentProviders={this.handleCurrentProviders}
+        />
+        <button
+          className="btn__logout"
+          onClick={() => auth.getAuth().signOut()}
+        >
+          Logout
+        </button>
+      </Layout>
     );
   }
-  }
+
+
+}
+
+  
 export default UserProfile;

@@ -32,21 +32,20 @@ const defaultProps = {
 };
 
 const SocialButtonList = ({ history, buttonList, auth, currentProviders }) => {
-  const authHandler = authData => {
-    if (authData) {
-      if (currentProviders === null) {
-        history.push('/profile');
-      } else {
-        currentProviders(authData.user.providerData);
-      }
-    } else {
-      console.log('Error authenticating');
-    }
-  };
+    const authHandler = authData => {
+        if (authData) {
+            if (currentProviders === null) {
+                history.push('/dashboard');
+            } else {
+                currentProviders(authData.user.providerData);
+            }
+        } else {
+            console.error('Error authenticating');
+        }
+};
 
   const authenticate = (e, provider) => {
     const providerOAuth = buttonList[provider].provider();
-
     if (!auth().currentUser) {
       auth()
         .signInWithPopup(providerOAuth)

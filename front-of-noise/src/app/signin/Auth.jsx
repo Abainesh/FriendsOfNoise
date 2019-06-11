@@ -41,8 +41,7 @@ class Auth extends Component {
     componentDidMount() {
     auth.getAuth().onAuthStateChanged(user => {
       if (user) {
-        this.props.history.push('/');
-        
+        this.props.history.push('/profile');      
       }
     });
   }

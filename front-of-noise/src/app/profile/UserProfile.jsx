@@ -4,6 +4,7 @@ import SocialButtonList from '../../_components/SocialButtonList';
 import SocialProfileList from '../../_components/SocialProfileList';
 import Layout from '../../_components/Layout';
 import {auth} from '../../Firebase'
+import Firebase from 'firebase';
 
 //import { render } from 'react-dom'
 import '../../_components/UserProfile.css'
@@ -42,8 +43,19 @@ state = {
     },
     providerData: this.props.providerData
   };
+
+getUserData=()=>{
+    let ref = Firebase.database().ref('/');
+  ref.on('value', snapshot => {
+    const state = snapshot.val();
+    this.setState(state);
+  });
+  console.log('DATA RETRIEVED');
+}
+
 componentDidMount() {
     this.updateProviders(this.state.providerData);
+    this.getUserData();
   }
 
 handleCurrentProviders = providerData => {

@@ -89,7 +89,6 @@ handleCurrentProviders = providerData => {
       <Layout>
         <h1>Secure Area</h1>
             
-//should display connected accounts here
         <SocialProfileList
           auth={auth.getAuth}
           providerData={this.state.providerData}

@@ -105,8 +105,9 @@ router.post('/', function(req, res, next) {
 		res.send("database updated");
 		res.end();
 		}
+	)
 	});
-});                        
+                        
 
 
 /** 

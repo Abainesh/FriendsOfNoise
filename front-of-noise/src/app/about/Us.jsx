@@ -6,6 +6,8 @@ import Section from 'react-bulma-components/lib/components/section';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 
+	
+
 
 class Us extends Component{
     constructor(props){
@@ -15,14 +17,15 @@ class Us extends Component{
     this.state = {
         users:null,
     };
+        
 }
     async componentDidMount() {
-    const users = (await axios.get('http://localhost:5000/user_data_all')).data;
-    this.setState({
-        users,
-    });
-        console.log(this.state.users);
-}
+    }
+    
+    
+    
+    
+    
 
     renderObject(){
         Object.keys(this.state).map((obj, i)=>{

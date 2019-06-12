@@ -71,9 +71,9 @@ router.get('/', function(req,res,next){
           } else {
             allData = Object.assign(allData, data);
         var string = JSON.stringify(allData);
+
           }
     })
-    
     .then(doc => {
         res.send(allData);
     })

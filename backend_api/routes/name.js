@@ -29,7 +29,7 @@
  *   "last_name": "Powell"
  * }
  */
-router.get('/', function(req, res, next) {
+router.get('/:userId', function(req, res, next) {
 	
 	var userId = req.query.userId;
 	var userIdint = null;

@@ -3,10 +3,52 @@ import React, {Component} from 'react';
 import Tile from 'react-bulma-components/lib/components/tile';
 import Heading from 'react-bulma-components/lib/components/heading';
 import Section from 'react-bulma-components/lib/components/section';
+import {Link} from 'react-router-dom';
+import axios from 'axios';
 
 
 class Us extends Component{
+    constructor(props){
+        super(props);
+        this.renderObject = this.renderObject.bind(this);
+    
+    this.state = {
+        users:null,
+    };
+}
+    async componentDidMount() {
+    const users = (await axios.get('http://localhost:5000/user_data_all')).data;
+    this.setState({
+        users,
+    });
+        console.log(this.state.users);
+}
 
+    renderObject(){
+        Object.keys(this.state).map((obj, i)=>{
+          return (
+            <div>
+                {this.state[obj]}
+            </div>
+            )
+        })
+    }
+    
+    
+    render(){
+        
+        return (
+        <div>
+                {this.state.users === null && <p>Loading data...</p>}
+                {this.state.users && this.renderObject()}
+                
+            </div>
+    )
+  }
+}
+             
+    /**
+    * Old about us - test for now
   state = {
 
     authenticated: false
@@ -28,5 +70,7 @@ class Us extends Component{
         </Section>
       )
     }
+    
   }
+  */
 export default Us;

@@ -5,11 +5,13 @@ import SocialProfileList from '../../_components/SocialProfileList';
 import Layout from '../../_components/Layout';
 import {auth} from '../../Firebase'
 import Firebase from 'firebase';
+import Auth from "../signin/Auth";
 
 //import { render } from 'react-dom'
 import '../../_components/UserProfile.css'
 
 class UserProfile extends Component {
+    
     static propTypes = {
         providerData: PropTypes.arrayOf(PropTypes.object).isRequired
     };

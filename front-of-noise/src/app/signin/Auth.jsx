@@ -38,6 +38,7 @@ const buttonList = {
 };
 
 class Auth extends Component {
+
     componentDidMount() {
     auth.getAuth().onAuthStateChanged(user => {
       if (user) {
@@ -118,6 +119,12 @@ const SocialButtonList = ({ history, buttonList, auth, currentProviders }) => {
       console.log('Error authenticating');
     }
   };
+
+function onSignIn(user) {
+   // token_id = user.getAuthResponse().id_token
+ //this.setState({token_id});
+}
+    
 //providerData is an array of objects 
     //which contains the connected social
     //accounts associated to the current User
@@ -127,6 +134,7 @@ const SocialButtonList = ({ history, buttonList, auth, currentProviders }) => {
       //one of social buttons to login to connect
       // a social account
     if (!auth().currentUser) {
+        var user;
       auth()
         .signInWithPopup(providerOAuth)
         .then(authHandler)

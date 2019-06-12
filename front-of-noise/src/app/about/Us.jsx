@@ -5,18 +5,17 @@ import Heading from 'react-bulma-components/lib/components/heading';
 import Section from 'react-bulma-components/lib/components/section';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
-
 	
 
 
 class Us extends Component{
+  
     
-  state = {
+    state = {
 
     authenticated: false
   }
-
-    render() {
+     render() {
       return(
       <Section>
         <Tile kind="parent">

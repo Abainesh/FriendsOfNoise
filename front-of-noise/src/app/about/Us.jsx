@@ -10,48 +10,7 @@ import axios from 'axios';
 
 
 class Us extends Component{
-    constructor(props){
-        super(props);
-        this.renderObject = this.renderObject.bind(this);
     
-    this.state = {
-        users:null,
-    };
-        
-}
-    async componentDidMount() {
-    }
-    
-    
-    
-    
-    
-
-    renderObject(){
-        Object.keys(this.state).map((obj, i)=>{
-          return (
-            <div>
-                {this.state[obj]}
-            </div>
-            )
-        })
-    }
-    
-    
-    render(){
-        
-        return (
-        <div>
-                {this.state.users === null && <p>Loading data...</p>}
-                {this.state.users && this.renderObject()}
-                
-            </div>
-    )
-  }
-}
-             
-    /**
-    * Old about us - test for now
   state = {
 
     authenticated: false
@@ -75,5 +34,5 @@ class Us extends Component{
     }
     
   }
-  */
+  
 export default Us;

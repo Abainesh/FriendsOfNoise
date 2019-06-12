@@ -3,6 +3,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require("cors");
+var helmet = require('helmet');
+var bodyParser = require('body-parser');
 
 
 const port = 3000;
@@ -17,7 +19,9 @@ var musicPreferencesRouter = require('./routes/music_preferences');
 var newPersonRouter = require('./routes/new_person');
 var userDataAllRouter = require('./routes/user_data_all');
 
+//express app
 var app = express();
+
 
 app.use(cors());
 app.use(logger('dev'));

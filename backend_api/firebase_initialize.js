@@ -11,3 +11,5 @@ const admin = require('firebase-admin');
 	  credential: admin.credential.cert(serviceAccount),
 	  databaseURL: "https://friendsofnoise-2ced6.firebaseio.com"
 	});
+
+let db = admin.firestore();

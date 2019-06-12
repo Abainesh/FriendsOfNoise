@@ -13,7 +13,7 @@ const Signin = () => (
       </p>
     <div className="col-md-6">
       <br />
-      <Auth />
+    <Auth/>
     </div>
     </div>
   </section>
